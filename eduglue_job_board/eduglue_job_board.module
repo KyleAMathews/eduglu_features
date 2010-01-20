@@ -1,0 +1,3 @@
+<?php
+
+include_once('eduglue_job_board.features.inc');
