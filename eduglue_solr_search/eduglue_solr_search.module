@@ -1,3 +1,59 @@
 <?php
 
 include_once('eduglue_solr_search.features.inc');
+
+// Provides a group search block.
+function eduglue_solr_search_block_form($form_state, $gid) {
+  $form['query'] = array(
+    '#type' => 'textfield',
+    '#size' => 25,
+    '#required' => TRUE,
+  );
+  $form['gid'] = array(
+    '#type' => 'value',
+    '#value' => $gid,
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Search Group'),
+  );
+
+  return $form;
+}
+
+function eduglue_solr_search_block_form_submit($form, &$form_state) {
+  $query = $form_state['values']['query'];
+  $group_nid = $form_state['values']['gid'];
+  
+  // Redirect to search
+  $form_state['redirect'] = array("search/apachesolr_search/" .
+    trim($query), "filters=im_og_gid%3A" . $group_nid . "&retain-filters=1");
+  // $form_state['redirect'] uses syntax for drupal_goto -- undocumented afaik.
+}
+
+/**
+ * Implementation of hook_block().
+ */
+function eduglue_solr_search_block($op = 'list', $delta = 0) {
+  if ($op == 'list') {
+    $blocks[0]['info'] = t('Group Solr Search form');
+    // Not worth caching.
+    $blocks[0]['cache'] = BLOCK_NO_CACHE;
+    return $blocks;
+  }
+  else if ($op == 'view' && user_access('search content')) {
+    if (is_numeric(arg(1))) {
+      $nid = check_plain(arg(1)); // arg(1) pulls the second argument from the url i.e. node/nid which is the group nid
+    }
+    // Is $nid a group nid?
+    $result = db_result(db_query("SELECT group_nid FROM {og_ancestry} WHERE group_nid = %d", $nid));
+    if (empty($result)) {
+      return;
+    }
+    
+    $block['content'] = drupal_get_form('eduglue_solr_search_block_form', $nid);
+    $block['subject'] = t('Search This Group');
+    return $block;
+  }
+}
+
