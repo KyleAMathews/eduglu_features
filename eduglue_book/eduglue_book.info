@@ -1,5 +1,4 @@
 core = "6.x"
-dependencies[] = "date_api"
 dependencies[] = "eduglue"
 dependencies[] = "diff"
 description = "The documents feature lets you store and share information and attachments."
