@@ -1,0 +1,3 @@
+<?php
+
+include_once('edguglue_groups.features.inc');
