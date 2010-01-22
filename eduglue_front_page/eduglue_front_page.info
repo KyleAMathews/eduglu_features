@@ -1,6 +1,5 @@
 core = "6.x"
 dependencies[] = "context"
-dependencies[] = "date_api"
 dependencies[] = "edully_front_page"
 dependencies[] = "modr8"
 dependencies[] = "og"
