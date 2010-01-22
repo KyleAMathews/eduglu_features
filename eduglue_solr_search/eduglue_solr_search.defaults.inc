@@ -12,13 +12,13 @@ function _eduglue_solr_search_context_default_contexts() {
     'value' => 'eduglue_solr_search',
     'description' => 'Sets block visibility for solr search',
     'path' => array(
-      '*/apache_solr_search/*' => '*/apache_solr_search/*',
+      '*/apachesolr_search/*' => '*/apachesolr_search/*',
     ),
     'block' => array(
-      'apacheeduglue_solr_search_currentsearch' => array(
-        'module' => 'apache_solr_search',
+      'apachesolr_search_currentsearch' => array(
+        'module' => 'apachesolr_search',
         'delta' => 'currentsearch',
-        'weight' => 36,
+        'weight' => 38,
         'region' => 'right',
         'status' => '0',
         'label' => 'Apache Solr Search: Current search',
@@ -27,7 +27,7 @@ function _eduglue_solr_search_context_default_contexts() {
       'apachesolr_sort' => array(
         'module' => 'apachesolr',
         'delta' => 'sort',
-        'weight' => 37,
+        'weight' => 39,
         'region' => 'right',
         'status' => '0',
         'label' => 'Apache Solr Core: Sorting',
@@ -36,34 +36,34 @@ function _eduglue_solr_search_context_default_contexts() {
       'apachesolr_og_im_og_gid' => array(
         'module' => 'apachesolr_og',
         'delta' => 'im_og_gid',
-        'weight' => 38,
+        'weight' => 40,
         'region' => 'right',
         'status' => '0',
         'label' => 'Apache Solr OG: Filter by Organic Group',
         'type' => 'context_ui',
       ),
-      'apacheeduglue_solr_search_uid' => array(
-        'module' => 'apache_solr_search',
+      'apachesolr_search_uid' => array(
+        'module' => 'apachesolr_search',
         'delta' => 'uid',
-        'weight' => 39,
+        'weight' => 41,
         'region' => 'right',
         'status' => '0',
         'label' => 'Apache Solr Search: Filter by author',
         'type' => 'context_ui',
       ),
-      'apacheeduglue_solr_search_im_vid_2' => array(
-        'module' => 'apache_solr_search',
+      'apachesolr_search_im_vid_2' => array(
+        'module' => 'apachesolr_search',
         'delta' => 'im_vid_2',
-        'weight' => 40,
+        'weight' => 42,
         'region' => 'right',
         'status' => '0',
         'label' => 'Apache Solr Search: Filter by taxonomy Tags',
         'type' => 'context_ui',
       ),
-      'apacheeduglue_solr_search_type' => array(
-        'module' => 'apache_solr_search',
+      'apachesolr_search_type' => array(
+        'module' => 'apachesolr_search',
         'delta' => 'type',
-        'weight' => 41,
+        'weight' => 43,
         'region' => 'right',
         'status' => '0',
         'label' => 'Apache Solr Search: Filter by content type',
