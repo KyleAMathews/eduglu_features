@@ -1,7 +1,6 @@
 core = "6.x"
 dependencies[] = "book"
 dependencies[] = "comment"
-dependencies[] = "date_api"
 dependencies[] = "imagecache"
 dependencies[] = "node"
 dependencies[] = "spaces"
