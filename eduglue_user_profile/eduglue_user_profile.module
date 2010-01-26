@@ -7,11 +7,8 @@ include_once('eduglue_user_profile.features.inc');
  * Implementation of hook_init().
  */
 function eduglue_user_profile_init() {
-  drupal_get_path('module', 'eduglue_user_profile') .
-                 "/eduglue_user_profile.css";
   drupal_add_css(drupal_get_path('module', 'eduglue_user_profile') .
                  "/eduglue_user_profile.css");
-  
 }
 
 /**
