@@ -3,7 +3,7 @@
 /**
  * Helper to implementation of hook_node_info().
  */
-function _edguglue_groups_node_info() {
+function _eduglu_groups_node_info() {
   $items = array(
     'group' => array(
       'name' => t('group'),

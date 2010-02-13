@@ -22,3 +22,9 @@ table#stats td {
 	margin-right: 10px;
 	margin-bottom: 10px;
 }
+
+ul.links {
+	margin-top: 19px;
+	float: left;
+	font-size: 1.2em;
+}
