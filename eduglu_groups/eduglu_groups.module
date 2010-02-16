@@ -45,7 +45,7 @@ function eduglu_groups_prepare_my_groups() {
   $output .= "<div id='my-groups'>";
   $output .= "<h2 class='grid-3'>My Groups</h2><p class='grid-5'>"
   . l("Browse all groups", "og/all", array('attributes' => array('class' => 'grid-2')))
-  . l("Manage my subscriptions", "mailnode/subscriptions", array('attributes' => array('class' => 'grid-2')))
+  . l("Manage my group memberships", "mailnode/subscriptions", array('attributes' => array('class' => 'grid-2')))
   . "<hr />";
   $output .= "<div class='clear-block'>";
   foreach ($chunked_groups as $groups) {

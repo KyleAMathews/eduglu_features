@@ -24,6 +24,7 @@ if (Drupal.jsEnabled) {
       // So link doesn't go anywhere.
       return false;
     });
+    
     // If the window is resized and the my-groups div is visible, reset
     // the div's position.
     $(window).resize(function() {
