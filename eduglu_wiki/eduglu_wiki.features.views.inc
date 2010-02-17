@@ -3,14 +3,14 @@
 /**
  * Helper to implementation of hook_views_default_views().
  */
-function _eduglue_discussion_views_default_views() {
+function _eduglu_wiki_views_default_views() {
   $views = array();
 
-  // Exported view: og_ghp_ron_spaces
+  // Exported view: eduglu_wiki
   $view = new view;
-  $view->name = 'og_ghp_ron_spaces';
-  $view->description = 'Spaces OG: Group home page - River of news. Default';
-  $view->tag = 'og';
+  $view->name = 'eduglu_wiki';
+  $view->description = 'View for eduglu_wiki feature';
+  $view->tag = 'eduglu';
   $view->view_php = '';
   $view->base_table = 'node';
   $view->is_cacheable = FALSE;
@@ -69,7 +69,7 @@ function _eduglue_discussion_views_default_views() {
     'type' => array(
       'operator' => 'in',
       'value' => array(
-        'story' => 'story',
+        'wiki' => 'wiki',
       ),
       'group' => '0',
       'exposed' => FALSE,
@@ -129,10 +129,10 @@ function _eduglue_discussion_views_default_views() {
   ));
   $handler->override_option('sitename_title', FALSE);
   $handler = $view->new_display('page', 'Page', 'page_1');
-  $handler->override_option('path', 'discussion');
+  $handler->override_option('path', 'wiki');
   $handler->override_option('menu', array(
     'type' => 'normal',
-    'title' => 'Dashboard',
+    'title' => 'Wiki',
     'description' => '',
     'weight' => '0',
     'name' => 'features',

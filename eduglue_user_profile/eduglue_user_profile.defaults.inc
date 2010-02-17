@@ -175,6 +175,7 @@ function _eduglue_user_profile_content_default_fields() {
     'display' => array(
       'url_cutoff' => '80',
     ),
+    'url' => '',
     'title' => 'value',
     'title_value' => 'My Facebook profile',
     'enable_tokens' => 0,
@@ -225,6 +226,7 @@ function _eduglue_user_profile_content_default_fields() {
     'display' => array(
       'url_cutoff' => '80',
     ),
+    'url' => '',
     'title' => 'value',
     'title_value' => 'My LinkedIn Profile',
     'enable_tokens' => 0,

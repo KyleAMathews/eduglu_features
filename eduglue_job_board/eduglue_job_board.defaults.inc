@@ -192,20 +192,10 @@ function _eduglue_job_board_context_default_contexts() {
       '0' => 'job_form',
     ),
     'views' => array(
-      '0' => 'eduglue_jobs',
+      '0' => 'eduglue_job_board',
     ),
     'menu' => 'job-postings',
-    'block' => array(
-      'block_2' => array(
-        'module' => 'block',
-        'delta' => '2',
-        'weight' => -39,
-        'region' => 'right',
-        'status' => '0',
-        'label' => 'Create new job posting',
-        'type' => 'context_ui',
-      ),
-    ),
+    'block' => array(),
   );
   return $items;
 }

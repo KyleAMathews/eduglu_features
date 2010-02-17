@@ -21,26 +21,7 @@ function _eduglue_polls_context_default_contexts() {
       '0' => 'polls',
     ),
     'menu' => 'poll',
-    'block' => array(
-      'og_0' => array(
-        'module' => 'og',
-        'delta' => '0',
-        'weight' => -39,
-        'region' => 'right',
-        'status' => '0',
-        'label' => 'Group details',
-        'type' => 'context_ui',
-      ),
-      'views_calendar_per_group-block_1' => array(
-        'module' => 'views',
-        'delta' => 'calendar_per_group-block_1',
-        'weight' => -38,
-        'region' => 'right',
-        'status' => '0',
-        'label' => 'Upcoming',
-        'type' => 'context_ui',
-      ),
-    ),
+    'block' => array(),
   );
   return $items;
 }
