@@ -585,3 +585,68 @@ function _eduglue_user_profile_context_default_contexts() {
   );
   return $items;
 }
+
+/**
+ * Helper to implementation of hook_imagecache_default_presets().
+ */
+function _eduglue_user_profile_imagecache_default_presets() {
+  $items = array(
+    '25x25_crop' => array(
+      'presetname' => '25x25_crop',
+      'actions' => array(
+        '0' => array(
+          'weight' => '0',
+          'module' => 'imagecache',
+          'action' => 'imagecache_scale_and_crop',
+          'data' => array(
+            'width' => '25',
+            'height' => '25',
+          ),
+        ),
+      ),
+    ),
+    '30x30_crop' => array(
+      'presetname' => '30x30_crop',
+      'actions' => array(
+        '0' => array(
+          'weight' => '0',
+          'module' => 'imagecache',
+          'action' => 'imagecache_scale_and_crop',
+          'data' => array(
+            'width' => '30',
+            'height' => '30',
+          ),
+        ),
+      ),
+    ),
+    'user_image_default' => array(
+      'presetname' => 'user_image_default',
+      'actions' => array(
+        '0' => array(
+          'weight' => '0',
+          'module' => 'imagecache',
+          'action' => 'imagecache_scale_and_crop',
+          'data' => array(
+            'width' => '100',
+            'height' => '100',
+          ),
+        ),
+      ),
+    ),
+    'user_image_large' => array(
+      'presetname' => 'user_image_large',
+      'actions' => array(
+        '0' => array(
+          'weight' => '0',
+          'module' => 'imagecache',
+          'action' => 'imagecache_scale_and_crop',
+          'data' => array(
+            'width' => '200',
+            'height' => '200',
+          ),
+        ),
+      ),
+    ),
+  );
+  return $items;
+}

@@ -19,6 +19,15 @@ function eduglue_user_profile_context_default_contexts() {
 }
 
 /**
+ * Implementation of hook_imagecache_default_presets().
+ */
+function eduglue_user_profile_imagecache_default_presets() {
+  module_load_include('inc', 'eduglue_user_profile', 'eduglue_user_profile.defaults');
+  $args = func_get_args();
+  return call_user_func_array('_eduglue_user_profile_imagecache_default_presets', $args);
+}
+
+/**
  * Implementation of hook_node_info().
  */
 function eduglue_user_profile_node_info() {
