@@ -1,5 +1,5 @@
 core = "6.x"
-dependencies[] = "eduglue_discussion"
+dependencies[] = "eduglu_discussion"
 description = "Simple wiki application. All group members can edit wiki content."
 features[context][] = "spaces-feature-wiki"
 features[menu][] = "wiki"

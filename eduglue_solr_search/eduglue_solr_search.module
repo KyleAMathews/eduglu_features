@@ -1,3 +1,0 @@
-<?php
-
-include_once('eduglue_solr_search.features.inc');
