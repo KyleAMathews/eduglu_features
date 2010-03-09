@@ -155,7 +155,7 @@ function _eduglu_front_page_views_default_views() {
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
-      'imagecache_preset' => '6',
+      'imagecache_preset' => 'user_image_default',
       'exclude' => 0,
       'id' => 'picture',
       'table' => 'users',
@@ -311,7 +311,6 @@ function _eduglu_front_page_views_default_views() {
   $handler->override_option('title', 'Recent activity in my groups');
   $handler->override_option('empty', 'There are no new posts in your groups.');
   $handler->override_option('empty_format', '1');
-  $handler->override_option('use_ajax', TRUE);
   $handler->override_option('use_pager', '1');
   $handler->override_option('distinct', 0);
   $handler->override_option('style_plugin', 'list');
