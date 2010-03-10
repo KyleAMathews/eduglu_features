@@ -69,13 +69,6 @@ function _eduglu_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'og_home_page_view';
-  $strongarm->value = 'og_ghp_ron';
-
-  $export['og_home_page_view'] = $strongarm;
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'purl_method_spaces_og';
   $strongarm->value = 'path';
 
