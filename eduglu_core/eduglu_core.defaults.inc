@@ -3,7 +3,7 @@
 /**
  * Helper to implementation of hook_ctools_plugin_api().
  */
-function _eduglu_ctools_plugin_api() {
+function _eduglu_core_ctools_plugin_api() {
   $args = func_get_args();
   $module = array_shift($args);
   $api = array_shift($args);
@@ -15,7 +15,7 @@ function _eduglu_ctools_plugin_api() {
 /**
  * Helper to implementation of hook_strongarm().
  */
-function _eduglu_strongarm() {
+function _eduglu_core_strongarm() {
   $export = array();
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -66,6 +66,13 @@ function _eduglu_strongarm() {
   $strongarm->value = 'features';
 
   $export['menu_primary_links_source'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_home_page_view';
+  $strongarm->value = 'og_ghp_ron';
+
+  $export['og_home_page_view'] = $strongarm;
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
