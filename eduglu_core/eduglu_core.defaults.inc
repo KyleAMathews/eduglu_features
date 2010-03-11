@@ -130,47 +130,5 @@ function _eduglu_core_strongarm() {
   $strongarm->value = '200';
 
   $export['upload_usersize_default'] = $strongarm;
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'user_picture_dimensions';
-  $strongarm->value = '1600x1400';
-
-  $export['user_picture_dimensions'] = $strongarm;
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'user_picture_file_size';
-  $strongarm->value = '1500';
-
-  $export['user_picture_file_size'] = $strongarm;
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'user_picture_path';
-  $strongarm->value = 'pictures';
-
-  $export['user_picture_path'] = $strongarm;
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'user_pictures';
-  $strongarm->value = '1';
-
-  $export['user_pictures'] = $strongarm;
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'user_register';
-  $strongarm->value = '0';
-
-  $export['user_register'] = $strongarm;
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'user_signatures';
-  $strongarm->value = '1';
-
-  $export['user_signatures'] = $strongarm;
   return $export;
 }
