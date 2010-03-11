@@ -19,6 +19,24 @@ function eduglu_user_profile_context_default_contexts() {
 }
 
 /**
+ * Implementation of hook_ctools_plugin_api().
+ */
+function eduglu_user_profile_ctools_plugin_api() {
+  module_load_include('inc', 'eduglu_user_profile', 'eduglu_user_profile.defaults');
+  $args = func_get_args();
+  return call_user_func_array('_eduglu_user_profile_ctools_plugin_api', $args);
+}
+
+/**
+ * Implementation of hook_fieldgroup_default_groups().
+ */
+function eduglu_user_profile_fieldgroup_default_groups() {
+  module_load_include('inc', 'eduglu_user_profile', 'eduglu_user_profile.defaults');
+  $args = func_get_args();
+  return call_user_func_array('_eduglu_user_profile_fieldgroup_default_groups', $args);
+}
+
+/**
  * Implementation of hook_imagecache_default_presets().
  */
 function eduglu_user_profile_imagecache_default_presets() {
@@ -34,4 +52,13 @@ function eduglu_user_profile_node_info() {
   module_load_include('inc', 'eduglu_user_profile', 'eduglu_user_profile.features.node');
   $args = func_get_args();
   return call_user_func_array('_eduglu_user_profile_node_info', $args);
+}
+
+/**
+ * Implementation of hook_strongarm().
+ */
+function eduglu_user_profile_strongarm() {
+  module_load_include('inc', 'eduglu_user_profile', 'eduglu_user_profile.defaults');
+  $args = func_get_args();
+  return call_user_func_array('_eduglu_user_profile_strongarm', $args);
 }
