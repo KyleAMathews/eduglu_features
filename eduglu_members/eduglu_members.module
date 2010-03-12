@@ -1,20 +1,20 @@
 <?php
 
-include_once('eduglu_user_profile.features.inc');
+include_once('eduglu_members.features.inc');
 
 
 /**
  * Implementation of hook_init().
  */
-function eduglu_user_profile_init() {
-  drupal_add_css(drupal_get_path('module', 'eduglu_user_profile') .
-                 "/eduglu_user_profile.css");
+function eduglu_members_init() {
+  drupal_add_css(drupal_get_path('module', 'eduglu_members') .
+                 "/eduglu_members.css");
 }
 
 /**
  * Implementation of hook_block()
  */
-function eduglu_user_profile_block($op = 'list', $delta = 0, $edit = array()) {
+function eduglu_members_block($op = 'list', $delta = 0, $edit = array()) {
   switch ($op) {
     case 'list':
       $blocks[0]['info'] = t('User Profile Block with stats and bio');
@@ -27,7 +27,7 @@ function eduglu_user_profile_block($op = 'list', $delta = 0, $edit = array()) {
         $uid = check_plain(arg(1));
       }
       $content .= "";
-      
+
       if (user_access('access content') && arg(0) == "user" && $uid != 0) {
         
         // If this is the user's page, add links to edit their account and profile
@@ -180,4 +180,3 @@ function fix_twitter_link($twitter_text) {
     return check_plain($twitter_text);
   }
 }
-

@@ -1,6 +1,6 @@
 /* Block user-profile bumping against search box now that it's got no margins */
-.block-eduglu_user_profile {
-  margin-top: 30px;
+.block-eduglu_members {
+  margin-top: -30px;
 }
 
 table#stats {
@@ -17,8 +17,6 @@ table#stats td {
 
 .user_profile_image {
 	float: left;
-	xpadding: 0 10px 10px 10px;
-	xborder: 1px solid black;
 	margin-right: 10px;
 	margin-bottom: 10px;
 }

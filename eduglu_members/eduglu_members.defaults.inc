@@ -3,7 +3,7 @@
 /**
  * Helper to implementation of hook_content_default_fields().
  */
-function _eduglu_user_profile_content_default_fields() {
+function _eduglu_members_content_default_fields() {
   $fields = array();
 
   // Exported field: field_about_me
@@ -471,7 +471,7 @@ Alumni',
 /**
  * Helper to implementation of hook_context_default_contexts().
  */
-function _eduglu_user_profile_context_default_contexts() {
+function _eduglu_members_context_default_contexts() {
   $items = array();
 
   $items[] = array(
@@ -488,8 +488,8 @@ function _eduglu_user_profile_context_default_contexts() {
       '5' => 5,
     ),
     'block' => array(
-      'eduglu_user_profile_0' => array(
-        'module' => 'eduglu_user_profile',
+      'eduglu_members_0' => array(
+        'module' => 'eduglu_members',
         'delta' => '0',
         'weight' => -39,
         'region' => 'right',
@@ -505,7 +505,7 @@ function _eduglu_user_profile_context_default_contexts() {
 /**
  * Helper to implementation of hook_ctools_plugin_api().
  */
-function _eduglu_user_profile_ctools_plugin_api() {
+function _eduglu_members_ctools_plugin_api() {
   $args = func_get_args();
   $module = array_shift($args);
   $api = array_shift($args);
@@ -517,7 +517,7 @@ function _eduglu_user_profile_ctools_plugin_api() {
 /**
  * Helper to implementation of hook_fieldgroup_default_groups().
  */
-function _eduglu_user_profile_fieldgroup_default_groups() {
+function _eduglu_members_fieldgroup_default_groups() {
   $groups = array();
 
   // Exported group: group_about
@@ -610,7 +610,7 @@ function _eduglu_user_profile_fieldgroup_default_groups() {
 /**
  * Helper to implementation of hook_imagecache_default_presets().
  */
-function _eduglu_user_profile_imagecache_default_presets() {
+function _eduglu_members_imagecache_default_presets() {
   $items = array(
     '25x25_crop' => array(
       'presetname' => '25x25_crop',
@@ -675,7 +675,7 @@ function _eduglu_user_profile_imagecache_default_presets() {
 /**
  * Helper to implementation of hook_strongarm().
  */
-function _eduglu_user_profile_strongarm() {
+function _eduglu_members_strongarm() {
   $export = array();
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

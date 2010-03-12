@@ -3,7 +3,7 @@
 /**
  * Helper to implementation of hook_node_info().
  */
-function _eduglu_user_profile_node_info() {
+function _eduglu_members_node_info() {
   $items = array(
     'uprofile' => array(
       'name' => t('User Profile'),
