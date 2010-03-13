@@ -37,6 +37,15 @@ function eduglu_discussion_node_info() {
 }
 
 /**
+ * Implementation of hook_user_default_permissions().
+ */
+function eduglu_discussion_user_default_permissions() {
+  module_load_include('inc', 'eduglu_discussion', 'eduglu_discussion.defaults');
+  $args = func_get_args();
+  return call_user_func_array('_eduglu_discussion_user_default_permissions', $args);
+}
+
+/**
  * Implementation of hook_strongarm().
  */
 function eduglu_discussion_strongarm() {

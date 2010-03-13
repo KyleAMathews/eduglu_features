@@ -61,6 +61,51 @@ function _eduglu_polls_menu_default_items() {
 }
 
 /**
+ * Helper to implementation of hook_user_default_permissions().
+ */
+function _eduglu_polls_user_default_permissions() {
+  $permissions = array();
+
+  // Exported permission: cancel own vote
+  $permissions[] = array(
+    'name' => 'cancel own vote',
+    'roles' => array(
+      '0' => 'admin',
+      '1' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: create poll content
+  $permissions[] = array(
+    'name' => 'create poll content',
+    'roles' => array(
+      '0' => 'admin',
+      '1' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: edit own poll content
+  $permissions[] = array(
+    'name' => 'edit own poll content',
+    'roles' => array(
+      '0' => 'admin',
+      '1' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: vote on polls
+  $permissions[] = array(
+    'name' => 'vote on polls',
+    'roles' => array(
+      '0' => 'admin',
+      '1' => 'authenticated user',
+    ),
+  );
+
+  return $permissions;
+}
+
+/**
  * Helper to implementation of hook_strongarm().
  */
 function _eduglu_polls_strongarm() {

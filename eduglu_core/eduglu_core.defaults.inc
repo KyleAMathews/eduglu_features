@@ -13,6 +13,305 @@ function _eduglu_core_ctools_plugin_api() {
 }
 
 /**
+ * Helper to implementation of hook_user_default_permissions().
+ */
+function _eduglu_core_user_default_permissions() {
+  $permissions = array();
+
+  // Exported permission: access administration menu
+  $permissions[] = array(
+    'name' => 'access administration menu',
+    'roles' => array(
+      '0' => 'admin',
+    ),
+  );
+
+  // Exported permission: access all views
+  $permissions[] = array(
+    'name' => 'access all views',
+    'roles' => array(
+      '0' => 'admin',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: access comments
+  $permissions[] = array(
+    'name' => 'access comments',
+    'roles' => array(
+      '0' => 'Moderator',
+      '1' => 'admin',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: access content
+  $permissions[] = array(
+    'name' => 'access content',
+    'roles' => array(
+      '0' => 'Moderator',
+      '1' => 'admin',
+      '2' => 'anonymous user',
+      '3' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: access user profiles
+  $permissions[] = array(
+    'name' => 'access user profiles',
+    'roles' => array(
+      '0' => 'admin',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: administer comments
+  $permissions[] = array(
+    'name' => 'administer comments',
+    'roles' => array(
+      '0' => 'Moderator',
+      '1' => 'admin',
+    ),
+  );
+
+  // Exported permission: administer content types
+  $permissions[] = array(
+    'name' => 'administer content types',
+    'roles' => array(
+      '0' => 'admin',
+    ),
+  );
+
+  // Exported permission: administer fasttoggle
+  $permissions[] = array(
+    'name' => 'administer fasttoggle',
+    'roles' => array(
+      '0' => 'admin',
+    ),
+  );
+
+  // Exported permission: administer nodes
+  $permissions[] = array(
+    'name' => 'administer nodes',
+    'roles' => array(
+      '0' => 'admin',
+    ),
+  );
+
+  // Exported permission: display drupal links
+  $permissions[] = array(
+    'name' => 'display drupal links',
+    'roles' => array(
+      '0' => 'admin',
+    ),
+  );
+
+  // Exported permission: make posts sticky
+  $permissions[] = array(
+    'name' => 'make posts sticky',
+    'roles' => array(
+      '0' => 'Moderator',
+      '1' => 'admin',
+    ),
+  );
+
+  // Exported permission: moderate comments
+  $permissions[] = array(
+    'name' => 'moderate comments',
+    'roles' => array(
+      '0' => 'Moderator',
+      '1' => 'admin',
+    ),
+  );
+
+  // Exported permission: moderate posts
+  $permissions[] = array(
+    'name' => 'moderate posts',
+    'roles' => array(
+      '0' => 'Moderator',
+      '1' => 'admin',
+    ),
+  );
+
+  // Exported permission: moderate users
+  $permissions[] = array(
+    'name' => 'moderate users',
+    'roles' => array(
+      '0' => 'admin',
+    ),
+  );
+
+  // Exported permission: post comments
+  $permissions[] = array(
+    'name' => 'post comments',
+    'roles' => array(
+      '0' => 'Master of Quizzes',
+      '1' => 'Moderator',
+      '2' => 'Teacher',
+      '3' => 'admin',
+      '4' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: post comments without approval
+  $permissions[] = array(
+    'name' => 'post comments without approval',
+    'roles' => array(
+      '0' => 'Moderator',
+      '1' => 'admin',
+      '2' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: promote posts
+  $permissions[] = array(
+    'name' => 'promote posts',
+    'roles' => array(
+      '0' => 'Moderator',
+      '1' => 'admin',
+    ),
+  );
+
+  // Exported permission: search content
+  $permissions[] = array(
+    'name' => 'search content',
+    'roles' => array(
+      '0' => 'admin',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: upload files
+  $permissions[] = array(
+    'name' => 'upload files',
+    'roles' => array(
+      '0' => 'admin',
+      '1' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: upload files to comments
+  $permissions[] = array(
+    'name' => 'upload files to comments',
+    'roles' => array(
+      '0' => 'admin',
+      '1' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: use advanced search
+  $permissions[] = array(
+    'name' => 'use advanced search',
+    'roles' => array(
+      '0' => 'admin',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: view files uploaded to comments
+  $permissions[] = array(
+    'name' => 'view files uploaded to comments',
+    'roles' => array(
+      '0' => 'admin',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: view imagecache 25x25_crop
+  $permissions[] = array(
+    'name' => 'view imagecache 25x25_crop',
+    'roles' => array(),
+  );
+
+  // Exported permission: view imagecache 30x30_crop
+  $permissions[] = array(
+    'name' => 'view imagecache 30x30_crop',
+    'roles' => array(
+      '0' => 'admin',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: view imagecache comment_image
+  $permissions[] = array(
+    'name' => 'view imagecache comment_image',
+    'roles' => array(
+      '0' => 'admin',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: view imagecache discussion_image_thumbnail
+  $permissions[] = array(
+    'name' => 'view imagecache discussion_image_thumbnail',
+    'roles' => array(
+      '0' => 'admin',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: view imagecache discussion_large
+  $permissions[] = array(
+    'name' => 'view imagecache discussion_large',
+    'roles' => array(
+      '0' => 'admin',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: view imagecache user_image_default
+  $permissions[] = array(
+    'name' => 'view imagecache user_image_default',
+    'roles' => array(
+      '0' => 'admin',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: view imagecache user_image_large
+  $permissions[] = array(
+    'name' => 'view imagecache user_image_large',
+    'roles' => array(
+      '0' => 'admin',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: view uploaded files
+  $permissions[] = array(
+    'name' => 'view uploaded files',
+    'roles' => array(
+      '0' => 'admin',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: view users outside groups
+  $permissions[] = array(
+    'name' => 'view users outside groups',
+    'roles' => array(
+      '0' => 'admin',
+      '1' => 'authenticated user',
+    ),
+  );
+
+  return $permissions;
+}
+
+/**
  * Helper to implementation of hook_strongarm().
  */
 function _eduglu_core_strongarm() {

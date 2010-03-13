@@ -58,6 +58,43 @@ function _eduglu_discussion_menu_default_items() {
 }
 
 /**
+ * Helper to implementation of hook_user_default_permissions().
+ */
+function _eduglu_discussion_user_default_permissions() {
+  $permissions = array();
+
+  // Exported permission: create story content
+  $permissions[] = array(
+    'name' => 'create story content',
+    'roles' => array(
+      '0' => 'admin',
+      '1' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: delete own story content
+  $permissions[] = array(
+    'name' => 'delete own story content',
+    'roles' => array(
+      '0' => 'Moderator',
+      '1' => 'admin',
+      '2' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: edit own story content
+  $permissions[] = array(
+    'name' => 'edit own story content',
+    'roles' => array(
+      '0' => 'admin',
+      '1' => 'authenticated user',
+    ),
+  );
+
+  return $permissions;
+}
+
+/**
  * Helper to implementation of hook_strongarm().
  */
 function _eduglu_discussion_strongarm() {

@@ -28,6 +28,15 @@ function eduglu_polls_menu_default_items() {
 }
 
 /**
+ * Implementation of hook_user_default_permissions().
+ */
+function eduglu_polls_user_default_permissions() {
+  module_load_include('inc', 'eduglu_polls', 'eduglu_polls.defaults');
+  $args = func_get_args();
+  return call_user_func_array('_eduglu_polls_user_default_permissions', $args);
+}
+
+/**
  * Implementation of hook_strongarm().
  */
 function eduglu_polls_strongarm() {

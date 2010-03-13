@@ -673,6 +673,61 @@ function _eduglu_members_imagecache_default_presets() {
 }
 
 /**
+ * Helper to implementation of hook_user_default_permissions().
+ */
+function _eduglu_members_user_default_permissions() {
+  $permissions = array();
+
+  // Exported permission: access user profiles
+  $permissions[] = array(
+    'name' => 'access user profiles',
+    'roles' => array(
+      '0' => 'admin',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: administer permissions
+  $permissions[] = array(
+    'name' => 'administer permissions',
+    'roles' => array(
+      '0' => 'admin',
+    ),
+  );
+
+  // Exported permission: administer users
+  $permissions[] = array(
+    'name' => 'administer users',
+    'roles' => array(
+      '0' => 'admin',
+    ),
+  );
+
+  // Exported permission: view imagecache user_image_default
+  $permissions[] = array(
+    'name' => 'view imagecache user_image_default',
+    'roles' => array(
+      '0' => 'admin',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: view imagecache user_image_large
+  $permissions[] = array(
+    'name' => 'view imagecache user_image_large',
+    'roles' => array(
+      '0' => 'admin',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
+    ),
+  );
+
+  return $permissions;
+}
+
+/**
  * Helper to implementation of hook_strongarm().
  */
 function _eduglu_members_strongarm() {
