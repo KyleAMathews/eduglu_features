@@ -58,16 +58,6 @@ function _eduglu_core_user_default_permissions() {
     ),
   );
 
-  // Exported permission: access user profiles
-  $permissions[] = array(
-    'name' => 'access user profiles',
-    'roles' => array(
-      '0' => 'admin',
-      '1' => 'anonymous user',
-      '2' => 'authenticated user',
-    ),
-  );
-
   // Exported permission: administer comments
   $permissions[] = array(
     'name' => 'administer comments',
@@ -262,26 +252,6 @@ function _eduglu_core_user_default_permissions() {
   // Exported permission: view imagecache discussion_large
   $permissions[] = array(
     'name' => 'view imagecache discussion_large',
-    'roles' => array(
-      '0' => 'admin',
-      '1' => 'anonymous user',
-      '2' => 'authenticated user',
-    ),
-  );
-
-  // Exported permission: view imagecache user_image_default
-  $permissions[] = array(
-    'name' => 'view imagecache user_image_default',
-    'roles' => array(
-      '0' => 'admin',
-      '1' => 'anonymous user',
-      '2' => 'authenticated user',
-    ),
-  );
-
-  // Exported permission: view imagecache user_image_large
-  $permissions[] = array(
-    'name' => 'view imagecache user_image_large',
     'roles' => array(
       '0' => 'admin',
       '1' => 'anonymous user',
