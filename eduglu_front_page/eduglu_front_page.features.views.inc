@@ -281,22 +281,22 @@ function _eduglu_front_page_views_default_views() {
         'button' => 'Expose',
       ),
     ),
-    'uid' => array(
+    'og_public' => array(
       'operator' => '=',
-      'value' => 1,
-      'group' => 0,
+      'value' => '1',
+      'group' => '0',
       'exposed' => FALSE,
       'expose' => array(
         'operator' => FALSE,
         'label' => '',
       ),
-      'id' => 'uid',
-      'table' => 'og_uid',
-      'field' => 'uid',
-      'relationship' => 'group_nid',
-      'expose_button' => array(
-        'button' => 'Expose',
+      'id' => 'og_public',
+      'table' => 'og_access_post',
+      'field' => 'og_public',
+      'override' => array(
+        'button' => 'Override',
       ),
+      'relationship' => 'none',
     ),
   ));
   $handler->override_option('access', array(
@@ -311,6 +311,7 @@ function _eduglu_front_page_views_default_views() {
   $handler->override_option('title', 'Recent activity in my groups');
   $handler->override_option('empty', 'There are no new posts in your groups.');
   $handler->override_option('empty_format', '1');
+  $handler->override_option('items_per_page', 5);
   $handler->override_option('use_pager', '1');
   $handler->override_option('distinct', 0);
   $handler->override_option('style_plugin', 'list');
@@ -324,7 +325,7 @@ function _eduglu_front_page_views_default_views() {
     'hide_empty' => 0,
   ));
   $handler = $view->new_display('page', 'Page', 'page');
-  $handler->override_option('path', 'group/myunread');
+  $handler->override_option('path', 'group/unread');
   $handler->override_option('menu', array(
     'type' => 'default tab',
     'title' => 'My Unread',
@@ -348,7 +349,7 @@ function _eduglu_front_page_views_default_views() {
   $handler->override_option('row_options', array(
     'item_length' => 'default',
   ));
-  $handler->override_option('path', 'group/myunread/feed');
+  $handler->override_option('path', 'myunread/feed');
   $handler->override_option('menu', array(
     'type' => 'none',
     'title' => '',
@@ -367,6 +368,21 @@ function _eduglu_front_page_views_default_views() {
     'default' => 0,
   ));
   $handler->override_option('sitename_title', FALSE);
+  $handler = $view->new_display('page', 'recent-activity-anonymous', 'page_1');
+  $handler->override_option('path', 'latest-activity');
+  $handler->override_option('menu', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
+  ));
+  $handler->override_option('tab_options', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+  ));
 
   $views[$view->name] = $view;
 
