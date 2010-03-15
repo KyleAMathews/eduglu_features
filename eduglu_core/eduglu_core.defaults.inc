@@ -75,14 +75,6 @@ function _eduglu_core_user_default_permissions() {
     ),
   );
 
-  // Exported permission: administer fasttoggle
-  $permissions[] = array(
-    'name' => 'administer fasttoggle',
-    'roles' => array(
-      '0' => 'admin',
-    ),
-  );
-
   // Exported permission: administer nodes
   $permissions[] = array(
     'name' => 'administer nodes',
@@ -94,41 +86,6 @@ function _eduglu_core_user_default_permissions() {
   // Exported permission: display drupal links
   $permissions[] = array(
     'name' => 'display drupal links',
-    'roles' => array(
-      '0' => 'admin',
-    ),
-  );
-
-  // Exported permission: make posts sticky
-  $permissions[] = array(
-    'name' => 'make posts sticky',
-    'roles' => array(
-      '0' => 'Moderator',
-      '1' => 'admin',
-    ),
-  );
-
-  // Exported permission: moderate comments
-  $permissions[] = array(
-    'name' => 'moderate comments',
-    'roles' => array(
-      '0' => 'Moderator',
-      '1' => 'admin',
-    ),
-  );
-
-  // Exported permission: moderate posts
-  $permissions[] = array(
-    'name' => 'moderate posts',
-    'roles' => array(
-      '0' => 'Moderator',
-      '1' => 'admin',
-    ),
-  );
-
-  // Exported permission: moderate users
-  $permissions[] = array(
-    'name' => 'moderate users',
     'roles' => array(
       '0' => 'admin',
     ),
@@ -153,15 +110,6 @@ function _eduglu_core_user_default_permissions() {
       '0' => 'Moderator',
       '1' => 'admin',
       '2' => 'authenticated user',
-    ),
-  );
-
-  // Exported permission: promote posts
-  $permissions[] = array(
-    'name' => 'promote posts',
-    'roles' => array(
-      '0' => 'Moderator',
-      '1' => 'admin',
     ),
   );
 
@@ -222,36 +170,6 @@ function _eduglu_core_user_default_permissions() {
   // Exported permission: view imagecache 30x30_crop
   $permissions[] = array(
     'name' => 'view imagecache 30x30_crop',
-    'roles' => array(
-      '0' => 'admin',
-      '1' => 'anonymous user',
-      '2' => 'authenticated user',
-    ),
-  );
-
-  // Exported permission: view imagecache comment_image
-  $permissions[] = array(
-    'name' => 'view imagecache comment_image',
-    'roles' => array(
-      '0' => 'admin',
-      '1' => 'anonymous user',
-      '2' => 'authenticated user',
-    ),
-  );
-
-  // Exported permission: view imagecache discussion_image_thumbnail
-  $permissions[] = array(
-    'name' => 'view imagecache discussion_image_thumbnail',
-    'roles' => array(
-      '0' => 'admin',
-      '1' => 'anonymous user',
-      '2' => 'authenticated user',
-    ),
-  );
-
-  // Exported permission: view imagecache discussion_large
-  $permissions[] = array(
-    'name' => 'view imagecache discussion_large',
     'roles' => array(
       '0' => 'admin',
       '1' => 'anonymous user',
@@ -371,6 +289,30 @@ function _eduglu_core_strongarm() {
   $strongarm->value = 'frontpage';
 
   $export['site_frontpage'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'theme_dewey_settings';
+  $strongarm->value = array(
+    'toggle_logo' => 1,
+    'toggle_name' => 1,
+    'toggle_slogan' => 0,
+    'toggle_mission' => 1,
+    'toggle_node_user_picture' => 1,
+    'toggle_comment_user_picture' => 1,
+    'toggle_search' => 1,
+    'toggle_favicon' => 1,
+    'toggle_primary_links' => 1,
+    'toggle_secondary_links' => 1,
+    'default_logo' => 1,
+    'logo_path' => '',
+    'logo_upload' => '',
+    'default_favicon' => 1,
+    'favicon_path' => '',
+    'favicon_upload' => '',
+  );
+
+  $export['theme_dewey_settings'] = $strongarm;
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
