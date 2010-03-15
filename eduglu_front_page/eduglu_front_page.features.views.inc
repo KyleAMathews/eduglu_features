@@ -281,7 +281,7 @@ function _eduglu_front_page_views_default_views() {
         'button' => 'Expose',
       ),
     ),
-    'og_public' => array(
+    'uid' => array(
       'operator' => '=',
       'value' => '1',
       'group' => '0',
@@ -290,28 +290,21 @@ function _eduglu_front_page_views_default_views() {
         'operator' => FALSE,
         'label' => '',
       ),
-      'id' => 'og_public',
-      'table' => 'og_access_post',
-      'field' => 'og_public',
-      'override' => array(
-        'button' => 'Override',
-      ),
-      'relationship' => 'none',
+      'id' => 'uid',
+      'table' => 'og_uid',
+      'field' => 'uid',
+      'relationship' => 'group_nid',
     ),
   ));
   $handler->override_option('access', array(
-    'type' => 'role',
-    'role' => array(
-      '2' => 2,
-    ),
+    'type' => 'none',
   ));
   $handler->override_option('cache', array(
     'type' => 'none',
   ));
-  $handler->override_option('title', 'Recent activity in my groups');
+  $handler->override_option('title', 'Recent Activity in My Groups');
   $handler->override_option('empty', 'There are no new posts in your groups.');
   $handler->override_option('empty_format', '1');
-  $handler->override_option('items_per_page', 5);
   $handler->override_option('use_pager', '1');
   $handler->override_option('distinct', 0);
   $handler->override_option('style_plugin', 'list');
@@ -369,6 +362,45 @@ function _eduglu_front_page_views_default_views() {
   ));
   $handler->override_option('sitename_title', FALSE);
   $handler = $view->new_display('page', 'recent-activity-anonymous', 'page_1');
+  $handler->override_option('relationships', array());
+  $handler->override_option('filters', array(
+    'status' => array(
+      'id' => 'status',
+      'table' => 'node',
+      'field' => 'status',
+      'operator' => '=',
+      'value' => 1,
+      'group' => 0,
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'relationship' => 'none',
+      'expose_button' => array(
+        'button' => 'Expose',
+      ),
+    ),
+    'og_public' => array(
+      'operator' => '=',
+      'value' => '1',
+      'group' => '0',
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'id' => 'og_public',
+      'table' => 'og_access_post',
+      'field' => 'og_public',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+  ));
+  $handler->override_option('title', 'Latest Activity');
+  $handler->override_option('items_per_page', 3);
   $handler->override_option('path', 'latest-activity');
   $handler->override_option('menu', array(
     'type' => 'none',

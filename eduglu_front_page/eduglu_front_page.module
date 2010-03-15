@@ -1,3 +1,56 @@
 <?php
 
 include_once('eduglu_front_page.features.inc');
+
+/**
+ * Implementation of hook_menu.
+ */
+function eduglu_front_page_menu () {
+  $items['frontpage'] = array(
+    'title' => 'Learning Through Conversations',
+    'description' => t('Generates front page for eduglu_front_page sites'),
+    'page callback' => 'eduglu_front_page_frontpage',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/*
+ * Implementaiton of hook_init().
+ */
+function eduglu_front_page_init() {
+  drupal_add_js(drupal_get_path('module', 'eduglu_front_page') . "/eduglu_front_page.js");
+}
+/*
+ * Generates front page for eduglu_front_page sites
+ */
+function eduglu_front_page_frontpage() {
+  global $user;
+  if (!$user->uid) { // User is anonymous.
+    $out .= "<h2>Latest activity</h2>";
+    $out .= views_embed_view('eduglu_recent_activity', $display_id = 'page_1');
+    
+    // Login form
+    $out .= "<h2>Login</h2>";
+    $out .= drupal_get_form('user_login');
+    return $out;
+  }
+  else {
+    $out .= "<h2>Latest activity in my groups</h2>";
+    $out .= views_embed_view('eduglu_recent_activity', $display_id = 'page');
+    return $out;
+  }
+}
+
+function eduglu_front_page_form_alter(&$form, &$form_state, $form_id) {
+//dpm($form_id);
+//dpm($form);
+//dpm($form_state);
+  switch ($form_id) {
+    // Redirect people back to the front page after logging in.
+    case 'user_login':
+      $form['#redirect'] = '<front>';
+      break;
+  }
+}

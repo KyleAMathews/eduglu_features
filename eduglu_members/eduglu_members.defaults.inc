@@ -1062,7 +1062,7 @@ function _eduglu_members_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'user_picture_default';
-  $strongarm->value = 'files/pictures/head.png';
+  $strongarm->value = 'sites/all/themes/dewey/images/default_user_avatar.png';
 
   $export['user_picture_default'] = $strongarm;
   $strongarm = new stdClass;

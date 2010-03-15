@@ -1,7 +1,6 @@
 core = "6.x"
 dependencies[] = "comment"
 dependencies[] = "context"
-dependencies[] = "edully_front_page"
 dependencies[] = "modr8"
 dependencies[] = "og"
 dependencies[] = "og_views"
