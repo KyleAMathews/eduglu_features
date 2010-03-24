@@ -1,4 +1,32 @@
-.about-group-legend {
-  font-size: 200%;
-  margin-top: 2px;
+.eduglu-about-stats-boxes-container {
+  margin-top: 35px;
+}
+.eduglu-about-stats-box {
+  border: 1px solid lightGrey;
+  background: #F7F7F9;
+  margin-bottom: 5px;
+  padding-bottom: 10px;
+  height: 65px;
+}
+.eduglu-about-stats-box div{
+  left: 10px;
+  top: 15px
+}
+.eduglu-about-bottom-img {
+  position: absolute;
+  left: 17px;
+  bottom: 16px;
+}
+.eduglu-about-stats-label {
+  position: absolute;
+  right: 42px;
+  bottom: -15px;
+  font-size: 8pt;
+  z-index: 5;
+}
+
+.eduglu-about-stats-box-label {
+  position: absolute;
+  left: 20px;
+  top: 5px;
 }
