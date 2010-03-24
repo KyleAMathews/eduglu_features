@@ -1,5 +1,6 @@
 .eduglu-about-stats-boxes-container {
-  margin-top: 35px;
+  xmargin-top: 35px;
+  margin-bottom: 10px;
 }
 .eduglu-about-stats-box {
   border: 1px solid lightGrey;
@@ -29,4 +30,28 @@
   position: absolute;
   left: 20px;
   top: 5px;
+}
+.eduglu-about-top-contributor-name {
+  font-size: 150%;
+  font-style: larger;
+}
+.eduglu-about-top-contributor-picture {
+  float: left;
+  margin: 0 15px 0 10px;
+  height: 100px;
+}
+.eduglu-about-top-contributor-box {
+  border: 1px solid lightGrey;
+  background: #F7F7F9;
+  margin-bottom: 5px;
+  padding: 10px 0;
+}
+.page-about-group h3 {
+  border-bottom: 2px solid lightgrey;
+}
+.eduglu-about-members {
+    border: 1px solid lightGrey;
+  background: #F7F7F9;
+  margin-bottom: 5px;
+  padding: 10px;
 }
