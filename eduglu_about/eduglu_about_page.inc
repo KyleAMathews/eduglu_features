@@ -2,7 +2,13 @@
 
 define('THIRTY_DAYS_UNIX', 2592000);
 define('SIX_MONTHS_UNIX', 15552000);
+define('ONE_YEAR_UNIX', 31536000);
+define('ONE_WEEK_SECONDS', 604800);
+// MySQL group by week seems to default to Monday as the start of the week.
+define('LAST_MONDAY', strtotime("last Monday")); 
 
+// seems queries for data aren't correct... isys doesn't show any posts for past couple of weeks, others show posts where there isn't any... odd.
+// Flot doesn't work if js compression is turned on...
 function eduglu_about_page() {
   if ($space = spaces_get_space()) {
     return theme('eduglu_about_page', $space);
@@ -17,23 +23,21 @@ function _eduglu_about_new_group_users($space) {
   
   if ($new_group_members_data = cache_get('eduglu_about_new_members_' . $space->sid)) {
     $data = $new_group_members_data->data;
-    dpm('get new members data from cache');
   }
   else {
     $result = db_query("
       SELECT count(date_format(from_unixtime(created), '%Y%U')) as count,
-      date_format(from_unixtime(created), '%U') as week,
-      created as sortdate
+      created as timestamp
       FROM og_uid
       WHERE nid = %d
+      AND created > %d
       GROUP BY date_format(from_unixtime(created), '%Y%U')
-      ORDER BY sortdate desc
-      LIMIT 52", $space->sid);
+      ORDER BY timestamp desc", $space->sid, LAST_MONDAY - ONE_YEAR_UNIX);
   
     $results = array();
     // Pull out into keyed array.
     while ($data = db_fetch_array($result)) {
-      $results[$data['week']] = intval($data['count']);
+      $results[$data['timestamp']] = intval($data['count']);
     }
   
     $data = _eduglu_about_process_weekly($results);
@@ -64,24 +68,22 @@ function _eduglu_about_new_group_comments($space) {
 
   if ($new_group_comments_data = cache_get('eduglu_about_new_comments_' . $space->sid)) {
     $data = $new_group_comments_data->data;
-    dpm('get new comments data from cache');
   }
   else {
     $result = db_query("
       SELECT count(date_format(from_unixtime(c.timestamp), '%Y%U')) as count,
-      date_format(from_unixtime(c.timestamp), '%U') as week,
-      c.timestamp as sortdate
+      c.timestamp as timestamp
       FROM {comments} c JOIN {og_ancestry} o
       WHERE c.nid = o.nid
       AND o.group_nid = %d
+      AND c.timestamp > %d
       GROUP BY date_format(from_unixtime(c.timestamp), '%Y%U')
-      ORDER BY sortdate desc
-      LIMIT 52", $space->sid);
+      ORDER BY timestamp desc", $space->sid, LAST_MONDAY - ONE_YEAR_UNIX);
   
     $results = array();
     // Pull out into keyed array.
     while ($data = db_fetch_array($result)) {
-      $results[$data['week']] = intval($data['count']);
+      $results[$data['timestamp']] = intval($data['count']);
     }
   
     $data = _eduglu_about_process_weekly($results);
@@ -114,25 +116,23 @@ function _eduglu_about_new_nodes($space) {
   
   if ($new_node_data = cache_get('eduglu_about_new_nodes_' . $space->sid)) {
     $data = $new_node_data->data;
-    dpm('get new nodes data from cache');
   }
   else {
     $result = db_query("SELECT
       count(date_format(from_unixtime(n.created), '%Y%U')) as count,
-      date_format(from_unixtime(n.created), '%U') as week,
-      created as sortdate
+      created as timestamp
       FROM node n JOIN og_ancestry o
       WHERE n.nid = o.nid
       AND o.group_nid = %d
       AND n.type in ('story','poll','event_cck','book','event','job_form','wiki','learning_contract','quiz')
+      AND n.created > %d
       GROUP BY date_format(from_unixtime(n.created), '%Y%U')
-      ORDER BY sortdate desc
-      LIMIT 52", $space->sid);
+      ORDER BY timestamp desc", $space->sid, LAST_MONDAY - ONE_YEAR_UNIX);
   
     $results = array();
     // Pull out into keyed array.
     while ($data = db_fetch_array($result)) {
-      $results[$data['week']] = intval($data['count']);
+      $results[$data['timestamp']] = intval($data['count']);
     }
   
     $data = _eduglu_about_process_weekly($results);
@@ -179,51 +179,20 @@ function _eduglu_about_flot_options() {
 
 
 /*
- * Helper function to align week numbers amongst multiple years.
- */
-function _eduglu_about_correct_weeks($weeks_array) {
-  $keys = array_keys($weeks_array);
-  for ($i = 0; $i <= count($keys); $i++) {
-    if ($keys[$i] < $keys[$i + 1]) {
-      for ($p = $i; $p >= 0; $p--) {
-        $keys[$p] = $keys[$p] + 53;
-      }
-      break;
-    }
-  }
-
-  return array_combine($keys, $weeks_array);
-}
-
-/*
  *  Helper function. Process weekly stats.
  */
 function _eduglu_about_process_weekly($results) {
-  // Add first week to array so graph will have the correct starting point when
-  // when zeroed out.
-  $first_week = date('W');
-  $results[$first_week] = 0;
-
-  $results = _eduglu_about_correct_weeks($results);
-
-  ksort($results);
-
-  // Fill in empty values with zeros.
-  $keys = array_keys($results);
- 
-  $end = array_pop($keys);
+  $one_year_ago = LAST_MONDAY - ONE_YEAR_UNIX;
+  
   $values = array();
-  $count = 0;
-  for ($i = $keys[0]; $i <= $end; $i++) {
-    if ($results[$i]) {
-      $values[$count] = $results[$i];
-      $count++;
-    }
-    else {
-      $count++;
-    }
+  
+  foreach ($results as $timestamp => $value) {
+    // Use floor instead of round as timestamp chosen could be near end up week
+    // hence round up which would be a mistake.
+    $key = floor(($timestamp - $one_year_ago) / ONE_WEEK_SECONDS);
+    $values[$key] = $value;
   }
- 
+  
   // Convert to array structure required by flot
   $flot_values = array();
   foreach ($values as $key => $value) {
