@@ -1,5 +1,6 @@
 core = "6.x"
 description = "Feature that provides an about page for each group"
 name = "Eduglu About"
+features[menu][] = "about-group"
 spaces[types][] = "og"
 version = "6.x-1.0-alpha1"

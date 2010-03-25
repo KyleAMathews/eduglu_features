@@ -50,8 +50,20 @@
   border-bottom: 2px solid lightgrey;
 }
 .eduglu-about-members {
-    border: 1px solid lightGrey;
+  border: 1px solid lightGrey;
   background: #F7F7F9;
   margin-bottom: 5px;
-  padding: 10px;
+  padding: 19px;
+}
+/* Kill page title, Unneeded */
+.page-about-group #page-title {
+  display: none;
+}
+.eduglu-about-group-description {
+  font-size: larger;
+  font-style: italic;
+  margin-top: 10px;
+  border-bottom: 1px solid lightGrey;
+  padding-left: 10px;
+  padding-bottom: 5px;
 }

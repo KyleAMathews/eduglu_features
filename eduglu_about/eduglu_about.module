@@ -1,16 +1,7 @@
 <?php
-
-define('THIRTY_DAYS_UNIX', 2592000);
-define('SIX_MONTHS_UNIX', 15552000);
-
 // TODO cache everything for 24 hours.
 // Move stuff into theme functions
-// Move everything except hook_menu into a seperate inc file.
-// Add group description at top.
-// Get rid of "About Group" somehow.
-// Get it as a tab
-// set context somehow -- oh, just by path when it's about-group
-// if no activity over past six months, just kill that section.
+
 /*
  * Implementation of hook_init().
  */
@@ -23,379 +14,47 @@ function eduglu_about_init() {
  */
 function eduglu_about_menu() {
   $items['about-group'] = array(
-    'title' => 'About Group',
+    'title' => 'About',
     'description' => t('Shows top contributors and recent activity in a group.'),
     'page callback' => 'eduglu_about_page',
     'access arguments' => array('access content'),
+    'menu_name' => 'features',
+    'file' => 'eduglu_about_page.inc',
+    'weight' => -1000,
   );
 
   return $items;
 }
 
-function eduglu_about_page() {
-  // Set context
-  context_set('discussion');
-  if ($space = spaces_get_space()) {
-    $output .= _eduglu_about_members_pics($space);
-    $output .= "<div class='grid-9 eduglu-about-stats-boxes-container'>";
-    $output .= "<h3>Group Statistics</h3>";
-    $output .= _eduglu_about_new_group_users($space);
-    $output .= _eduglu_about_new_nodes($space);
-    $output .= _eduglu_about_new_group_comments($space);
-    $output .= "</div>";
-    $output .= _eduglu_top_contributors($space);
-    
-    return $output;
-  }
-  else {
-    return "";
-  }
-}
-
-function _eduglu_about_new_group_users($space) {
-  $options = eduglu_about_flot_options();
-
-  $result = db_query("
-    SELECT count(date_format(from_unixtime(created), '%Y%U')) as count,
-    date_format(from_unixtime(created), '%U') as week,
-    created as sortdate
-    FROM og_uid
-    WHERE nid = %d
-    GROUP BY date_format(from_unixtime(created), '%Y%U')
-    ORDER BY sortdate desc
-    LIMIT 52", $space->sid);
-
-  $num_members = db_result(db_query("SELECT count(*)
-                        FROM og_uid
-                        WHERE nid = %d
-                        AND created > %d", $space->sid, time() - THIRTY_DAYS_UNIX));
-
-  $results = array();
-  // Pull out into keyed array.
-  while ($data = db_fetch_array($result)) {
-    $results[$data['week']] = intval($data['count']);
-  }
-
-  $data = _metrics_dashboard_process_weekly($results);
-
-  // Set the yaxis max at larger of either 20, or the largest value.
-  if (max($data['orig_data']) < 20) {
-    $options->yaxis['max'] = 20;
-  }
- 
-  $d1 = new flotData($data['flot_values']);
-
-  $output .= "<div class='grid-9 eduglu-about-stats-box'>";
-  $output .= "<p class='eduglu-about-stats-box-label'>" . format_plural($num_members, "1 <strong>New Member</strong> in Last 30 Days", "@count <strong>New Members</strong> in Last 30 Days") . "</p>";
-  $output .= theme('flot_graph', array('style'=>'height:50px;width:485px;'), array($d1), $options);
-  $output .= "<img class='eduglu-about-bottom-img' src='". base_path() . path_to_theme() ."/images/bottom.png'>";
-  $output .= "<p class='eduglu-about-stats-label'>52 Weeks New Members</p>";
-  $output .= "</div>";
-
-  return $output;
-}
-function _eduglu_about_new_group_comments($space) {
-  $options = eduglu_about_flot_options();
-
-  $result = db_query("
-    SELECT count(date_format(from_unixtime(c.timestamp), '%Y%U')) as count,
-    date_format(from_unixtime(c.timestamp), '%U') as week,
-    c.timestamp as sortdate
-    FROM {comments} c JOIN {og_ancestry} o
-    WHERE c.nid = o.nid
-    AND o.group_nid = %d
-    GROUP BY date_format(from_unixtime(c.timestamp), '%Y%U')
-    ORDER BY sortdate desc
-    LIMIT 52", $space->sid);
-
-  $num_comments = db_result(db_query("SELECT count(*)
-                        FROM {comments} c JOIN {og_ancestry} o
-                        WHERE c.nid = o.nid
-                        AND o.group_nid = %d
-                        AND c.timestamp > %d", $space->sid, time() - THIRTY_DAYS_UNIX));
-
-  $results = array();
-  // Pull out into keyed array.
-  while ($data = db_fetch_array($result)) {
-    $results[$data['week']] = intval($data['count']);
-  }
-
-  $data = _metrics_dashboard_process_weekly($results);
-
-  // Set the yaxis max at larger of either 20, or the largest value.
-  if (max($data['orig_data']) < 20) {
-    $options->yaxis['max'] = 20;
-  }
-
-  $d1 = new flotData($data['flot_values']);
-
-  $output .= "<div class='grid-9 eduglu-about-stats-box'>";
-  $output .= "<p class='eduglu-about-stats-box-label'>" . format_plural($num_comments, "1 <strong>New Comment</strong> in Last 30 Days", "@count <strong>New Comments</strong> in Last 30 Days") . "</p>";
-  $output .= theme('flot_graph', array('style'=>'height:50px;width:485px;'), array($d1), $options);
-  $output .= "<img class='eduglu-about-bottom-img' src='". base_path() . path_to_theme() ."/images/bottom.png'>";
-  $output .= "<p class='eduglu-about-stats-label'>52 Weeks New Comments</p>";
-  $output .= "</div>";
-
-  return $output;
-}
-
-function _eduglu_about_new_nodes($space) {
-  $options = eduglu_about_flot_options();
-
-  $result = db_query("SELECT
-    count(date_format(from_unixtime(n.created), '%Y%U')) as count,
-    date_format(from_unixtime(n.created), '%U') as week,
-    created as sortdate
-    FROM node n JOIN og_ancestry o
-    WHERE n.nid = o.nid
-    AND o.group_nid = %d
-    AND n.type in ('story','poll','event_cck','book','event','job_form','wiki','learning_contract','quiz')
-    GROUP BY date_format(from_unixtime(n.created), '%Y%U')
-    ORDER BY sortdate desc
-    LIMIT 52", $space->sid);
-
-  $results = array();
-  // Pull out into keyed array.
-  while ($data = db_fetch_array($result)) {
-    $results[$data['week']] = intval($data['count']);
-  }
-
-  $data = _metrics_dashboard_process_weekly($results);
-
-  // Set the yaxis max at larger of either 20, or the largest value.
-  if (max($data['orig_data']) < 20) {
-    $options->yaxis['max'] = 20;
-  }
-
-  $num_nodes = db_result(db_query("SELECT count(*)
-                        FROM {og_ancestry} o JOIN {node} n
-                        WHERE n.nid = o.nid
-                        AND o.group_nid = %d
-                        AND n.created > %d",
-                          $space->sid, time() - THIRTY_DAYS_UNIX));
-
-
-  $d1 = new flotData($data['flot_values']);
-
-  $output .= "<div class='grid-9 eduglu-about-stats-box'>";
-  $output .= "<p class='eduglu-about-stats-box-label'>" . 
-        format_plural($num_nodes, "1 <strong>New Post</strong> in Last 30 Days",
-                                  "@count <strong>New Posts</strong> in Last 30 Days") . "</p>";
-  $output .= theme('flot_graph', array('style'=>'height:50px;width:485px;'), array($d1), $options);
-  $output .= "<img class='eduglu-about-bottom-img' src='". base_path() . path_to_theme() ."/images/bottom.png'>";
-  $output .= "<p class='eduglu-about-stats-label'>52 Weeks New Posts</p>";
-  $output .= "</div>";
-  
-  return $output;
-}
-
-//function eduglu_about_new_nodes
-function eduglu_about_flot_options() {
-  $options->colors = array('#375D81');
-  $options->bars->show = true;
-  $options->bars->barWidth = .75;
-  $options->bars->fill = 1;
-  $options->grid = array(borderWidth=>0, tickColor=>'white');
-  $options->xaxis = array('ticks'=>array(), 'min' => 0, 'max' => 53);
-  $options->yaxis = array('ticks'=>array());
-  return $options;
-}
-
-
 /*
- * Helper function to align week numbers amongst multiple years.
+ * Implementation of hook_theme().
  */
-function _metrics_dashboard_correct_weeks($weeks_array) {
-  $keys = array_keys($weeks_array);
-  for ($i = 0; $i <= count($keys); $i++) {
-    if ($keys[$i] < $keys[$i + 1]) {
-      for ($p = $i; $p >= 0; $p--) {
-        $keys[$p] = $keys[$p] + 53;
-      }
-      break;
-    }
-  }
+function eduglu_about_theme() {
+  return array(
+    'eduglu_about_page' => array(
+      'arguments' => array('space' => array()),
+      'file' => 'eduglu_about_theme.inc',
+    ),
+    'eduglu_about_stats_boxes_container' => array(
+      'arguments' => array('space' => array()),
+      'file' => 'eduglu_about_theme.inc',
+    ),
+    'eduglu_about_top_contributor' => array(
+      'arguments' => array('uid' => array(), 'top_posters' => array(), 'top_commenters' => array()),
+      'file' => 'eduglu_about_theme.inc',
+    ),
+    'eduglu_about_top_contributor_box' => array(
+      'arguments' => array('top_contributors' => array(), 'top_posters' => array(), 'top_commenters' => array()),
+      'file' => 'eduglu_about_theme.inc',
+    ),
+    'eduglu_members_listing' => array(
+      'arguments' => array('members' => array(), 'num_members' => array()),
+      'file' => 'eduglu_about_theme.inc',
+    ),
+    'eduglu_stats_box' => array(
+      'arguments' => array('flotData' => array(), 'options' => array(), 'label' => array(), 'legend' => array()),
+      'file' => 'eduglu_about_theme.inc',
+    ),
+  );
 
-  return array_combine($keys, $weeks_array);
-}
-
-/*
- *  Helper function. Process weekly stats.
- */
-function _metrics_dashboard_process_weekly($results) {
-  // Add first week to array so graph will have the correct starting point when
-  // when zeroed out.
-  $first_week = date('W');
-  $results[$first_week] = 0;
-
-  $results = _metrics_dashboard_correct_weeks($results);
-
-  ksort($results);
-
-  // Fill in empty values with zeros.
-  $keys = array_keys($results);
- 
-  $end = array_pop($keys);
-  $values = array();
-  $count = 0;
-  for ($i = $keys[0]; $i <= $end; $i++) {
-    if ($results[$i]) {
-      $values[$count] = $results[$i];
-      $count++;
-    }
-    else {
-      $count++;
-    }
-  }
- 
-  // Convert to format required for flot
-  $flot_values = array();
-  foreach ($values as $key => $value) {
-    $flot_values[$key] = array(0 => $key, 1 => $value);
-  }
-
-  return array('orig_data' => $results, 'flot_values' => array_values($flot_values));
-}
-
-function _eduglu_about_members_pics($space) {
-  $output .= '<div class="grid-6 eduglu-about-members-container">';
-  $num_members = db_result(db_query("SELECT count(*)
-                        FROM og_uid
-                        WHERE nid = %d", $space->sid));
-  $output .= "<h3>$num_members Members</h3>";
-
-  // Fetch pictures of group memberes
-  $results = db_query("SELECT u.uid, u.picture
-                       FROM {og_uid} o JOIN {users} u
-                       WHERE o.uid = u.uid
-                       AND o.nid = %d
-                       ORDER BY o.created
-                       LIMIT 348", $space->sid);
-
-  $members = array();
-  while ($data = db_fetch_array($results)) {
-    $members[$data['uid']] = $data['picture'];
-  }
-
-  $output .= '<div class="eduglu-about-members">';
-  // Add pictures
-  $output .= _eduglu_about_create_member_pictures($members);
-  $output .= '</div>';
-  $output .= '</div>';
-
-  return $output;
-}
-
-function _eduglu_about_create_member_pictures($members) {
-  foreach ($members as $uid => $picture) {
-    if (isset($picture) && module_exists('imagecache')) {
-      $attr = array('class' => 'group-member-picture');
-      $preset = '25x25_crop';
-
-      $attr['class'] .= ' picture-'. $preset;
-      if (file_exists($picture)) {
-        $image = theme('imagecache', $preset, $picture);
-      }
-      else {
-        $default_image = variable_get('user_picture_default', '');
-        $image = theme("imagecache", $preset, $default_image);
-      }
-      $path = 'user/'. $uid;
-      $output .= l($image, $path, array('attributes' => $attr,
-                                        'html' => true));
-    }
-  }
-
-  return $output;
-}
-
-/*
- * Return top five contributors by number of posts/comments made in the past
- * six months.
- */
-function _eduglu_top_contributors($space) {
-
-  // Top 20 commenters
-  $result = db_query("
-        SELECT uid, count(*) as count
-        FROM {comments} c
-        JOIN {og_ancestry} o
-        WHERE c.nid = o.nid
-        AND o.group_nid = %d
-        AND timestamp > %d
-        GROUP BY c.uid
-        ORDER BY count(*) DESC
-        LIMIT 100", $space->sid, time() - SIX_MONTHS_UNIX);
-
-  $top_commenters = array();
-  while ($data = db_fetch_array($result)) {
-    $top_commenters[$data['uid']] = $data['count'];
-  }
-
-  // Top 20 posters
-  $result = db_query("
-        SELECT uid, count(*) as count
-        FROM {node} n
-        JOIN {og_ancestry} o 
-        WHERE n.nid = o.nid 
-        AND o.group_nid = %d
-        AND created > %d
-        GROUP BY n.uid 
-        ORDER BY count(*) DESC 
-        LIMIT 100", $space->sid, time() - SIX_MONTHS_UNIX);
-   
-  $top_posters = array();
-  while ($data = db_fetch_array($result)) {
-    $top_posters[$data['uid']] = $data['count'];
-  }  
-
-  // Merge the two adding up the posts + comments count.
-  $top_contributors = array();
-  $uids = array_merge(array_keys($top_commenters), array_keys($top_posters));
-  foreach($uids as $uid) {
-    $top_contributors[$uid] = $top_commenters[$uid] + $top_posters[$uid];
-  }
-  
-  // Sort by #, reverse order, and slice.
-  asort($top_contributors);
-  $top_contributors = array_reverse($top_contributors, TRUE);
-  $top_contributors = array_slice($top_contributors, 0, 5, TRUE);
-
-  $output .= "<div class='grid-9 eduglu-about-top-contributors'>";
-  $output .= "<h3>Top Contributors in Last Six Months</h3>";
-  foreach ($top_contributors as $uid => $count) {
-    $user = user_load(array('uid' => $uid));
-    $output .= "<div class='grid-9 eduglu-about-top-contributor-box'>";
-    $output .= _eduglu_about_create_top_contributor_pictures($uid);
-    $output .= "<p class='eduglu-about-top-contributor-name'>" .$user->realname . "</p>";
-    $output .= "<strong>Posts:</strong> ";
-    $output .= ($top_posters[$uid]) ? $top_posters[$uid] : "0";
-    $output .= "<br /><strong>Comments:</strong> ";
-    $output .= ($top_commenters[$uid]) ? $top_commenters[$uid] : "0";
-    $output .= "</div>";
-  }
-  $output .= "</div>";
-  return $output;
-}
-
-function _eduglu_about_create_top_contributor_pictures($uid) {
-  $picture = db_result(db_query("SELECT picture FROM {users} WHERE uid = %d", $uid));
-  if (isset($picture) && module_exists('imagecache')) {
-    $attr = array('class' => 'eduglu-about-top-contributor-picture');
-    $preset = 'user_image_default';
-
-    $attr['class'] .= ' picture-'. $preset;
-    if (file_exists($picture)) {
-      $image = theme('imagecache', $preset, $picture);
-    }
-    else {
-      $default_image = variable_get('user_picture_default', '');
-      $image = theme("imagecache", $preset, $default_image);
-    }
-    $path = 'user/'. $uid;
-    $output .= l($image, $path, array('attributes' => $attr,
-                                      'html' => true));
-  }
-
-  return $output;
 }
