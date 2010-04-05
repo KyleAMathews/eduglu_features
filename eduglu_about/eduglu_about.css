@@ -54,7 +54,20 @@
   background: #F7F7F9;
   margin-bottom: 5px;
   padding: 19px;
+  overflow: auto;
 }
+.eduglu-about-members a img, .eduglu-about-members a {
+  border: none;
+  overflow: hidden;
+  float: left;
+}
+.eduglu-about-members a:hover {
+  border: 2px solid black;
+}
+.eduglu-about-members a:hover img {
+  margin: -2px;
+}
+
 /* Kill page title, Unneeded */
 .page-about-group #page-title {
   display: none;

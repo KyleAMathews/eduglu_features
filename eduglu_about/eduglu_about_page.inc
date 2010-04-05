@@ -228,7 +228,7 @@ function _eduglu_about_members_pics($space) {
 function _eduglu_about_create_member_pictures($members) {
   foreach ($members as $uid => $picture) {
     if (isset($picture) && module_exists('imagecache')) {
-      $attr = array('class' => 'group-member-picture');
+      $attr = array('class' => 'eduglu-about-group-member-picture');
       $preset = '25x25_crop';
 
       $attr['class'] .= ' picture-'. $preset;
