@@ -8,6 +8,13 @@ include_once('eduglu_groups.features.inc');
 function eduglu_groups_init() {
    drupal_add_js(drupal_get_path('module', 'eduglu_groups')
                  .'/eduglu_groups.js', 'module');
+   
+       // Add our space feed link if in a space.
+  if ($space = spaces_get_space()) {
+    $feed_url = url('rss.xml', array('absolute' => true));
+    
+    drupal_add_feed($feed_url, "Latests posts from the " . $space->title . " Group.");
+  }
 }
 
 /*
@@ -16,6 +23,12 @@ function eduglu_groups_init() {
 function eduglu_groups_preprocess_page(&$vars, $hook) {
   // Create my groups div.
   $vars['my_groups'] = eduglu_groups_prepare_my_groups();
+  
+    // Add our space feed link if in a space.
+  if ($space = spaces_get_space()) {
+    $feed_url = url('rss.xml', array('absolute' => true));
+    $vars['feed_icons'] = " " . theme('feed_icon', url("rss.xml"), $space->title . " Group RSS Feed");
+  }
 }
 
 function eduglu_groups_prepare_my_groups() {
@@ -62,4 +75,18 @@ function eduglu_groups_prepare_my_groups() {
     . "</strong>";
   $output .= "</div>";  
   return $output;  
+}
+
+function eduglu_groups_theme_registry_alter(&$theme_registry) {
+  $theme_registry['views_view__views_view_rss']['preprocess functions'][] = 'eduglu_groups_preprocess_views_view_rss';
+}
+
+/*
+ * Implementation of hook_views_pre_render().
+ * Modify feeds view to set proper title for space feeds.
+ */
+function eduglu_groups_preprocess_views_view_rss(&$vars) {
+   if ($space = spaces_get_space()) {
+      $vars['title'] = "$space->title Group";  
+   }
 }
