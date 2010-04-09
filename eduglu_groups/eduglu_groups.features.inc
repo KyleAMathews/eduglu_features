@@ -26,3 +26,12 @@ function eduglu_groups_strongarm() {
   $args = func_get_args();
   return call_user_func_array('_eduglu_groups_strongarm', $args);
 }
+
+/**
+ * Implementation of hook_views_default_views().
+ */
+function eduglu_groups_views_default_views() {
+  module_load_include('inc', 'eduglu_groups', 'eduglu_groups.features.views');
+  $args = func_get_args();
+  return call_user_func_array('_eduglu_groups_views_default_views', $args);
+}

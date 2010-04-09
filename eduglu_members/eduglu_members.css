@@ -26,3 +26,10 @@ ul.links {
 	float: left;
 	font-size: 1.2em;
 }
+.block-eduglu_members tbody {
+  border: none;
+}
+
+.block-eduglu_members h2 {
+  border-bottom: 1px solid black;
+}
