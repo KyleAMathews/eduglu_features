@@ -13,7 +13,7 @@ function eduglu_groups_init() {
   if ($space = spaces_get_space()) {
     $feed_url = url('rss.xml', array('absolute' => true));
     
-    drupal_add_feed($feed_url, "Latests posts from the " . $space->title . " Group.");
+    drupal_add_feed($feed_url, "Latests posts from the " . $space->group->title . " Group.");
   }
 }
 
@@ -27,23 +27,26 @@ function eduglu_groups_preprocess_page(&$vars, $hook) {
     // Add our space feed link if in a space.
   if ($space = spaces_get_space()) {
     $feed_url = url('rss.xml', array('absolute' => true));
-    $vars['feed_icons'] = " " . theme('feed_icon', url("rss.xml"), $space->title . " Group RSS Feed");
+    $vars['feed_icons'] = " " . theme('feed_icon', url("rss.xml"), $space->group->title . " Group RSS Feed");
   }
 }
 
 function eduglu_groups_prepare_my_groups() {
   global $user;
   
-  $results = db_query("SELECT o.nid, n.title
+  $results = db_query("SELECT p.value, n.title
                       FROM {og_uid} o
+                      JOIN {purl} p
                       JOIN {node} n
-                      WHERE o.nid = n.nid
+                      WHERE o.nid = p.id
+                      AND o.nid = n.nid
+                      AND p.provider = 'spaces_og'
                       AND o.uid = %d
                       AND o.is_active = 1", $user->uid);
   
   $groups = array();
   while ($data = db_fetch_array($results)) {
-    $groups[$data['nid']] = $data['title'];
+    $groups[$data['value']] = $data['title'];
   }
   
   // Sort the groups.
@@ -63,8 +66,8 @@ function eduglu_groups_prepare_my_groups() {
   $output .= "<div class='clear-block'>";
   foreach ($chunked_groups as $groups) {
     $output .= "<div class='grid-4'>";
-    foreach ($groups as $nid => $group_title) {
-      $output .= l($group_title, "node/" . $nid);
+    foreach ($groups as $value => $group_title) {
+      $output .= l($group_title, $value, array('purl' => array('disabled' => TRUE)));
     }
     $output .= "</div>";
   }
@@ -87,6 +90,6 @@ function eduglu_groups_theme_registry_alter(&$theme_registry) {
  */
 function eduglu_groups_preprocess_views_view_rss(&$vars) {
    if ($space = spaces_get_space()) {
-      $vars['title'] = "$space->title Group";  
+      $vars['title'] = "$space->group->title Group";  
    }
 }

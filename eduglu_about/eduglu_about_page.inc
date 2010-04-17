@@ -21,7 +21,7 @@ function eduglu_about_page() {
 function _eduglu_about_new_group_users($space) {
   $options = _eduglu_about_flot_options();
   
-  if ($new_group_members_data = cache_get('eduglu_about_new_members_' . $space->sid)) {
+  if ($new_group_members_data = cache_get('eduglu_about_new_members_' . $space->id)) {
     $data = $new_group_members_data->data;
   }
   else {
@@ -32,7 +32,7 @@ function _eduglu_about_new_group_users($space) {
       WHERE nid = %d
       AND created > %d
       GROUP BY date_format(from_unixtime(created), '%Y%U')
-      ORDER BY timestamp desc", $space->sid, LAST_MONDAY - ONE_YEAR_UNIX);
+      ORDER BY timestamp desc", $space->id, LAST_MONDAY - ONE_YEAR_UNIX);
   
     $results = array();
     // Pull out into keyed array.
@@ -42,13 +42,13 @@ function _eduglu_about_new_group_users($space) {
   
     $data = _eduglu_about_process_weekly($results);
     
-    cache_set('eduglu_about_new_members_' . $space->sid, $data, 'cache', time() + 86400);
+    cache_set('eduglu_about_new_members_' . $space->id, $data, 'cache', time() + 86400);
   }
 
   $num_members = db_result(db_query("SELECT count(*)
                         FROM og_uid
                         WHERE nid = %d
-                        AND created > %d", $space->sid, time() - THIRTY_DAYS_UNIX));
+                        AND created > %d", $space->id, time() - THIRTY_DAYS_UNIX));
 
   // Set the yaxis max at larger of either 20, or the largest value.
   if (max($data['orig_data']) < 20) {
@@ -66,7 +66,7 @@ function _eduglu_about_new_group_users($space) {
 function _eduglu_about_new_group_comments($space) {
   $options = _eduglu_about_flot_options();
 
-  if ($new_group_comments_data = cache_get('eduglu_about_new_comments_' . $space->sid)) {
+  if ($new_group_comments_data = cache_get('eduglu_about_new_comments_' . $space->id)) {
     $data = $new_group_comments_data->data;
   }
   else {
@@ -78,7 +78,7 @@ function _eduglu_about_new_group_comments($space) {
       AND o.group_nid = %d
       AND c.timestamp > %d
       GROUP BY date_format(from_unixtime(c.timestamp), '%Y%U')
-      ORDER BY timestamp desc", $space->sid, LAST_MONDAY - ONE_YEAR_UNIX);
+      ORDER BY timestamp desc", $space->id, LAST_MONDAY - ONE_YEAR_UNIX);
   
     $results = array();
     // Pull out into keyed array.
@@ -88,14 +88,14 @@ function _eduglu_about_new_group_comments($space) {
   
     $data = _eduglu_about_process_weekly($results);
     
-    cache_set('eduglu_about_new_comments_' . $space->sid, $data, 'cache', time() + 86400);
+    cache_set('eduglu_about_new_comments_' . $space->id, $data, 'cache', time() + 86400);
   }
 
   $num_comments = db_result(db_query("SELECT count(*)
                         FROM {comments} c JOIN {og_ancestry} o
                         WHERE c.nid = o.nid
                         AND o.group_nid = %d
-                        AND c.timestamp > %d", $space->sid, time() - THIRTY_DAYS_UNIX));
+                        AND c.timestamp > %d", $space->id, time() - THIRTY_DAYS_UNIX));
 
   // Set the yaxis max at larger of either 20, or the largest value.
   if (max($data['orig_data']) < 20) {
@@ -114,7 +114,7 @@ function _eduglu_about_new_group_comments($space) {
 function _eduglu_about_new_nodes($space) {
   $options = _eduglu_about_flot_options();
   
-  if ($new_node_data = cache_get('eduglu_about_new_nodes_' . $space->sid)) {
+  if ($new_node_data = cache_get('eduglu_about_new_nodes_' . $space->id)) {
     $data = $new_node_data->data;
   }
   else {
@@ -127,7 +127,7 @@ function _eduglu_about_new_nodes($space) {
       AND n.type in ('story','poll','event_cck','book','event','job_form','wiki','learning_contract','quiz')
       AND n.created > %d
       GROUP BY date_format(from_unixtime(n.created), '%Y%U')
-      ORDER BY timestamp desc", $space->sid, LAST_MONDAY - ONE_YEAR_UNIX);
+      ORDER BY timestamp desc", $space->id, LAST_MONDAY - ONE_YEAR_UNIX);
   
     $results = array();
     // Pull out into keyed array.
@@ -137,7 +137,7 @@ function _eduglu_about_new_nodes($space) {
   
     $data = _eduglu_about_process_weekly($results);
     
-    cache_set('eduglu_about_new_nodes_' . $space->sid, $data, 'cache', time() + 86400);
+    cache_set('eduglu_about_new_nodes_' . $space->id, $data, 'cache', time() + 86400);
   }
   
   // Set the yaxis max at larger of either 20, or the largest value.
@@ -150,7 +150,7 @@ function _eduglu_about_new_nodes($space) {
                         WHERE n.nid = o.nid
                         AND o.group_nid = %d
                         AND n.created > %d",
-                          $space->sid, time() - THIRTY_DAYS_UNIX));
+                          $space->id, time() - THIRTY_DAYS_UNIX));
 
 
   $d1 = new flotData($data['flot_values']);
@@ -205,7 +205,7 @@ function _eduglu_about_process_weekly($results) {
 function _eduglu_about_members_pics($space) {
   $num_members = db_result(db_query("SELECT count(*)
                         FROM og_uid
-                        WHERE nid = %d", $space->sid));
+                        WHERE nid = %d", $space->id));
 
   // Fetch pictures of group memberes
   $results = db_query("SELECT u.uid, u.picture
@@ -213,7 +213,7 @@ function _eduglu_about_members_pics($space) {
                        WHERE o.uid = u.uid
                        AND o.nid = %d
                        ORDER BY o.created
-                       LIMIT 348", $space->sid);
+                       LIMIT 400", $space->id);
 
   $members = array();
   while ($data = db_fetch_array($results)) {
@@ -264,7 +264,7 @@ function _eduglu_top_contributors($space) {
         AND timestamp > %d
         GROUP BY c.uid
         ORDER BY count(*) DESC
-        LIMIT 100", $space->sid, time() - SIX_MONTHS_UNIX);
+        LIMIT 100", $space->id, time() - SIX_MONTHS_UNIX);
 
   $top_commenters = array();
   while ($data = db_fetch_array($result)) {
@@ -281,7 +281,7 @@ function _eduglu_top_contributors($space) {
         AND created > %d
         GROUP BY n.uid 
         ORDER BY count(*) DESC 
-        LIMIT 100", $space->sid, time() - SIX_MONTHS_UNIX);
+        LIMIT 100", $space->id, time() - SIX_MONTHS_UNIX);
    
   $top_posters = array();
   while ($data = db_fetch_array($result)) {
