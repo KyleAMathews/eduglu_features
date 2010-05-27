@@ -472,34 +472,49 @@ Alumni',
  * Helper to implementation of hook_context_default_contexts().
  */
 function _eduglu_members_context_default_contexts() {
-  $items = array();
-
-  $items[] = array(
-    'namespace' => 'spaces',
-    'attribute' => 'feature',
-    'value' => 'user',
-    'description' => 'User profile page',
-    'user' => array(
-      '0' => 2,
-      '1' => 3,
-      '2' => 7,
-      '3' => 6,
-      '4' => 4,
-      '5' => 5,
+  $export = array();
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
+  $context->name = 'spaces-feature-user';
+  $context->description = 'User profile page';
+  $context->tag = '';
+  $context->conditions = array(
+    'node' => array(
+      'values' => array(
+        'uprofile' => 'uprofile',
+      ),
+      'options' => array(
+        'node_form' => 1,
+      ),
     ),
-    'block' => array(
-      'eduglu_members_0' => array(
-        'module' => 'eduglu_members',
-        'delta' => '0',
-        'weight' => -39,
-        'region' => 'right',
-        'status' => '0',
-        'label' => 'User Profile Block with stats and bio',
-        'type' => 'context_ui',
+    'path' => array(
+      'values' => array(
+        'user/*' => 'user/*',
+        'user' => 'user',
       ),
     ),
   );
-  return $items;
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'eduglu_members-0' => array(
+          'module' => 'eduglu_members',
+          'delta' => 0,
+          'region' => 'right',
+          'weight' => 0,
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 0;
+
+  $translatables['spaces-feature-user'] = array(
+    t('User profile page'),
+  );
+
+  $export['spaces-feature-user'] = $context;
+  return $export;
 }
 
 /**
@@ -509,7 +524,10 @@ function _eduglu_members_ctools_plugin_api() {
   $args = func_get_args();
   $module = array_shift($args);
   $api = array_shift($args);
-  if ($module == "strongarm" && $api == "strongarm") {
+  if ($module == "context" && $api == "context") {
+    return array("version" => 3);
+  }
+  else if ($module == "strongarm" && $api == "strongarm") {
     return array("version" => 1);
   }
 }

@@ -87,7 +87,8 @@ function _eduglu_discussion_views_default_views() {
     ),
   ));
   $handler->override_option('access', array(
-    'type' => 'none',
+    'type' => 'spaces_feature',
+    'spaces_feature' => 'eduglu_discussion',
   ));
   $handler->override_option('cache', array(
     'type' => 'none',
@@ -123,6 +124,7 @@ function _eduglu_discussion_views_default_views() {
     'title' => '',
     'description' => '',
     'weight' => 0,
+    'name' => 'navigation',
   ));
   $handler->override_option('displays', array(
     'default' => 0,
@@ -142,6 +144,7 @@ function _eduglu_discussion_views_default_views() {
     'title' => '',
     'description' => '',
     'weight' => 0,
+    'name' => 'navigation',
   ));
 
   $views[$view->name] = $view;

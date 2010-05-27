@@ -4,26 +4,44 @@
  * Helper to implementation of hook_context_default_contexts().
  */
 function _eduglu_polls_context_default_contexts() {
-  $items = array();
-
-  $items[] = array(
-    'namespace' => 'spaces',
-    'attribute' => 'feature',
-    'value' => 'poll',
-    'description' => 'context for space polls',
+  $export = array();
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
+  $context->name = 'spaces-feature-poll';
+  $context->description = 'context for space polls';
+  $context->tag = '';
+  $context->conditions = array(
     'node' => array(
-      '0' => 'poll',
+      'values' => array(
+        '0' => 'poll',
+      ),
+      'options' => array(),
     ),
     'path' => array(
-      '*/poll/*' => '*/poll/*',
+      'values' => array(
+        '*/poll/*' => '*/poll/*',
+      ),
+      'options' => array(),
     ),
     'views' => array(
-      '0' => 'polls',
+      'values' => array(
+        '0' => 'polls',
+      ),
+      'options' => array(),
     ),
-    'menu' => 'poll',
-    'block' => array(),
   );
-  return $items;
+  $context->reactions = array(
+    'menu' => 'poll',
+  );
+  $context->condition_mode = 0;
+
+  $translatables['spaces-feature-poll'] = array(
+    t('context for space polls'),
+  );
+
+  $export['spaces-feature-poll'] = $context;
+  return $export;
 }
 
 /**
@@ -33,7 +51,10 @@ function _eduglu_polls_ctools_plugin_api() {
   $args = func_get_args();
   $module = array_shift($args);
   $api = array_shift($args);
-  if ($module == "strongarm" && $api == "strongarm") {
+  if ($module == "context" && $api == "context") {
+    return array("version" => 3);
+  }
+  else if ($module == "strongarm" && $api == "strongarm") {
     return array("version" => 1);
   }
 }

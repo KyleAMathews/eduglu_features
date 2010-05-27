@@ -1,26 +1,114 @@
 <?php
 
 /**
+ * Helper to implementation of hook_content_default_fields().
+ */
+function _eduglu_discussion_content_default_fields() {
+  $fields = array();
+
+  // Exported field: field_test
+  $fields[] = array(
+    'field_name' => 'field_test',
+    'type_name' => 'story',
+    'display_settings' => array(
+      'label' => array(
+        'format' => 'above',
+        'exclude' => 0,
+      ),
+      '5' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'teaser' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'full' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '4' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '2' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      '3' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+      'token' => array(
+        'format' => 'default',
+        'exclude' => 0,
+      ),
+    ),
+    'widget_active' => '1',
+    'type' => 'text',
+    'required' => '0',
+    'multiple' => '0',
+    'module' => 'text',
+    'active' => '1',
+    'text_processing' => '',
+    'max_length' => '',
+    'allowed_values' => '',
+    'allowed_values_php' => '',
+    'widget' => array(
+      'rows' => NULL,
+      'size' => NULL,
+      'label' => 'test',
+      'weight' => '7',
+      'description' => '',
+      'type' => 'text_textarea',
+      'module' => 'text',
+    ),
+  );
+
+  // Translatables
+  array(
+    t('test'),
+  );
+
+  return $fields;
+}
+
+/**
  * Helper to implementation of hook_context_default_contexts().
  */
 function _eduglu_discussion_context_default_contexts() {
-  $items = array();
-
-  $items[] = array(
-    'namespace' => 'spaces',
-    'attribute' => 'feature',
-    'value' => 'discussion',
-    'description' => '',
+  $export = array();
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
+  $context->name = 'spaces-feature-discussion';
+  $context->description = '';
+  $context->tag = '';
+  $context->conditions = array(
     'node' => array(
-      '0' => 'story',
+      'values' => array(
+        '0' => 'story',
+      ),
+      'options' => array(),
     ),
     'views' => array(
-      '0' => 'og_ghp_ron_spaces',
+      'values' => array(
+        '0' => 'og_ghp_ron_spaces',
+      ),
+      'options' => array(),
     ),
-    'menu' => 'discussion',
-    'block' => array(),
   );
-  return $items;
+  $context->reactions = array(
+    'menu' => 'discussion',
+  );
+  $context->condition_mode = 0;
+
+  $translatables['spaces-feature-discussion'] = array(
+
+  );
+
+  $export['spaces-feature-discussion'] = $context;
+  return $export;
 }
 
 /**
@@ -30,7 +118,10 @@ function _eduglu_discussion_ctools_plugin_api() {
   $args = func_get_args();
   $module = array_shift($args);
   $api = array_shift($args);
-  if ($module == "strongarm" && $api == "strongarm") {
+  if ($module == "context" && $api == "context") {
+    return array("version" => 3);
+  }
+  else if ($module == "strongarm" && $api == "strongarm") {
     return array("version" => 1);
   }
 }
@@ -169,6 +260,24 @@ function _eduglu_discussion_strongarm() {
   $strongarm->value = '1';
 
   $export['comment_upload_story'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'content_extra_weights_story';
+  $strongarm->value = array(
+    'title' => '-5',
+    'body_field' => '-1',
+    'revision_information' => '4',
+    'comment_settings' => '5',
+    'menu' => '-3',
+    'taxonomy' => '-4',
+    'book' => '2',
+    'path' => '6',
+    'attachments' => '0',
+    'og_nodeapi' => '-2',
+  );
+
+  $export['content_extra_weights_story'] = $strongarm;
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;

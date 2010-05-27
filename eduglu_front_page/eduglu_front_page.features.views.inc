@@ -331,6 +331,7 @@ function _eduglu_front_page_views_default_views() {
     'title' => 'My Unread',
     'description' => '',
     'weight' => '0',
+    'name' => 'navigation',
   ));
   $handler = $view->new_display('feed', 'Feed', 'feed');
   $handler->override_option('style_plugin', 'rss');
@@ -355,6 +356,7 @@ function _eduglu_front_page_views_default_views() {
     'title' => '',
     'description' => '',
     'weight' => 0,
+    'name' => 'navigation',
   ));
   $handler->override_option('displays', array(
     'page' => 'page',
@@ -414,6 +416,7 @@ function _eduglu_front_page_views_default_views() {
     'title' => '',
     'description' => '',
     'weight' => 0,
+    'name' => 'navigation',
   ));
 
   $views[$view->name] = $view;

@@ -4,74 +4,95 @@
  * Helper to implementation of hook_context_default_contexts().
  */
 function _eduglu_solr_search_context_default_contexts() {
-  $items = array();
-
-  $items[] = array(
-    'namespace' => 'context_ui',
-    'attribute' => 'section',
-    'value' => 'eduglu_solr_search',
-    'description' => 'Sets block visibility for solr search',
+  $export = array();
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
+  $context->name = 'context_ui-section-eduglu_solr_search';
+  $context->description = 'Sets block visibility for solr search';
+  $context->tag = '';
+  $context->conditions = array(
     'path' => array(
-      '*/apachesolr_search/*' => '*/apachesolr_search/*',
+      'values' => array(
+        '*/apachesolr_search/*' => '*/apachesolr_search/*',
+      ),
+      'options' => array(),
     ),
+  );
+  $context->reactions = array(
     'block' => array(
-      'apachesolr_search_currentsearch' => array(
-        'module' => 'apachesolr_search',
-        'delta' => 'currentsearch',
-        'weight' => -33,
-        'region' => 'right',
-        'status' => '0',
-        'label' => 'Apache Solr Search: Current search',
-        'type' => 'context_ui',
-      ),
-      'apachesolr_sort' => array(
-        'module' => 'apachesolr',
-        'delta' => 'sort',
-        'weight' => 33,
-        'region' => 'right',
-        'status' => '0',
-        'label' => 'Apache Solr Core: Sorting',
-        'type' => 'context_ui',
-      ),
-      'apachesolr_og_im_og_gid' => array(
-        'module' => 'apachesolr_og',
-        'delta' => 'im_og_gid',
-        'weight' => 34,
-        'region' => 'right',
-        'status' => '0',
-        'label' => 'Apache Solr OG: Filter by Organic Group',
-        'type' => 'context_ui',
-      ),
-      'apachesolr_search_uid' => array(
-        'module' => 'apachesolr_search',
-        'delta' => 'uid',
-        'weight' => 35,
-        'region' => 'right',
-        'status' => '0',
-        'label' => 'Apache Solr Search: Filter by author',
-        'type' => 'context_ui',
-      ),
-      'apachesolr_search_im_vid_2' => array(
-        'module' => 'apachesolr_search',
-        'delta' => 'im_vid_2',
-        'weight' => 36,
-        'region' => 'right',
-        'status' => '0',
-        'label' => 'Apache Solr Search: Filter by taxonomy Tags',
-        'type' => 'context_ui',
-      ),
-      'apachesolr_search_type' => array(
-        'module' => 'apachesolr_search',
-        'delta' => 'type',
-        'weight' => 37,
-        'region' => 'right',
-        'status' => '0',
-        'label' => 'Apache Solr Search: Filter by content type',
-        'type' => 'context_ui',
+      'blocks' => array(
+        'apachesolr_search-currentsearch' => array(
+          'module' => 'apachesolr_search',
+          'delta' => 'currentsearch',
+          'weight' => -33,
+          'region' => 'right',
+          'status' => '0',
+          'label' => 'Apache Solr Search: Current search',
+          'type' => 'context_ui',
+          'bid' => 'apachesolr_search_currentsearch',
+        ),
+        'apachesolr-sort' => array(
+          'module' => 'apachesolr',
+          'delta' => 'sort',
+          'weight' => 33,
+          'region' => 'right',
+          'status' => '0',
+          'label' => 'Apache Solr Core: Sorting',
+          'type' => 'context_ui',
+          'bid' => 'apachesolr_sort',
+        ),
+        'apachesolr_og-im_og_gid' => array(
+          'module' => 'apachesolr_og',
+          'delta' => 'im_og_gid',
+          'weight' => 34,
+          'region' => 'right',
+          'status' => '0',
+          'label' => 'Apache Solr OG: Filter by Organic Group',
+          'type' => 'context_ui',
+          'bid' => 'apachesolr_og_im_og_gid',
+        ),
+        'apachesolr_search-uid' => array(
+          'module' => 'apachesolr_search',
+          'delta' => 'uid',
+          'weight' => 35,
+          'region' => 'right',
+          'status' => '0',
+          'label' => 'Apache Solr Search: Filter by author',
+          'type' => 'context_ui',
+          'bid' => 'apachesolr_search_uid',
+        ),
+        'apachesolr_search-im_vid_2' => array(
+          'module' => 'apachesolr_search',
+          'delta' => 'im_vid_2',
+          'weight' => 36,
+          'region' => 'right',
+          'status' => '0',
+          'label' => 'Apache Solr Search: Filter by taxonomy Tags',
+          'type' => 'context_ui',
+          'bid' => 'apachesolr_search_im_vid_2',
+        ),
+        'apachesolr_search-type' => array(
+          'module' => 'apachesolr_search',
+          'delta' => 'type',
+          'weight' => 37,
+          'region' => 'right',
+          'status' => '0',
+          'label' => 'Apache Solr Search: Filter by content type',
+          'type' => 'context_ui',
+          'bid' => 'apachesolr_search_type',
+        ),
       ),
     ),
   );
-  return $items;
+  $context->condition_mode = 0;
+
+  $translatables['context_ui-section-eduglu_solr_search'] = array(
+    t('Sets block visibility for solr search'),
+  );
+
+  $export['context_ui-section-eduglu_solr_search'] = $context;
+  return $export;
 }
 
 /**
@@ -81,7 +102,10 @@ function _eduglu_solr_search_ctools_plugin_api() {
   $args = func_get_args();
   $module = array_shift($args);
   $api = array_shift($args);
-  if ($module == "strongarm" && $api == "strongarm") {
+  if ($module == "context" && $api == "context") {
+    return array("version" => 3);
+  }
+  else if ($module == "strongarm" && $api == "strongarm") {
     return array("version" => 1);
   }
 }
@@ -111,7 +135,7 @@ function _eduglu_solr_search_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'apachesolr_failure';
-  $strongarm->value = 'show_drupal_results';
+  $strongarm->value = 'show_no_results';
 
   $export['apachesolr_failure'] = $strongarm;
   $strongarm = new stdClass;
@@ -181,7 +205,7 @@ function _eduglu_solr_search_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'apachesolr_search_default_previous';
-  $strongarm->value = 0;
+  $strongarm->value = '1';
 
   $export['apachesolr_search_default_previous'] = $strongarm;
   $strongarm = new stdClass;
@@ -290,7 +314,7 @@ function _eduglu_solr_search_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'apachesolr_search_taxonomy_previous';
-  $strongarm->value = 0;
+  $strongarm->value = '0';
 
   $export['apachesolr_search_taxonomy_previous'] = $strongarm;
   return $export;

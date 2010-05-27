@@ -4,23 +4,38 @@
  * Helper to implementation of hook_context_default_contexts().
  */
 function _eduglu_wiki_context_default_contexts() {
-  $items = array();
-
-  $items[] = array(
-    'namespace' => 'spaces',
-    'attribute' => 'feature',
-    'value' => 'wiki',
-    'description' => 'Context for eduglu_wiki feature',
+  $export = array();
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
+  $context->name = 'spaces-feature-wiki';
+  $context->description = 'Context for eduglu_wiki feature';
+  $context->tag = '';
+  $context->conditions = array(
     'node' => array(
-      '0' => 'wiki',
+      'values' => array(
+        '0' => 'wiki',
+      ),
+      'options' => array(),
     ),
     'views' => array(
-      '0' => 'eduglu_wiki',
+      'values' => array(
+        '0' => 'eduglu_wiki',
+      ),
+      'options' => array(),
     ),
-    'menu' => 'wiki',
-    'block' => array(),
   );
-  return $items;
+  $context->reactions = array(
+    'menu' => 'wiki',
+  );
+  $context->condition_mode = 0;
+
+  $translatables['spaces-feature-wiki'] = array(
+    t('Context for eduglu_wiki feature'),
+  );
+
+  $export['spaces-feature-wiki'] = $context;
+  return $export;
 }
 
 /**
@@ -30,7 +45,10 @@ function _eduglu_wiki_ctools_plugin_api() {
   $args = func_get_args();
   $module = array_shift($args);
   $api = array_shift($args);
-  if ($module == "strongarm" && $api == "strongarm") {
+  if ($module == "context" && $api == "context") {
+    return array("version" => 3);
+  }
+  else if ($module == "strongarm" && $api == "strongarm") {
     return array("version" => 1);
   }
 }
