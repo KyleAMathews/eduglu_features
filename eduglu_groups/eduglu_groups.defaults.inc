@@ -61,6 +61,15 @@ function _eduglu_groups_user_default_permissions() {
     ),
   );
 
+  // Exported permission: manage og_mailinglist subscriptions
+  $permissions[] = array(
+    'name' => 'manage og_mailinglist subscriptions',
+    'roles' => array(
+      '0' => 'admin',
+      '1' => 'authenticated user',
+    ),
+  );
+
   return $permissions;
 }
 
