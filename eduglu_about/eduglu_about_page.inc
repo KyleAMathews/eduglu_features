@@ -51,7 +51,7 @@ function _eduglu_about_new_group_users($space) {
                         AND created > %d", $space->id, time() - THIRTY_DAYS_UNIX));
 
   // Set the yaxis max at larger of either 20, or the largest value.
-  if (max($data['orig_data']) < 20) {
+  if (count($data['orig_data']) > 0 && max($data['orig_data']) < 20) {
     $options->yaxis['max'] = 20;
   }
  
@@ -98,7 +98,7 @@ function _eduglu_about_new_group_comments($space) {
                         AND c.timestamp > %d", $space->id, time() - THIRTY_DAYS_UNIX));
 
   // Set the yaxis max at larger of either 20, or the largest value.
-  if (max($data['orig_data']) < 20) {
+  if (count($data['orig_data']) > 0 && max($data['orig_data']) < 20) {
     $options->yaxis['max'] = 20;
   }
 
@@ -141,7 +141,7 @@ function _eduglu_about_new_nodes($space) {
   }
   
   // Set the yaxis max at larger of either 20, or the largest value.
-  if (max($data['orig_data']) < 20) {
+  if (count($data['orig_data']) > 0 && max($data['orig_data']) < 20) {
     $options->yaxis['max'] = 20;
   }
 
