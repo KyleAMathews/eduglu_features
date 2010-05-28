@@ -18,14 +18,6 @@ function _eduglu_core_ctools_plugin_api() {
 function _eduglu_core_user_default_permissions() {
   $permissions = array();
 
-  // Exported permission: access administration menu
-  $permissions[] = array(
-    'name' => 'access administration menu',
-    'roles' => array(
-      '0' => 'admin',
-    ),
-  );
-
   // Exported permission: access all views
   $permissions[] = array(
     'name' => 'access all views',
@@ -40,10 +32,9 @@ function _eduglu_core_user_default_permissions() {
   $permissions[] = array(
     'name' => 'access comments',
     'roles' => array(
-      '0' => 'Moderator',
-      '1' => 'admin',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
+      '0' => 'admin',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
     ),
   );
 
@@ -51,10 +42,9 @@ function _eduglu_core_user_default_permissions() {
   $permissions[] = array(
     'name' => 'access content',
     'roles' => array(
-      '0' => 'Moderator',
-      '1' => 'admin',
-      '2' => 'anonymous user',
-      '3' => 'authenticated user',
+      '0' => 'admin',
+      '1' => 'anonymous user',
+      '2' => 'authenticated user',
     ),
   );
 
@@ -62,8 +52,7 @@ function _eduglu_core_user_default_permissions() {
   $permissions[] = array(
     'name' => 'administer comments',
     'roles' => array(
-      '0' => 'Moderator',
-      '1' => 'admin',
+      '0' => 'admin',
     ),
   );
 
@@ -83,23 +72,12 @@ function _eduglu_core_user_default_permissions() {
     ),
   );
 
-  // Exported permission: display drupal links
-  $permissions[] = array(
-    'name' => 'display drupal links',
-    'roles' => array(
-      '0' => 'admin',
-    ),
-  );
-
   // Exported permission: post comments
   $permissions[] = array(
     'name' => 'post comments',
     'roles' => array(
-      '0' => 'Master of Quizzes',
-      '1' => 'Moderator',
-      '2' => 'Teacher',
-      '3' => 'admin',
-      '4' => 'authenticated user',
+      '0' => 'admin',
+      '1' => 'authenticated user',
     ),
   );
 
@@ -107,9 +85,8 @@ function _eduglu_core_user_default_permissions() {
   $permissions[] = array(
     'name' => 'post comments without approval',
     'roles' => array(
-      '0' => 'Moderator',
-      '1' => 'admin',
-      '2' => 'authenticated user',
+      '0' => 'admin',
+      '1' => 'authenticated user',
     ),
   );
 
@@ -304,12 +281,7 @@ function _eduglu_core_strongarm() {
     'toggle_favicon' => 1,
     'toggle_primary_links' => 1,
     'toggle_secondary_links' => 1,
-    'default_logo' => 1,
-    'logo_path' => '',
-    'logo_upload' => '',
     'default_favicon' => 1,
-    'favicon_path' => '',
-    'favicon_upload' => '',
   );
 
   $export['theme_dewey_settings'] = $strongarm;

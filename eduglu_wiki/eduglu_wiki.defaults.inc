@@ -92,8 +92,7 @@ function _eduglu_wiki_user_default_permissions() {
   $permissions[] = array(
     'name' => 'delete any wiki content',
     'roles' => array(
-      '0' => 'Moderator',
-      '1' => 'admin',
+      '0' => 'admin',
     ),
   );
 
@@ -101,9 +100,8 @@ function _eduglu_wiki_user_default_permissions() {
   $permissions[] = array(
     'name' => 'delete own wiki content',
     'roles' => array(
-      '0' => 'Moderator',
-      '1' => 'admin',
-      '2' => 'authenticated user',
+      '0' => 'admin',
+      '1' => 'authenticated user',
     ),
   );
 

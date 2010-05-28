@@ -48,7 +48,7 @@ function _eduglu_discussion_ctools_plugin_api() {
   if ($module == "context" && $api == "context") {
     return array("version" => 3);
   }
-  elseif ($module == "strongarm" && $api == "strongarm") {
+  else if ($module == "strongarm" && $api == "strongarm") {
     return array("version" => 1);
   }
 }
@@ -94,9 +94,8 @@ function _eduglu_discussion_user_default_permissions() {
   $permissions[] = array(
     'name' => 'delete own story content',
     'roles' => array(
-      '0' => 'Moderator',
-      '1' => 'admin',
-      '2' => 'authenticated user',
+      '0' => 'admin',
+      '1' => 'authenticated user',
     ),
   );
 
