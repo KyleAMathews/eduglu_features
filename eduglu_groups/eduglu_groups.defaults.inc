@@ -13,6 +13,58 @@ function _eduglu_groups_ctools_plugin_api() {
 }
 
 /**
+ * Helper to implementation of hook_user_default_permissions().
+ */
+function _eduglu_groups_user_default_permissions() {
+  $permissions = array();
+
+  // Exported permission: create group content
+  $permissions[] = array(
+    'name' => 'create group content',
+    'roles' => array(
+      '0' => 'admin',
+      '1' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: delete any group content
+  $permissions[] = array(
+    'name' => 'delete any group content',
+    'roles' => array(
+      '0' => 'admin',
+    ),
+  );
+
+  // Exported permission: delete own group content
+  $permissions[] = array(
+    'name' => 'delete own group content',
+    'roles' => array(
+      '0' => 'admin',
+      '1' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: edit any group content
+  $permissions[] = array(
+    'name' => 'edit any group content',
+    'roles' => array(
+      '0' => 'admin',
+    ),
+  );
+
+  // Exported permission: edit own group content
+  $permissions[] = array(
+    'name' => 'edit own group content',
+    'roles' => array(
+      '0' => 'admin',
+      '1' => 'authenticated user',
+    ),
+  );
+
+  return $permissions;
+}
+
+/**
  * Helper to implementation of hook_strongarm().
  */
 function _eduglu_groups_strongarm() {

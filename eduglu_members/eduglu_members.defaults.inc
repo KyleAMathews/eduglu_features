@@ -722,6 +722,48 @@ function _eduglu_members_user_default_permissions() {
     ),
   );
 
+  // Exported permission: create uprofile content
+  $permissions[] = array(
+    'name' => 'create uprofile content',
+    'roles' => array(
+      '0' => 'admin',
+      '1' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: delete any uprofile content
+  $permissions[] = array(
+    'name' => 'delete any uprofile content',
+    'roles' => array(
+      '0' => 'admin',
+    ),
+  );
+
+  // Exported permission: delete own uprofile content
+  $permissions[] = array(
+    'name' => 'delete own uprofile content',
+    'roles' => array(
+      '0' => 'admin',
+    ),
+  );
+
+  // Exported permission: edit any uprofile content
+  $permissions[] = array(
+    'name' => 'edit any uprofile content',
+    'roles' => array(
+      '0' => 'admin',
+    ),
+  );
+
+  // Exported permission: edit own uprofile content
+  $permissions[] = array(
+    'name' => 'edit own uprofile content',
+    'roles' => array(
+      '0' => 'admin',
+      '1' => 'authenticated user',
+    ),
+  );
+
   // Exported permission: view imagecache user_image_default
   $permissions[] = array(
     'name' => 'view imagecache user_image_default',

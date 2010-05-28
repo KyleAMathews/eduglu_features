@@ -19,6 +19,15 @@ function eduglu_groups_node_info() {
 }
 
 /**
+ * Implementation of hook_user_default_permissions().
+ */
+function eduglu_groups_user_default_permissions() {
+  module_load_include('inc', 'eduglu_groups', 'eduglu_groups.defaults');
+  $args = func_get_args();
+  return call_user_func_array('_eduglu_groups_user_default_permissions', $args);
+}
+
+/**
  * Implementation of hook_strongarm().
  */
 function eduglu_groups_strongarm() {
