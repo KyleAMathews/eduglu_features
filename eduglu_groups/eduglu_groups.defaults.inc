@@ -33,6 +33,7 @@ function _eduglu_groups_spaces_presets() {
       'spaces_og_register' => 1,
       'spaces_og_directory' => 1,
       'spaces_og_private' => 0,
+      'spaces_preset_og' => 'og_controlled',
       'spaces_features' => array(
         'eduglu_about' => '1',
         'eduglu_discussion' => '1',
@@ -45,6 +46,7 @@ function _eduglu_groups_spaces_presets() {
         'eduglu_polls' => '0',
         'eduglu_wiki' => '0',
       ),
+      'site_frontpage' => 'discussion',
     ),
   );
 
@@ -104,12 +106,7 @@ function _eduglu_groups_spaces_presets() {
       'spaces_og_register' => 1,
       'spaces_og_directory' => 1,
       'spaces_og_private' => 0,
-      'spaces_features' => array(
-        'eduglu_about' => '1',
-        'eduglu_discussion' => '1',
-        'eduglu_polls' => '0',
-        'eduglu_wiki' => '0',
-      ),
+      'spaces_preset_og' => 'og_public',
       'previous_features' => array(
         'eduglu_about' => '1',
         'eduglu_discussion' => '1',
@@ -117,6 +114,12 @@ function _eduglu_groups_spaces_presets() {
         'eduglu_wiki' => '0',
       ),
       'site_frontpage' => 'discussion',
+      'spaces_features' => array(
+        'eduglu_about' => '1',
+        'eduglu_discussion' => '1',
+        'eduglu_polls' => '0',
+        'eduglu_wiki' => '0',
+      ),
     ),
   );
 
