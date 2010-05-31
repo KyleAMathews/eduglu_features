@@ -100,7 +100,8 @@ function eduglu_groups_preprocess_views_view_rss(&$vars) {
  */
 function eduglu_groups_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
   if ($op == "view" && $node->type == "group") {
-    $space = spaces_get_space();
-    drupal_goto($node->purl . "/" . $space->controllers->variable->values['space']['site_frontpage']);
+    if ($space = spaces_get_space()) {
+      drupal_goto($node->purl . "/" . $space->controllers->variable->values['space']['site_frontpage']);
+    }
   }
 }
