@@ -1,6 +1,6 @@
 /* Block user-profile bumping against search box now that it's got no margins */
 .block-eduglu_members {
-  margin-top: -30px;
+  margin-top: 60px;
 }
 
 table#stats {

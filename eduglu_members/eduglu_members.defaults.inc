@@ -34,6 +34,8 @@ function _eduglu_members_content_default_fields() {
     'allowed_values' => '',
     'allowed_values_php' => '',
     'widget' => array(
+      'rows' => '10',
+      'size' => 60,
       'default_value' => array(
         '0' => array(
           'value' => '',
@@ -42,8 +44,6 @@ function _eduglu_members_content_default_fields() {
         ),
       ),
       'default_value_php' => NULL,
-      'rows' => '10',
-      'size' => 60,
       'label' => 'About Me',
       'weight' => '-4',
       'description' => '',
@@ -227,6 +227,8 @@ function _eduglu_members_content_default_fields() {
     'allowed_values' => '',
     'allowed_values_php' => '',
     'widget' => array(
+      'rows' => '1',
+      'size' => '60',
       'default_value' => array(
         '0' => array(
           'value' => '',
@@ -234,8 +236,6 @@ function _eduglu_members_content_default_fields() {
         ),
       ),
       'default_value_php' => NULL,
-      'rows' => '1',
-      'size' => '60',
       'label' => 'Location',
       'weight' => '-8',
       'description' => 'City, State or Province, Country',
@@ -334,6 +334,8 @@ function _eduglu_members_content_default_fields() {
     'allowed_values' => '',
     'allowed_values_php' => '',
     'widget' => array(
+      'rows' => '1',
+      'size' => '60',
       'default_value' => array(
         '0' => array(
           'value' => '',
@@ -341,8 +343,6 @@ function _eduglu_members_content_default_fields() {
         ),
       ),
       'default_value_php' => NULL,
-      'rows' => '1',
-      'size' => '60',
       'label' => 'Name',
       'weight' => '-9',
       'description' => '',
@@ -441,9 +441,10 @@ Alumni',
     'allowed_values' => '',
     'allowed_values_php' => '',
     'widget' => array(
+      'rows' => '1',
+      'size' => NULL,
       'default_value' => NULL,
       'default_value_php' => '',
-      'rows' => '1',
       'label' => 'Twitter',
       'weight' => 0,
       'description' => '',
@@ -478,20 +479,11 @@ function _eduglu_members_context_default_contexts() {
   $context->api_version = 3;
   $context->name = 'spaces-feature-user';
   $context->description = 'User profile page';
-  $context->tag = '';
+  $context->tag = 'eduglu';
   $context->conditions = array(
-    'node' => array(
+    'views' => array(
       'values' => array(
-        'uprofile' => 'uprofile',
-      ),
-      'options' => array(
-        'node_form' => 1,
-      ),
-    ),
-    'path' => array(
-      'values' => array(
-        'user/*' => 'user/*',
-        'user' => 'user',
+        'eduglu_profile:page_1' => 'eduglu_profile:page_1',
       ),
     ),
   );
@@ -504,6 +496,12 @@ function _eduglu_members_context_default_contexts() {
           'region' => 'right',
           'weight' => 0,
         ),
+        'views-eduglu_tracker-block_1' => array(
+          'module' => 'views',
+          'delta' => 'eduglu_tracker-block_1',
+          'region' => 'content',
+          'weight' => 0,
+        ),
       ),
     ),
   );
@@ -511,6 +509,7 @@ function _eduglu_members_context_default_contexts() {
 
   $translatables['spaces-feature-user'] = array(
     t('User profile page'),
+    t('eduglu'),
   );
 
   $export['spaces-feature-user'] = $context;
@@ -527,7 +526,7 @@ function _eduglu_members_ctools_plugin_api() {
   if ($module == "context" && $api == "context") {
     return array("version" => 3);
   }
-  else if ($module == "strongarm" && $api == "strongarm") {
+  elseif ($module == "strongarm" && $api == "strongarm") {
     return array("version" => 1);
   }
 }
@@ -540,6 +539,7 @@ function _eduglu_members_fieldgroup_default_groups() {
 
   // Exported group: group_about
   $groups[] = array(
+    'group_type' => 'standard',
     'type_name' => 'uprofile',
     'group_name' => 'group_about',
     'label' => 'Basic Info',
@@ -556,7 +556,6 @@ function _eduglu_members_fieldgroup_default_groups() {
       ),
     ),
     'weight' => '1',
-    'group_type' => 'standard',
     'fields' => array(
       '0' => 'field_name',
       '1' => 'field_location',
@@ -569,6 +568,7 @@ function _eduglu_members_fieldgroup_default_groups() {
 
   // Exported group: group_contact
   $groups[] = array(
+    'group_type' => 'standard',
     'type_name' => 'uprofile',
     'group_name' => 'group_contact',
     'label' => 'Contact',
@@ -585,7 +585,6 @@ function _eduglu_members_fieldgroup_default_groups() {
       ),
     ),
     'weight' => '5',
-    'group_type' => 'standard',
     'fields' => array(
       '0' => 'field_linkedin_profile',
       '1' => 'field_twitter',
@@ -595,6 +594,7 @@ function _eduglu_members_fieldgroup_default_groups() {
 
   // Exported group: group_links
   $groups[] = array(
+    'group_type' => 'standard',
     'type_name' => 'uprofile',
     'group_name' => 'group_links',
     'label' => 'Links',
@@ -611,7 +611,6 @@ function _eduglu_members_fieldgroup_default_groups() {
       ),
     ),
     'weight' => '7',
-    'group_type' => 'standard',
     'fields' => array(),
   );
 
@@ -888,6 +887,13 @@ function _eduglu_members_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'content_profile_use_uprofile';
+  $strongarm->value = 1;
+
+  $export['content_profile_use_uprofile'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'node_options_uprofile';
   $strongarm->value = array(
     '0' => 'status',
@@ -919,7 +925,7 @@ function _eduglu_members_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'user_email_verification';
-  $strongarm->value = 0;
+  $strongarm->value = TRUE;
 
   $export['user_email_verification'] = $strongarm;
   $strongarm = new stdClass;
