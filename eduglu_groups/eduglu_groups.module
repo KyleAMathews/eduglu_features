@@ -28,6 +28,16 @@ function eduglu_groups_init() {
 }
 
 /*
+ * Implementation of hook_menu_alter().
+ */
+function eduglu_groups_menu_alter(&$items) {
+  if (isset($items['user/%user_category/edit/groups'])) {
+    unset($items['user/%user_category/edit/groups']);
+    unset($items['user/%user/edit/groups']);
+  }
+}
+
+/*
  * Impmentation of hook_preprocess_page().
  */
 function eduglu_groups_preprocess_page(&$vars, $hook) {
