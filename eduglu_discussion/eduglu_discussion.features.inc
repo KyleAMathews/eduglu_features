@@ -1,15 +1,6 @@
 <?php
 
 /**
- * Implementation of hook_content_default_fields().
- */
-function eduglu_discussion_content_default_fields() {
-  module_load_include('inc', 'eduglu_discussion', 'eduglu_discussion.defaults');
-  $args = func_get_args();
-  return call_user_func_array('_eduglu_discussion_content_default_fields', $args);
-}
-
-/**
  * Implementation of hook_context_default_contexts().
  */
 function eduglu_discussion_context_default_contexts() {

@@ -1,79 +1,6 @@
 <?php
 
 /**
- * Helper to implementation of hook_content_default_fields().
- */
-function _eduglu_discussion_content_default_fields() {
-  $fields = array();
-
-  // Exported field: field_test
-  $fields[] = array(
-    'field_name' => 'field_test',
-    'type_name' => 'story',
-    'display_settings' => array(
-      'label' => array(
-        'format' => 'above',
-        'exclude' => 0,
-      ),
-      '5' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      '4' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      '2' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      '3' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'token' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-    ),
-    'widget_active' => '1',
-    'type' => 'text',
-    'required' => '0',
-    'multiple' => '0',
-    'module' => 'text',
-    'active' => '1',
-    'text_processing' => '',
-    'max_length' => '',
-    'allowed_values' => '',
-    'allowed_values_php' => '',
-    'widget' => array(
-      'rows' => NULL,
-      'size' => NULL,
-      'label' => 'test',
-      'weight' => '7',
-      'description' => '',
-      'type' => 'text_textarea',
-      'module' => 'text',
-    ),
-  );
-
-  // Translatables
-  array(
-    t('test'),
-  );
-
-  return $fields;
-}
-
-/**
  * Helper to implementation of hook_context_default_contexts().
  */
 function _eduglu_discussion_context_default_contexts() {
@@ -83,19 +10,20 @@ function _eduglu_discussion_context_default_contexts() {
   $context->api_version = 3;
   $context->name = 'spaces-feature-discussion';
   $context->description = '';
-  $context->tag = '';
+  $context->tag = 'eduglu';
   $context->conditions = array(
     'node' => array(
       'values' => array(
-        '0' => 'story',
+        'story' => 'story',
       ),
-      'options' => array(),
+      'options' => array(
+        'node_form' => 1,
+      ),
     ),
     'views' => array(
       'values' => array(
-        '0' => 'og_ghp_ron_spaces',
+        'og_ghp_ron_spaces' => 'og_ghp_ron_spaces',
       ),
-      'options' => array(),
     ),
   );
   $context->reactions = array(
@@ -104,7 +32,7 @@ function _eduglu_discussion_context_default_contexts() {
   $context->condition_mode = 0;
 
   $translatables['spaces-feature-discussion'] = array(
-
+    t('eduglu'),
   );
 
   $export['spaces-feature-discussion'] = $context;

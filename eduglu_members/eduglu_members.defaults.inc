@@ -34,6 +34,8 @@ function _eduglu_members_content_default_fields() {
     'allowed_values' => '',
     'allowed_values_php' => '',
     'widget' => array(
+      'rows' => '10',
+      'size' => 60,
       'default_value' => array(
         '0' => array(
           'value' => '',
@@ -42,8 +44,6 @@ function _eduglu_members_content_default_fields() {
         ),
       ),
       'default_value_php' => NULL,
-      'rows' => '10',
-      'size' => 60,
       'label' => 'About Me',
       'weight' => '-4',
       'description' => '',
@@ -227,6 +227,8 @@ function _eduglu_members_content_default_fields() {
     'allowed_values' => '',
     'allowed_values_php' => '',
     'widget' => array(
+      'rows' => '1',
+      'size' => '60',
       'default_value' => array(
         '0' => array(
           'value' => '',
@@ -234,8 +236,6 @@ function _eduglu_members_content_default_fields() {
         ),
       ),
       'default_value_php' => NULL,
-      'rows' => '1',
-      'size' => '60',
       'label' => 'Location',
       'weight' => '-8',
       'description' => 'City, State or Province, Country',
@@ -334,6 +334,8 @@ function _eduglu_members_content_default_fields() {
     'allowed_values' => '',
     'allowed_values_php' => '',
     'widget' => array(
+      'rows' => '1',
+      'size' => '60',
       'default_value' => array(
         '0' => array(
           'value' => '',
@@ -341,8 +343,6 @@ function _eduglu_members_content_default_fields() {
         ),
       ),
       'default_value_php' => NULL,
-      'rows' => '1',
-      'size' => '60',
       'label' => 'Name',
       'weight' => '-9',
       'description' => '',
@@ -441,9 +441,10 @@ Alumni',
     'allowed_values' => '',
     'allowed_values_php' => '',
     'widget' => array(
+      'rows' => '1',
+      'size' => NULL,
       'default_value' => NULL,
       'default_value_php' => '',
-      'rows' => '1',
       'label' => 'Twitter',
       'weight' => 0,
       'description' => '',
@@ -538,6 +539,7 @@ function _eduglu_members_fieldgroup_default_groups() {
 
   // Exported group: group_about
   $groups[] = array(
+    'group_type' => 'standard',
     'type_name' => 'uprofile',
     'group_name' => 'group_about',
     'label' => 'Basic Info',
@@ -554,7 +556,6 @@ function _eduglu_members_fieldgroup_default_groups() {
       ),
     ),
     'weight' => '1',
-    'group_type' => 'standard',
     'fields' => array(
       '0' => 'field_name',
       '1' => 'field_location',
@@ -567,6 +568,7 @@ function _eduglu_members_fieldgroup_default_groups() {
 
   // Exported group: group_contact
   $groups[] = array(
+    'group_type' => 'standard',
     'type_name' => 'uprofile',
     'group_name' => 'group_contact',
     'label' => 'Contact',
@@ -583,7 +585,6 @@ function _eduglu_members_fieldgroup_default_groups() {
       ),
     ),
     'weight' => '5',
-    'group_type' => 'standard',
     'fields' => array(
       '0' => 'field_linkedin_profile',
       '1' => 'field_twitter',
@@ -593,6 +594,7 @@ function _eduglu_members_fieldgroup_default_groups() {
 
   // Exported group: group_links
   $groups[] = array(
+    'group_type' => 'standard',
     'type_name' => 'uprofile',
     'group_name' => 'group_links',
     'label' => 'Links',
@@ -609,7 +611,6 @@ function _eduglu_members_fieldgroup_default_groups() {
       ),
     ),
     'weight' => '7',
-    'group_type' => 'standard',
     'fields' => array(),
   );
 

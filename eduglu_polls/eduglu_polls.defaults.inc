@@ -10,25 +10,25 @@ function _eduglu_polls_context_default_contexts() {
   $context->api_version = 3;
   $context->name = 'spaces-feature-poll';
   $context->description = 'context for space polls';
-  $context->tag = '';
+  $context->tag = 'eduglu';
   $context->conditions = array(
     'node' => array(
       'values' => array(
-        '0' => 'poll',
+        'poll' => 'poll',
       ),
-      'options' => array(),
+      'options' => array(
+        'node_form' => 1,
+      ),
     ),
     'path' => array(
       'values' => array(
         '*/poll/*' => '*/poll/*',
       ),
-      'options' => array(),
     ),
     'views' => array(
       'values' => array(
-        '0' => 'polls',
+        'polls' => 'polls',
       ),
-      'options' => array(),
     ),
   );
   $context->reactions = array(
@@ -38,6 +38,7 @@ function _eduglu_polls_context_default_contexts() {
 
   $translatables['spaces-feature-poll'] = array(
     t('context for space polls'),
+    t('eduglu'),
   );
 
   $export['spaces-feature-poll'] = $context;

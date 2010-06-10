@@ -10,19 +10,20 @@ function _eduglu_wiki_context_default_contexts() {
   $context->api_version = 3;
   $context->name = 'spaces-feature-wiki';
   $context->description = 'Context for eduglu_wiki feature';
-  $context->tag = '';
+  $context->tag = 'eduglu';
   $context->conditions = array(
     'node' => array(
       'values' => array(
-        '0' => 'wiki',
+        'wiki' => 'wiki',
       ),
-      'options' => array(),
+      'options' => array(
+        'node_form' => 1,
+      ),
     ),
     'views' => array(
       'values' => array(
-        '0' => 'eduglu_wiki',
+        'eduglu_wiki' => 'eduglu_wiki',
       ),
-      'options' => array(),
     ),
   );
   $context->reactions = array(
@@ -32,6 +33,7 @@ function _eduglu_wiki_context_default_contexts() {
 
   $translatables['spaces-feature-wiki'] = array(
     t('Context for eduglu_wiki feature'),
+    t('eduglu'),
   );
 
   $export['spaces-feature-wiki'] = $context;

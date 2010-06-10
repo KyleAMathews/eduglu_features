@@ -10,14 +10,13 @@ function _eduglu_front_page_context_default_contexts() {
   $context->api_version = 3;
   $context->name = 'context_ui-section-frontpage';
   $context->description = 'Controls the front page';
-  $context->tag = '';
+  $context->tag = 'eduglu';
   $context->conditions = array(
     'path' => array(
       'values' => array(
-        'frontpage' => 'frontpage',
         '<front>' => '<front>',
+        'frontpage' => 'frontpage',
       ),
-      'options' => array(),
     ),
   );
   $context->reactions = array();
@@ -25,6 +24,7 @@ function _eduglu_front_page_context_default_contexts() {
 
   $translatables['context_ui-section-frontpage'] = array(
     t('Controls the front page'),
+    t('eduglu'),
   );
 
   $export['context_ui-section-frontpage'] = $context;

@@ -105,7 +105,7 @@ function _eduglu_solr_search_ctools_plugin_api() {
   if ($module == "context" && $api == "context") {
     return array("version" => 3);
   }
-  elseif ($module == "strongarm" && $api == "strongarm") {
+  else if ($module == "strongarm" && $api == "strongarm") {
     return array("version" => 1);
   }
 }
