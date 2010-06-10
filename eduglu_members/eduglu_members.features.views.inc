@@ -260,7 +260,7 @@ function _eduglu_members_views_default_views() {
       ),
       'wildcard' => 'all',
       'wildcard_substitution' => 'All',
-      'title' => 'Recent posts for %1',
+      'title' => '',
       'breadcrumb' => '',
       'default_argument_type' => 'user',
       'default_argument' => '',
