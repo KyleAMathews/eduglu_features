@@ -1,3 +1,20 @@
 <?php
 
 include_once('eduglu_core.features.inc');
+
+/**
+ * Implementation of hook_menu_alter().
+ */
+function eduglu_core_menu_alter(&$items) {
+  // Kill undesirable menu items
+  $yank = array(
+    'book',
+    'rss.xml',
+    'node/%node/outline',
+  );
+  foreach ($yank as $path) {
+    if (!empty($items[$path])) {
+      unset($items[$path]);
+    }
+  }
+}

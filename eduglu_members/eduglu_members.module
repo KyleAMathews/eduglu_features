@@ -15,6 +15,22 @@ function eduglu_members_init() {
  * Implementation of hook_menu_alter().
  */
 function eduglu_members_menu_alter(&$items) {
+  // Views: disable views that we are 'overriding'
+  $views_defaults = variable_get('views_defaults', array());
+  $disabled = array(
+    'tracker',
+  );
+  $set = FALSE;
+  foreach ($disabled as $view_name) {
+    if (empty($views_defaults[$view_name])) {
+      $set = TRUE;
+      $views_defaults[$view_name] = TRUE;
+    }
+  }
+  if ($set) {
+    variable_set('views_defaults', $views_defaults);
+  }
+
   // Remove node/add/profile as a suitable alternative is provided by
   // content_profile.
   if (isset($items['node/add/profile'])) {
@@ -25,6 +41,13 @@ function eduglu_members_menu_alter(&$items) {
     unset($items['user/%user/dashboard/custom-1']);
     unset($items['user/%user/dashboard/custom-2']);
     unset($items['user/%user/dashboard/add']);
+  }
+  if (isset($items['user/%user/contact'])) {
+    unset($items['user/%user/contact']);
+  }
+  if (isset($items['user/%user/track'])) {
+    unset($items['user/%user/track']);
+    unset($items['user/%user/track/posts']);
   }
   // Temp hack until there's more features to add (the fabled global apps) or if we want to customize the dashboard in any way.
   if (isset($items['user/%user/features'])) {
@@ -112,7 +135,10 @@ function eduglu_members_block($op = 'list', $delta = 0, $edit = array()) {
           field_major_value as major
       	  FROM {content_type_uprofile} c JOIN {node} n 
           WHERE c.nid = n.nid AND n.uid = %d", $uid));
-              
+        
+        if ($bio_results['name']) {
+          $content .= "<strong>Name</strong> " . $bio_results['name'] . "<br />";
+        }      
         if ($bio_results['major']) {
           $content .= "<strong>Major</strong> ". $bio_results['major'] ."<br />";
               }
@@ -204,14 +230,14 @@ function eduglu_members_block($op = 'list', $delta = 0, $edit = array()) {
           $possesive_name_str = $possesive_name[0] ."'s Groups";
           $content .= "<strong>". $possesive_name_str . "</strong>";
           if ($items) {
-          $content .= theme('item_list', $items); 
+            $content .= theme('item_list', $items); 
           }
           else {
             $content .= "<ul><li>" . $possesive_name[0] . " hasn't joined any groups yet.</li></ul>";
           }
         
           // return new block
-          $block['subject'] = $bio_results['name'];
+          $block['subject'] = '';//$bio_results['name'];
           $block['content'] = $content;
           return $block;
         }
