@@ -513,6 +513,44 @@ function _eduglu_members_context_default_contexts() {
   );
 
   $export['spaces-feature-user'] = $context;
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
+  $context->name = 'spaces_dashboard-custom-1';
+  $context->description = 'Dashboard';
+  $context->tag = 'Dashboard';
+  $context->conditions = array();
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views-og_my-block_1' => array(
+          'module' => 'views',
+          'delta' => 'og_my-block_1',
+          'region' => 'right',
+          'weight' => 0,
+        ),
+        'user-3' => array(
+          'module' => 'user',
+          'delta' => 3,
+          'region' => 'right',
+          'weight' => 1,
+        ),
+        'views-eduglu_recent_activity-block_1' => array(
+          'module' => 'views',
+          'delta' => 'eduglu_recent_activity-block_1',
+          'region' => 'content',
+          'weight' => 0,
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 0;
+
+  $translatables['spaces_dashboard-custom-1'] = array(
+    t('Dashboard'),
+  );
+
+  $export['spaces_dashboard-custom-1'] = $context;
   return $export;
 }
 
