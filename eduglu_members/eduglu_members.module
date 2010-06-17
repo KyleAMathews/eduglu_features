@@ -188,7 +188,7 @@ function eduglu_members_block($op = 'list', $delta = 0, $edit = array()) {
           $content .= "<hr />";
           
           // Contact part
-          $name = check_plain($bio_results['name']);
+          $name = ($bio_results['name']) ? check_plain($bio_results['name']) : $user->name;
           $content .= "<strong>Connect with ". $name ."</strong>";
           $content .= "<ul>";
           if ($user->uid != 0 && $user->uid != $uid) { // You can't contact yourself through island.
@@ -225,8 +225,8 @@ function eduglu_members_block($op = 'list', $delta = 0, $edit = array()) {
           while ($group = db_fetch_object($results)) {
             $items[] = l($group->title, 'node/' . $group->nid);
           }
-          
-          $possesive_name = explode(" ", check_plain($bio_results['name']));
+         
+          $possesive_name = explode(" ", check_plain($name)); 
           $possesive_name_str = $possesive_name[0] ."'s Groups";
           $content .= "<strong>". $possesive_name_str . "</strong>";
           if ($items) {
