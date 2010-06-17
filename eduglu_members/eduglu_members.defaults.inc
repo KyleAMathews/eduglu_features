@@ -34,8 +34,6 @@ function _eduglu_members_content_default_fields() {
     'allowed_values' => '',
     'allowed_values_php' => '',
     'widget' => array(
-      'rows' => '10',
-      'size' => 60,
       'default_value' => array(
         '0' => array(
           'value' => '',
@@ -44,6 +42,8 @@ function _eduglu_members_content_default_fields() {
         ),
       ),
       'default_value_php' => NULL,
+      'rows' => '10',
+      'size' => 60,
       'label' => 'About Me',
       'weight' => '-4',
       'description' => '',
@@ -227,8 +227,6 @@ function _eduglu_members_content_default_fields() {
     'allowed_values' => '',
     'allowed_values_php' => '',
     'widget' => array(
-      'rows' => '1',
-      'size' => '60',
       'default_value' => array(
         '0' => array(
           'value' => '',
@@ -236,6 +234,8 @@ function _eduglu_members_content_default_fields() {
         ),
       ),
       'default_value_php' => NULL,
+      'rows' => '1',
+      'size' => '60',
       'label' => 'Location',
       'weight' => '-8',
       'description' => 'City, State or Province, Country',
@@ -334,8 +334,6 @@ function _eduglu_members_content_default_fields() {
     'allowed_values' => '',
     'allowed_values_php' => '',
     'widget' => array(
-      'rows' => '1',
-      'size' => '60',
       'default_value' => array(
         '0' => array(
           'value' => '',
@@ -343,6 +341,8 @@ function _eduglu_members_content_default_fields() {
         ),
       ),
       'default_value_php' => NULL,
+      'rows' => '1',
+      'size' => '60',
       'label' => 'Name',
       'weight' => '-9',
       'description' => '',
@@ -441,10 +441,9 @@ Alumni',
     'allowed_values' => '',
     'allowed_values_php' => '',
     'widget' => array(
-      'rows' => '1',
-      'size' => NULL,
       'default_value' => NULL,
       'default_value_php' => '',
+      'rows' => '1',
       'label' => 'Twitter',
       'weight' => 0,
       'description' => '',
@@ -564,6 +563,9 @@ function _eduglu_members_ctools_plugin_api() {
   if ($module == "context" && $api == "context") {
     return array("version" => 3);
   }
+  elseif ($module == "spaces" && $api == "spaces") {
+    return array("version" => 3);
+  }
   elseif ($module == "strongarm" && $api == "strongarm") {
     return array("version" => 1);
   }
@@ -577,7 +579,6 @@ function _eduglu_members_fieldgroup_default_groups() {
 
   // Exported group: group_about
   $groups[] = array(
-    'group_type' => 'standard',
     'type_name' => 'uprofile',
     'group_name' => 'group_about',
     'label' => 'Basic Info',
@@ -594,6 +595,7 @@ function _eduglu_members_fieldgroup_default_groups() {
       ),
     ),
     'weight' => '1',
+    'group_type' => 'standard',
     'fields' => array(
       '0' => 'field_name',
       '1' => 'field_location',
@@ -606,7 +608,6 @@ function _eduglu_members_fieldgroup_default_groups() {
 
   // Exported group: group_contact
   $groups[] = array(
-    'group_type' => 'standard',
     'type_name' => 'uprofile',
     'group_name' => 'group_contact',
     'label' => 'Contact',
@@ -623,6 +624,7 @@ function _eduglu_members_fieldgroup_default_groups() {
       ),
     ),
     'weight' => '5',
+    'group_type' => 'standard',
     'fields' => array(
       '0' => 'field_linkedin_profile',
       '1' => 'field_twitter',
@@ -632,7 +634,6 @@ function _eduglu_members_fieldgroup_default_groups() {
 
   // Exported group: group_links
   $groups[] = array(
-    'group_type' => 'standard',
     'type_name' => 'uprofile',
     'group_name' => 'group_links',
     'label' => 'Links',
@@ -649,6 +650,7 @@ function _eduglu_members_fieldgroup_default_groups() {
       ),
     ),
     'weight' => '7',
+    'group_type' => 'standard',
     'fields' => array(),
   );
 
@@ -725,6 +727,29 @@ function _eduglu_members_imagecache_default_presets() {
     ),
   );
   return $items;
+}
+
+/**
+ * Helper to implementation of hook_spaces_presets().
+ */
+function _eduglu_members_spaces_presets() {
+  $export = array();
+  $spaces_presets = new stdClass;
+  $spaces_presets->disabled = FALSE; /* Edit this to true to make a default spaces_presets disabled initially */
+  $spaces_presets->api_version = 3;
+  $spaces_presets->name = 'eduglu_simple_profile';
+  $spaces_presets->title = 'Simple Profile';
+  $spaces_presets->description = 'Provides simple user profile for EduGlu';
+  $spaces_presets->space_type = 'user';
+  $spaces_presets->value = FALSE;
+
+  $translatables['eduglu_simple_profile'] = array(
+    t('Provides simple user profile for EduGlu'),
+    t('Simple Profile'),
+  );
+
+  $export['eduglu_simple_profile'] = $spaces_presets;
+  return $export;
 }
 
 /**

@@ -37,7 +37,7 @@ function eduglu_members_menu_alter(&$items) {
     unset($items['node/add/profile']);
   }
   if (isset($items['user/%user/dashboard'])) {
-    unset($items['user/%user/dashboard']);
+//    unset($items['user/%user/dashboard']);
     unset($items['user/%user/dashboard/custom-1']);
     unset($items['user/%user/dashboard/custom-2']);
     unset($items['user/%user/dashboard/add']);
@@ -50,9 +50,9 @@ function eduglu_members_menu_alter(&$items) {
     unset($items['user/%user/track/posts']);
   }
   // Temp hack until there's more features to add (the fabled global apps) or if we want to customize the dashboard in any way.
-  if (isset($items['user/%user/features'])) {
-    unset ($items['user/%user/features']);
-  }
+//  if (isset($items['user/%user/features'])) {
+//    unset ($items['user/%user/features']);
+//  }
   if (isset($items['user/%user/view'])) {
     $items['user/%user/view']['title'] = t('Profile');
   }
