@@ -980,6 +980,22 @@ function _eduglu_members_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'spaces_features';
+  $strongarm->value = array(
+    'spaces_dashboard' => '1',
+  );
+
+  $export['spaces_features'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'spaces_preset_user';
+  $strongarm->value = 'eduglu_simple_profile';
+
+  $export['spaces_preset_user'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'upload_uprofile';
   $strongarm->value = '0';
 
