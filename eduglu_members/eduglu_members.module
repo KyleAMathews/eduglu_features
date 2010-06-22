@@ -66,7 +66,7 @@ function eduglu_members_menu_alter(&$items) {
  */
 function eduglu_members_nodeapi(&$node, $op) {
 if ($op == "view" && $node->type == "uprofile"
-    // Only redirect on a normal node view. Otherwise, this kills cron
+    // Only redirect on a normal node build/view. Otherwise, this kills cron
     // because the search module will load uprofile nodes and then get redirected.
     && (!isset($node->build_mode) || $node->build_mode == NODE_BUILD_NORMAL)) { 
     drupal_goto("user/" . $node->uid);

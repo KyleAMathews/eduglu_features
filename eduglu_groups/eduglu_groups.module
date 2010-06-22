@@ -125,3 +125,83 @@ function eduglu_groups_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
     }
   }
 }
+
+/****************************************************************************************
+ * Provide option for spaces to restrict access in public groups to authenticated users.
+ ****************************************************************************************/
+
+/**
+* Implementation of hook_node_access_explain().
+*/
+function eduglu_groups_node_access_explain($row) {
+  if ($row->realm == 'eduglu_groups_authenticated') {
+    return t('All authenticated users may view this node.');
+  }
+}
+
+/**
+* Implementation of hook_node_access_records.
+*/
+function eduglu_groups_node_access_records($node) {
+  // The 'authenticated' grant that will be set on public OG content.
+  $grant = array (
+    'realm' => 'eduglu_groups_authenticated',
+    'gid' => 0,
+    'grant_view' => 1,
+    'grant_update' => 0,
+    'grant_delete' => 0,
+    'priority' => 0,
+  );
+
+  // Protected group posts.
+  if (!empty($node->og_groups) && $node->og_public && eduglu_groups_is_space_protected($node)) {
+    return array($grant);
+  }
+
+  return NULL;
+}
+
+/**
+ * Checks if new node is in a space that protects its content from anonymous users.
+ */
+function eduglu_groups_is_space_protected($node) {
+  if (!og_is_group_type($node->type)) {
+    $space = spaces_load('og', current(array_keys($node->og_groups)));
+  }
+  else {
+    return false; // Group nodes themselves aren't protected. Bad idea?
+  }
+  $result = db_result(db_query("SELECT id
+                              FROM {spaces_overrides}
+                              WHERE value LIKE '%moderated_private%'
+                              AND id = %d", $space->id));
+  return $result;
+}
+
+/**
+* Implementation of hook_node_grants().
+*/
+function eduglu_groups_node_grants($account, $op) {
+  $grants = array();
+
+  // Allow authenticated users to view public group nodes.
+  if ($op == 'view' && in_array('authenticated user', $account->roles)) {
+    $grants['eduglu_groups_authenticated'][] = 0;
+  }
+
+  return $grants;
+}
+
+/**
+* Implementation of hook_og_access_grants_alter().
+*/
+function eduglu_groups_og_access_grants_alter(&$grants, $node) {
+  // og_access is about to insert grants for this node. Remove any public grants
+  // so that this node isn't visible to everyone. It will be replaced by our
+  // own mymodule_authenticated grant.
+  foreach ($grants as $key => $grant) {
+    if ($grant['realm'] == 'og_public' && eduglu_groups_is_space_protected($node)) {
+      unset($grants[$key]);
+    }
+  }
+}
