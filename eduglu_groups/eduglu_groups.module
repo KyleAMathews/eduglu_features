@@ -157,7 +157,7 @@ function eduglu_groups_node_access_records($node) {
   if (!empty($node->og_groups) && $node->og_public && eduglu_groups_is_space_protected($node)) {
     return array($grant);
   }
-
+  
   return NULL;
 }
 
