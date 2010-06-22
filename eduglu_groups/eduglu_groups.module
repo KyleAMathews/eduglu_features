@@ -173,7 +173,7 @@ function eduglu_groups_is_space_protected($node) {
   }
   $result = db_result(db_query("SELECT id
                               FROM {spaces_overrides}
-                              WHERE value LIKE '%moderated_private%'
+                              WHERE value LIKE '%eduglu_protected%'
                               AND id = %d", $space->id));
   return $result;
 }

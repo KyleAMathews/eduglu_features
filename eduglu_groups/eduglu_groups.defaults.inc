@@ -25,7 +25,7 @@ function _eduglu_groups_spaces_presets() {
   $spaces_presets->api_version = 3;
   $spaces_presets->name = 'eduglu_private';
   $spaces_presets->title = 'Private Group';
-  $spaces_presets->description = '';
+  $spaces_presets->description = 'Only members will be able to access this group. Membership is strictly managed by admins.';
   $spaces_presets->space_type = 'og';
   $spaces_presets->value = array(
     'variable' => array(
@@ -51,6 +51,7 @@ function _eduglu_groups_spaces_presets() {
   );
 
   $translatables['eduglu_private'] = array(
+    t('Only members will be able to access this group. Membership is strictly managed by admins.'),
     t('Private Group'),
   );
 
@@ -60,7 +61,7 @@ function _eduglu_groups_spaces_presets() {
   $spaces_presets->api_version = 3;
   $spaces_presets->name = 'eduglu_public';
   $spaces_presets->title = 'Public Group';
-  $spaces_presets->description = '';
+  $spaces_presets->description = 'Anyone on the internet can view content from this group. Members may join this group at will.';
   $spaces_presets->space_type = 'og';
   $spaces_presets->value = array(
     'variable' => array(
@@ -86,10 +87,52 @@ function _eduglu_groups_spaces_presets() {
   );
 
   $translatables['eduglu_public'] = array(
+    t('Anyone on the internet can view content from this group. Members may join this group at will.'),
     t('Public Group'),
   );
 
   $export['eduglu_public'] = $spaces_presets;
+  $spaces_presets = new stdClass;
+  $spaces_presets->disabled = FALSE; /* Edit this to true to make a default spaces_presets disabled initially */
+  $spaces_presets->api_version = 3;
+  $spaces_presets->name = 'eduglu_protected';
+  $spaces_presets->title = 'Protected Group';
+  $spaces_presets->description = 'Only site members can see group posts. Members may join this group at will.';
+  $spaces_presets->space_type = 'og';
+  $spaces_presets->value = array(
+    'variable' => array(
+      'spaces_og_register' => 0,
+      'spaces_og_private' => 0,
+      'spaces_og_selective' => '0',
+      'spaces_og_directory' => 1,
+      'spaces_features' => array(
+        'eduglu_about' => '1',
+        'eduglu_book' => '0',
+        'eduglu_career_group' => '0',
+        'eduglu_discussion' => '1',
+        'eduglu_job_board' => '0',
+        'eduglu_polls' => '1',
+        'eduglu_wiki' => '0',
+      ),
+      'space_menu_items' => array(
+        'eduglu_book' => '-7',
+        'eduglu_polls' => '-8',
+        'eduglu_discussion' => '-9',
+        'eduglu_about' => '-10',
+        'eduglu_job_board' => '-6',
+        'eduglu_career_group' => '-5',
+        'eduglu_wiki' => '-4',
+      ),
+      'site_frontpage' => 'discussion',
+    ),
+  );
+
+  $translatables['eduglu_protected'] = array(
+    t('Only site members can see group posts. Members may join this group at will.'),
+    t('Protected Group'),
+  );
+
+  $export['eduglu_protected'] = $spaces_presets;
   return $export;
 }
 
