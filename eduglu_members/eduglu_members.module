@@ -42,9 +42,6 @@ function eduglu_members_menu_alter(&$items) {
     unset($items['user/%user/dashboard/custom-2']);
     unset($items['user/%user/dashboard/add']);
   }
-  if (isset($items['user/%user/contact'])) {
-    unset($items['user/%user/contact']);
-  }
   if (isset($items['user/%user/track'])) {
     unset($items['user/%user/track']);
     unset($items['user/%user/track/posts']);
