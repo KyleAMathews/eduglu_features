@@ -129,11 +129,14 @@ function eduglu_members_block($op = 'list', $delta = 0, $edit = array()) {
       $uid = 0;
       if (is_numeric(arg(1))) {
         $uid = check_plain(arg(1));
+        $account = user_load($uid);
       }
       $content .= "";
 
       if (user_access('access user profiles') && arg(0) == "user" && $uid != 0) {
         $profile = node_load(array('type' => 'uprofile', 'uid' => $uid));
+
+        $name = (isset($profile->field_name[0]['value'])) ? $profile->field_name[0]['value'] : $user->name;
 
         if ($profile->field_name[0]['value']) {
           $content .= "<strong>Name</strong> " . $profile->field_name[0]['value'] . "<br />";
@@ -166,10 +169,16 @@ function eduglu_members_block($op = 'list', $delta = 0, $edit = array()) {
         $content .= "<tr><td>". $num_nodes ." Posts</td>
         <td class='left-border'>". $num_comments ." Comments</td></tr>";
         $content .= "</table>";
-
         $content .= "</ul>";
-
         $content .= "<hr />";
+
+        if ($user->uid != $uid) {
+          $content .= "<strong>" . t("Connect with @name", array('@name' => $name)) . "</strong>";
+          $contact_methods = array();
+          $contact_methods[] = l(t("Send @name an email", array('@name' => $name)), "user/" . $uid . "/contact");
+          $content .= theme('item_list', $contact_methods);
+          $content .= "<hr />";
+        }
 
         // Load user's groups.
         // Query the database for the user's groups
@@ -188,7 +197,7 @@ function eduglu_members_block($op = 'list', $delta = 0, $edit = array()) {
           $items[] = l($group->title, 'node/' . $group->nid);
         }
 
-        $possesive_name = explode(" ", check_plain($profile->field_name[0]['value'])); 
+        $possesive_name = explode(" ", check_plain($name)); 
         $possesive_name_str = $possesive_name[0] ."'s Groups";
         $content .= "<strong>". $possesive_name_str . "</strong>";
         if ($items) {
