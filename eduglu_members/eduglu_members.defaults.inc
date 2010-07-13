@@ -34,6 +34,8 @@ function _eduglu_members_content_default_fields() {
     'allowed_values' => '',
     'allowed_values_php' => '',
     'widget' => array(
+      'rows' => '10',
+      'size' => 60,
       'default_value' => array(
         '0' => array(
           'value' => '',
@@ -42,10 +44,8 @@ function _eduglu_members_content_default_fields() {
         ),
       ),
       'default_value_php' => NULL,
-      'rows' => '10',
-      'size' => 60,
       'label' => 'About Me',
-      'weight' => '-4',
+      'weight' => '-6',
       'description' => '',
       'type' => 'text_textarea',
       'module' => 'text',
@@ -87,6 +87,7 @@ function _eduglu_members_content_default_fields() {
     'title' => 'none',
     'title_value' => '',
     'enable_tokens' => 0,
+    'validate_url' => '',
     'widget' => array(
       'default_value' => array(
         '0' => array(
@@ -97,103 +98,6 @@ function _eduglu_members_content_default_fields() {
       'label' => 'Website',
       'weight' => '-7',
       'description' => 'Your home on the web',
-      'type' => 'link',
-      'module' => 'link',
-    ),
-  );
-
-  // Exported field: field_facebook_public
-  $fields[] = array(
-    'field_name' => 'field_facebook_public',
-    'type_name' => 'uprofile',
-    'display_settings' => array(
-      'label' => array(
-        'format' => 'above',
-      ),
-      'full' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-    ),
-    'widget_active' => '1',
-    'type' => 'link',
-    'required' => '0',
-    'multiple' => '0',
-    'module' => 'link',
-    'active' => '1',
-    'attributes' => array(
-      'target' => 'default',
-      'rel' => '',
-      'class' => '',
-    ),
-    'display' => array(
-      'url_cutoff' => '80',
-    ),
-    'url' => '',
-    'title' => 'value',
-    'title_value' => 'My Facebook profile',
-    'enable_tokens' => 0,
-    'widget' => array(
-      'default_value' => array(
-        '0' => array(
-          'url' => '',
-          'attributes' => 'N;',
-        ),
-      ),
-      'default_value_php' => '',
-      'label' => 'Facebook',
-      'weight' => '1',
-      'description' => 'Link to Facebook profile page',
-      'type' => 'link',
-      'module' => 'link',
-    ),
-  );
-
-  // Exported field: field_linkedin_profile
-  $fields[] = array(
-    'field_name' => 'field_linkedin_profile',
-    'type_name' => 'uprofile',
-    'display_settings' => array(
-      'label' => array(
-        'format' => 'above',
-      ),
-      'full' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-    ),
-    'widget_active' => '1',
-    'type' => 'link',
-    'required' => '0',
-    'multiple' => '0',
-    'module' => 'link',
-    'active' => '1',
-    'attributes' => array(
-      'target' => 'default',
-      'rel' => '',
-      'class' => '',
-    ),
-    'display' => array(
-      'url_cutoff' => '80',
-    ),
-    'url' => '',
-    'title' => 'value',
-    'title_value' => 'My LinkedIn Profile',
-    'enable_tokens' => 0,
-    'widget' => array(
-      'default_value' => NULL,
-      'default_value_php' => '',
-      'label' => 'LinkedIn Profile',
-      'weight' => '-1',
-      'description' => 'URL to public LinkedIn profile page',
       'type' => 'link',
       'module' => 'link',
     ),
@@ -227,6 +131,8 @@ function _eduglu_members_content_default_fields() {
     'allowed_values' => '',
     'allowed_values_php' => '',
     'widget' => array(
+      'rows' => '1',
+      'size' => '60',
       'default_value' => array(
         '0' => array(
           'value' => '',
@@ -234,73 +140,9 @@ function _eduglu_members_content_default_fields() {
         ),
       ),
       'default_value_php' => NULL,
-      'rows' => '1',
-      'size' => '60',
       'label' => 'Location',
       'weight' => '-8',
       'description' => 'City, State or Province, Country',
-      'type' => 'text_textfield',
-      'module' => 'text',
-    ),
-  );
-
-  // Exported field: field_major
-  $fields[] = array(
-    'field_name' => 'field_major',
-    'type_name' => 'uprofile',
-    'display_settings' => array(
-      'label' => array(
-        'format' => 'above',
-        'exclude' => 0,
-      ),
-      'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      '4' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      '2' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      '3' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'token' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-    ),
-    'widget_active' => '1',
-    'type' => 'text',
-    'required' => '1',
-    'multiple' => '0',
-    'module' => 'text',
-    'active' => '1',
-    'text_processing' => '0',
-    'max_length' => '',
-    'allowed_values' => '',
-    'allowed_values_php' => '',
-    'widget' => array(
-      'rows' => 5,
-      'size' => '60',
-      'default_value' => array(
-        '0' => array(
-          'value' => '',
-          '_error_element' => 'default_value_widget][field_major][0][value',
-        ),
-      ),
-      'default_value_php' => NULL,
-      'label' => 'Major',
-      'weight' => '-6',
-      'description' => 'Your current major. Please enter "Undeclared" if you haven\'t choosen a major yet.',
       'type' => 'text_textfield',
       'module' => 'text',
     ),
@@ -334,6 +176,8 @@ function _eduglu_members_content_default_fields() {
     'allowed_values' => '',
     'allowed_values_php' => '',
     'widget' => array(
+      'rows' => '1',
+      'size' => '60',
       'default_value' => array(
         '0' => array(
           'value' => '',
@@ -341,111 +185,8 @@ function _eduglu_members_content_default_fields() {
         ),
       ),
       'default_value_php' => NULL,
-      'rows' => '1',
-      'size' => '60',
       'label' => 'Name',
       'weight' => '-9',
-      'description' => '',
-      'type' => 'text_textfield',
-      'module' => 'text',
-    ),
-  );
-
-  // Exported field: field_role
-  $fields[] = array(
-    'field_name' => 'field_role',
-    'type_name' => 'uprofile',
-    'display_settings' => array(
-      'label' => array(
-        'format' => 'above',
-        'exclude' => 0,
-      ),
-      'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'full' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      '4' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      '2' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      '3' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'token' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-    ),
-    'widget_active' => '1',
-    'type' => 'text',
-    'required' => '1',
-    'multiple' => '0',
-    'module' => 'text',
-    'active' => '1',
-    'text_processing' => '0',
-    'max_length' => '',
-    'allowed_values' => 'Student
-Staff
-Professor
-Alumni',
-    'allowed_values_php' => '',
-    'widget' => array(
-      'default_value' => array(
-        '0' => array(
-          'value' => '',
-        ),
-      ),
-      'default_value_php' => NULL,
-      'label' => 'Role',
-      'weight' => '-5',
-      'description' => '',
-      'type' => 'optionwidgets_select',
-      'module' => 'optionwidgets',
-    ),
-  );
-
-  // Exported field: field_twitter
-  $fields[] = array(
-    'field_name' => 'field_twitter',
-    'type_name' => 'uprofile',
-    'display_settings' => array(
-      'label' => array(
-        'format' => 'above',
-      ),
-      'full' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-      'teaser' => array(
-        'format' => 'default',
-        'exclude' => 0,
-      ),
-    ),
-    'widget_active' => '1',
-    'type' => 'text',
-    'required' => '0',
-    'multiple' => '0',
-    'module' => 'text',
-    'active' => '1',
-    'text_processing' => '0',
-    'max_length' => '',
-    'allowed_values' => '',
-    'allowed_values_php' => '',
-    'widget' => array(
-      'default_value' => NULL,
-      'default_value_php' => '',
-      'rows' => '1',
-      'label' => 'Twitter',
-      'weight' => 0,
       'description' => '',
       'type' => 'text_textfield',
       'module' => 'text',
@@ -455,13 +196,8 @@ Alumni',
   // Translatables
   array(
     t('About Me'),
-    t('Facebook'),
-    t('LinkedIn Profile'),
     t('Location'),
-    t('Major'),
     t('Name'),
-    t('Role'),
-    t('Twitter'),
     t('Website'),
   );
 
@@ -579,6 +315,7 @@ function _eduglu_members_fieldgroup_default_groups() {
 
   // Exported group: group_about
   $groups[] = array(
+    'group_type' => 'standard',
     'type_name' => 'uprofile',
     'group_name' => 'group_about',
     'label' => 'Basic Info',
@@ -595,19 +332,17 @@ function _eduglu_members_fieldgroup_default_groups() {
       ),
     ),
     'weight' => '1',
-    'group_type' => 'standard',
     'fields' => array(
       '0' => 'field_name',
       '1' => 'field_location',
       '2' => 'field_blog',
-      '3' => 'field_major',
-      '4' => 'field_role',
-      '5' => 'field_about_me',
+      '3' => 'field_about_me',
     ),
   );
 
   // Exported group: group_contact
   $groups[] = array(
+    'group_type' => 'standard',
     'type_name' => 'uprofile',
     'group_name' => 'group_contact',
     'label' => 'Contact',
@@ -624,16 +359,12 @@ function _eduglu_members_fieldgroup_default_groups() {
       ),
     ),
     'weight' => '5',
-    'group_type' => 'standard',
-    'fields' => array(
-      '0' => 'field_linkedin_profile',
-      '1' => 'field_twitter',
-      '2' => 'field_facebook_public',
-    ),
+    'fields' => array(),
   );
 
   // Exported group: group_links
   $groups[] = array(
+    'group_type' => 'standard',
     'type_name' => 'uprofile',
     'group_name' => 'group_links',
     'label' => 'Links',
@@ -650,7 +381,6 @@ function _eduglu_members_fieldgroup_default_groups() {
       ),
     ),
     'weight' => '7',
-    'group_type' => 'standard',
     'fields' => array(),
   );
 
@@ -930,7 +660,11 @@ function _eduglu_members_strongarm() {
   $strongarm->name = 'content_extra_weights_uprofile';
   $strongarm->value = array(
     'title' => '-5',
-    'menu' => '-2',
+    'revision_information' => '-3',
+    'author' => '-2',
+    'options' => '-1',
+    'comment_settings' => '0',
+    'menu' => '-4',
   );
 
   $export['content_extra_weights_uprofile'] = $strongarm;
