@@ -71,6 +71,17 @@ if ($op == "view" && $node->type == "uprofile"
 }
 
 /**
+ * Implmentation of hook_form_alter().
+ */
+function eduglu_members_form_alter(&$form, $form_state, $form_id) {
+  if ($form_id == "uprofile_node_form") {
+    $form['title']['#value'] = 'User Profile';
+    $form['title']['#type'] = 'value';
+    $form['title']['#required'] = FALSE;
+  }
+}
+
+/**
  * Implementation of hook_context_links_alter().
  */
 function eduglu_members_context_links_alter(&$links) {
@@ -121,7 +132,7 @@ function eduglu_members_block($op = 'list', $delta = 0, $edit = array()) {
       }
       $content .= "";
 
-      if (user_access('access user') && arg(0) == "user" && $uid != 0) {
+      if (user_access('access user profiles') && arg(0) == "user" && $uid != 0) {
         $profile = node_load(array('type' => 'uprofile', 'uid' => $uid));
 
         if ($profile->field_name[0]['value']) {
