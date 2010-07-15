@@ -9,3 +9,10 @@ function eduglu_core_update_6000() {
             link_title = 'dashboard' 
             WHERE link_title = 'my feed'");
 }
+
+/**
+ * Enable the eduglu_welcome feature.
+ */
+function eduglu_core_update_6001() {
+  drupal_install_modules(array('eduglu_welcome'));
+}
