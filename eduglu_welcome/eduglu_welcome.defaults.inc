@@ -52,3 +52,25 @@ function _eduglu_welcome_ctools_plugin_api() {
     return array("version" => 3);
   }
 }
+
+/**
+ * Helper to implementation of hook_menu_default_items().
+ */
+function _eduglu_welcome_menu_default_items() {
+  $items = array();
+
+  $items[] = array(
+    'title' => 'Welcome',
+    'path' => 'welcome',
+    'weight' => '-1000',
+    'description' => 'Provide welcome message + login link.',
+  );
+  // Translatables
+  array(
+    t('Provide welcome message + login link.'),
+    t('Welcome'),
+  );
+
+
+  return $items;
+}
