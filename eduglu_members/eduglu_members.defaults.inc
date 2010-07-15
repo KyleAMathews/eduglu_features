@@ -716,6 +716,7 @@ function _eduglu_members_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'spaces_features';
   $strongarm->value = array(
+    'eduglu_welcome' => '1',
     'spaces_dashboard' => '1',
   );
 
