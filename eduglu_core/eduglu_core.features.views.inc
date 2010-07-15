@@ -3,7 +3,7 @@
 /**
  * Helper to implementation of hook_views_default_views().
  */
-function _eduglu_front_page_views_default_views() {
+function _eduglu_core_views_default_views() {
   $views = array();
 
   // Exported view: eduglu_recent_activity

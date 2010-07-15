@@ -26,3 +26,12 @@ function eduglu_core_strongarm() {
   $args = func_get_args();
   return call_user_func_array('_eduglu_core_strongarm', $args);
 }
+
+/**
+ * Implementation of hook_views_default_views().
+ */
+function eduglu_core_views_default_views() {
+  module_load_include('inc', 'eduglu_core', 'eduglu_core.features.views');
+  $args = func_get_args();
+  return call_user_func_array('_eduglu_core_views_default_views', $args);
+}
