@@ -1,0 +1,11 @@
+<?php
+
+/**
+ * Update the "my feed" global link to dashboard.
+ */
+function eduglu_core_update_6000() {
+  db_query("UPDATE {menu_links} 
+            SET link_path = 'dashboard', 
+            link_title = 'dashboard' 
+            WHERE link_title = 'my feed'");
+}
