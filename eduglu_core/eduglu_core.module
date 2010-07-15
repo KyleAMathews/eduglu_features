@@ -18,3 +18,16 @@ function eduglu_core_menu_alter(&$items) {
     }
   }
 }
+
+function eduglu_core_form_alter(&$form, &$form_state, $form_id) {
+//dpm($form_id);
+//dpm($form);
+//dpm($form_state);
+  switch ($form_id) {
+    // Redirect people back to the front page after logging in.
+    case 'user_login_block':
+      $form['#action'] = 'dashboard';
+      break;
+  }
+}
+

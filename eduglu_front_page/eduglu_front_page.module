@@ -49,8 +49,8 @@ function eduglu_front_page_form_alter(&$form, &$form_state, $form_id) {
 //dpm($form_state);
   switch ($form_id) {
     // Redirect people back to the front page after logging in.
-    case 'user_login':
-      $form['#redirect'] = '<front>';
+    case 'user_login_block':
+      $form['#action'] = 'dashboard';
       break;
   }
 }

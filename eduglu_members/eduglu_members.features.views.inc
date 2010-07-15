@@ -353,9 +353,8 @@ function _eduglu_members_views_default_views() {
     ),
   ));
   $handler->override_option('access', array(
-    'type' => 'none',
-    'role' => array(),
-    'perm' => '',
+    'type' => 'perm',
+    'perm' => 'access user profiles',
   ));
   $handler->override_option('cache', array(
     'type' => 'none',

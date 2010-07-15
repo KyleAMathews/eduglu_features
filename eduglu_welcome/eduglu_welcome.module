@@ -48,7 +48,7 @@ function eduglu_welcome_settings() {
 function eduglu_welcome_page() {
   $output .= t("<h2>Welcome to your new install of Eduglu!</h2><p>We hope using Eduglu will be a great experience for you and your learning community.</p>");
   $output .= t("<p>If you have any questions about how to use your new Eduglu site, please post a question on the <a href='http://community.eduglu.org/support'>Eduglu community site</a></p>");
-  $output .= t("<p>To edit this page, go to " . l("click here", "features/eduglu_welcome", array('absolute' => TRUE, "query" => array("destination" => "welcome"))) . "</p>");
+  $output .= t("<p>To edit this page, " . l("go here", "features/eduglu_welcome", array('absolute' => TRUE, "query" => array("destination" => "welcome"))) . "</p>");
   
   return variable_get('eduglu_welcome_body', $output);
 }
