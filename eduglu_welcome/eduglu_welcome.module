@@ -1,0 +1,54 @@
+<?php
+
+include_once('eduglu_welcome.features.inc');
+
+/*
+ * Implementation of hook_menu().
+ */
+function eduglu_welcome_menu() {
+  $items['welcome'] = array(
+    'title' => "Welcome",
+    'description' => t('Provide welcome message + login link.'),
+    'page callback' => 'eduglu_welcome_page',
+    'access callback' => 'spaces_access_feature',
+    'access arguments' => array('view', 'eduglu_welcome'),
+    'menu_name' => 'features',
+    'weight' => -1000,
+  );
+  $items['features/eduglu_welcome'] = array(
+    'title' => 'Settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('eduglu_welcome_settings'),
+    'access callback' => 'spaces_access_admin',
+    'access arguments' => array(),
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+* Settings form for imageboard feature.
+*/
+function eduglu_welcome_settings() {
+  $output .= t("<h2>Welcome to your new install of Eduglu!</h2>\n\n<p>We hope using Eduglu will be a great experience for you and your learning community.</p>\n\n");
+  $output .= t("<p>If you have any questions about how to use your new Eduglu site, please post a question on the <a href='http://community.eduglu.org/support'>Eduglu community site</a></p>");
+  
+  $form = array();
+  $form['eduglu_welcome_body'] = array(
+    '#title' => t('Welcome text'),
+    '#type' => 'textarea',
+    '#rows' => 10,
+    '#description' => t('Enter a welcome message for members of your learning community.'),
+    '#default_value' => variable_get('imageboard_title', $output),
+  );
+  return system_settings_form($form);
+}
+
+function eduglu_welcome_page() {
+  $output .= t("<h2>Welcome to your new install of Eduglu!</h2><p>We hope using Eduglu will be a great experience for you and your learning community.</p>");
+  $output .= t("<p>If you have any questions about how to use your new Eduglu site, please post a question on the <a href='http://community.eduglu.org/support'>Eduglu community site</a></p>");
+  $output .= t("<p>To edit this page, go to " . l("click here", "features/eduglu_welcome", array('absolute' => TRUE, "query" => array("destination" => "welcome"))) . "</p>");
+  
+  return variable_get('eduglu_welcome_body', $output);
+}
