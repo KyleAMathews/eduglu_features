@@ -3,6 +3,34 @@
 include_once('eduglu_core.features.inc');
 
 /**
+ * Implementation of hook_menu().
+ */
+function eduglu_core_menu() {
+  $items['eduglu_front_page_redirect'] = array(
+    'title' => "redirecting...",
+    'description' => t('Just a handy redirect tool'),
+    'page callback' => 'eduglu_core_redirect',
+    'access callback' => 'user_access',
+    'access arguments' => array('access content'),
+  );
+
+  return $items;
+}
+
+/**
+ * Redirect authenticated users to their dashboard away from the welcome page.
+ */
+function eduglu_core_redirect() {
+  global $user;
+  if ($user->uid == 0) {
+    drupal_goto("welcome");
+  }
+  else {
+    drupal_goto("dashboard");
+  }
+}
+
+/**
  * Implementation of hook_menu_alter().
  */
 function eduglu_core_menu_alter(&$items) {

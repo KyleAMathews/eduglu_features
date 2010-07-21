@@ -263,7 +263,7 @@ function _eduglu_core_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'site_frontpage';
-  $strongarm->value = 'welcome';
+  $strongarm->value = 'eduglu_front_page_redirect';
 
   $export['site_frontpage'] = $strongarm;
   $strongarm = new stdClass;
