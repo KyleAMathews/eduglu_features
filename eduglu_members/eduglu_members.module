@@ -136,7 +136,7 @@ function eduglu_members_block($op = 'list', $delta = 0, $edit = array()) {
       if (user_access('access user profiles') && arg(0) == "user" && $uid != 0) {
         $profile = node_load(array('type' => 'uprofile', 'uid' => $uid));
 
-        $name = (isset($profile->field_name[0]['value'])) ? $profile->field_name[0]['value'] : $user->name;
+        $name = (isset($profile->field_name[0]['value'])) ? $profile->field_name[0]['value'] : $account->name;
 
         if ($profile->field_name[0]['value']) {
           $content .= "<strong>Name</strong> " . $profile->field_name[0]['value'] . "<br />";
