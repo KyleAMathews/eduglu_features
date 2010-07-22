@@ -12,8 +12,7 @@ function theme_eduglu_about_stats_boxes_container($space) {
   $output .= "<div class='grid-9 eduglu-about-stats-boxes-container'>";
   $output .= "<h3>Group Statistics</h3>";
   $output .= _eduglu_about_new_group_users($space);
-  $output .= _eduglu_about_new_nodes($space);
-  $output .= _eduglu_about_new_group_comments($space);
+  $output .= _eduglu_about_new_posts($space);
   $output .= "</div>";
   
   return $output;

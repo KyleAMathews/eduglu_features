@@ -63,57 +63,55 @@ function _eduglu_about_new_group_users($space) {
   
   return $output;
 }
-function _eduglu_about_new_group_comments($space) {
+
+/**
+ * Generate flot graph of how many posts (nodes + comments) have been created / week in this group.
+ */
+function _eduglu_about_new_posts($space) {
   $options = _eduglu_about_flot_options();
 
-  if ($new_group_comments_data = cache_get('eduglu_about_new_comments_' . $space->id)) {
-    $data = $new_group_comments_data->data;
-  }
-  else {
-    $result = db_query("
-      SELECT count(date_format(from_unixtime(c.timestamp), '%Y%U')) as count,
-      c.timestamp as timestamp
-      FROM {comments} c JOIN {og_ancestry} o
-      WHERE c.nid = o.nid
-      AND o.group_nid = %d
-      AND c.timestamp > %d
-      GROUP BY date_format(from_unixtime(c.timestamp), '%Y%U')
-      ORDER BY timestamp desc", $space->id, LAST_MONDAY - ONE_YEAR_UNIX);
-  
-    $results = array();
-    // Pull out into keyed array.
-    while ($data = db_fetch_array($result)) {
-      $results[$data['timestamp']] = intval($data['count']);
-    }
-  
-    $data = _eduglu_about_process_weekly($results);
-    
-    cache_set('eduglu_about_new_comments_' . $space->id, $data, 'cache', time() + 86400);
-  }
+  list($node_data, $num_nodes) = _eduglu_about_query_new_nodes($space);
+  list($comment_data, $num_comments) = _eduglu_about_query_new_comments($space);
 
-  $num_comments = db_result(db_query("SELECT count(*)
-                        FROM {comments} c JOIN {og_ancestry} o
-                        WHERE c.nid = o.nid
-                        AND o.group_nid = %d
-                        AND c.timestamp > %d", $space->id, time() - THIRTY_DAYS_UNIX));
+  $num_posts = $num_nodes + $num_comments;
 
   // Set the yaxis max at larger of either 20, or the largest value.
-  if (count($data['orig_data']) > 0 && max($data['orig_data']) < 20) {
+  if (count($comment_data['orig_data']) > 0 && max($comment_data['orig_data']) < 20) {
     $options->yaxis['max'] = 20;
   }
 
-  $d1 = new flotData($data['flot_values']);
-  $label = format_plural($num_comments, "1 <strong>New Comment</strong> in Last 30 Days", "@count <strong>New Comments</strong> in Last 30 Days");
-  $legend = "52 Weeks New Comments";
-  
+  // Merge node + comment data.
+  $flot_data = $node_data['flot_values'];
+  foreach ($comment_data['flot_values'] as $data) {
+    $success = FALSE;
+    foreach ($flot_data as &$week) {
+      // If the comment count is from the same week add them, else add new row.
+      if ($data[0] == $week[0]) {
+        $week[1] = $week[1] + $data[1];
+        $success = TRUE;
+      }
+    }
+    if (!$success) {
+      $flot_data[] = array($data[0], $data[1]);
+    }
+  }
+
+  $d1 = new flotData($flot_data);
+  $label = format_plural($num_posts, "1 <strong>New Post</strong> in Last 30 Days",
+                                  "@count <strong>New Posts</strong> in Last 30 Days");
+  $legend = "52 Weeks New Posts";
+
   $output = theme('eduglu_stats_box', $d1, $options, $label, $legend);
 
   return $output;
 }
 
-function _eduglu_about_new_nodes($space) {
-  $options = _eduglu_about_flot_options();
-  
+/**
+ * Query how many new nodes in the past year.
+ *
+ * @return Array $data processed data.
+ */
+function _eduglu_about_query_new_nodes($space) {
   if ($new_node_data = cache_get('eduglu_about_new_nodes_' . $space->id)) {
     $data = $new_node_data->data;
   }
@@ -139,11 +137,6 @@ function _eduglu_about_new_nodes($space) {
     
     cache_set('eduglu_about_new_nodes_' . $space->id, $data, 'cache', time() + 86400);
   }
-  
-  // Set the yaxis max at larger of either 20, or the largest value.
-  if (count($data['orig_data']) > 0 && max($data['orig_data']) < 20) {
-    $options->yaxis['max'] = 20;
-  }
 
   $num_nodes = db_result(db_query("SELECT count(*)
                         FROM {og_ancestry} o JOIN {node} n
@@ -152,15 +145,47 @@ function _eduglu_about_new_nodes($space) {
                         AND n.created > %d",
                           $space->id, time() - THIRTY_DAYS_UNIX));
 
+  return array($data, $num_nodes);
+}
 
-  $d1 = new flotData($data['flot_values']);
-  $label = format_plural($num_nodes, "1 <strong>New Post</strong> in Last 30 Days",
-                                  "@count <strong>New Posts</strong> in Last 30 Days");
-  $legend = "52 Weeks New Posts";
+/**
+ * Query how many new nodes in the past year.
+ * 
+ * @return Array $data processed data.
+ */
+function _eduglu_about_query_new_comments($space) {
+  if ($new_group_comments_data = cache_get('eduglu_about_new_comments_' . $space->id)) {
+    $data = $new_group_comments_data->data;
+  }
+  else {
+    $result = db_query("
+      SELECT count(date_format(from_unixtime(c.timestamp), '%Y%U')) as count,
+      c.timestamp as timestamp
+      FROM {comments} c JOIN {og_ancestry} o
+      WHERE c.nid = o.nid
+      AND o.group_nid = %d
+      AND c.timestamp > %d
+      GROUP BY date_format(from_unixtime(c.timestamp), '%Y%U')
+      ORDER BY timestamp desc", $space->id, LAST_MONDAY - ONE_YEAR_UNIX);
   
-  $output = theme('eduglu_stats_box', $d1, $options, $label, $legend);
-  
-  return $output;
+    $results = array();
+    // Pull out into keyed array.
+    while ($data = db_fetch_array($result)) {
+      $results[$data['timestamp']] = intval($data['count']);
+    }
+
+    $data = _eduglu_about_process_weekly($results);
+
+    cache_set('eduglu_about_new_comments_' . $space->id, $data, 'cache', time() + 86400);
+  }
+
+  $num_comments = db_result(db_query("SELECT count(*)
+                        FROM {comments} c JOIN {og_ancestry} o
+                        WHERE c.nid = o.nid
+                        AND o.group_nid = %d
+                        AND c.timestamp > %d", $space->id, time() - THIRTY_DAYS_UNIX));
+
+  return array($data, $num_comments);
 }
 
 /*
