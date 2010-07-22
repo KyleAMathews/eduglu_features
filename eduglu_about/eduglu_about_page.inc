@@ -250,8 +250,14 @@ function _eduglu_about_members_pics($space) {
   return $output;
 }
 
+/**
+ * Create micro-thumbnails for all the members of a group.
+ *
+ * We only display a percentage of people w/o pictures.
+ */
 function _eduglu_about_create_member_pictures($members) {
   foreach ($members as $uid => $picture) {
+    $continue = false;
     if (isset($picture) && module_exists('imagecache')) {
       $attr = array('class' => 'eduglu-about-group-member-picture');
       $preset = '25x25_crop';
@@ -260,16 +266,26 @@ function _eduglu_about_create_member_pictures($members) {
       if (file_exists($picture)) {
         $image = theme('imagecache', $preset, $picture);
       }
-      else {
-        $default_image = variable_get('user_picture_default', '');
-        $image = theme("imagecache", $preset, $default_image);
+    else {
+      // Only use ~20% of people w/o pictures. Too many default pictures
+      // looks tacky + we want to reinforce it's cool to have a picture.
+      $rand_num = rand(0,1000);
+      if ($rand_num > 200) {
+        $continue = TRUE;
       }
-      $path = 'user/'. $uid;
-      $output .= l($image, $path, array('attributes' => $attr,
-                                        'html' => true));
+
+      $default_image = variable_get('user_picture_default', '');
+      $image = theme("imagecache", $preset, $default_image);
+    }
+    if ($continue) {
+      continue;
+    }
+
+    $path = 'user/'. $uid;
+    $output .= l($image, $path, array('attributes' => $attr,
+                                      'html' => true));
     }
   }
-
   return $output;
 }
 
