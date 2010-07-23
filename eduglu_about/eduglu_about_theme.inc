@@ -66,9 +66,9 @@ function theme_eduglu_about_top_contributor($uid, $top_posters, $top_commenters)
   }
   
   $output .= "<p class='eduglu-about-top-contributor-name'>" . l($name, "user/" . $user->uid) . "</p>";
-  $output .= "<strong>Posts:</strong> ";
+  $output .= "<strong>Posts</strong> ";
   $output .= ($top_posters[$uid]) ? $top_posters[$uid] : "0";
-  $output .= "<br /><strong>Comments:</strong> ";
+  $output .= "<br /><strong>Comments</strong> ";
   $output .= ($top_commenters[$uid]) ? $top_commenters[$uid] : "0";
   $output .= "</div>";
   
