@@ -57,5 +57,37 @@ function eduglu_core_form_alter(&$form, &$form_state, $form_id) {
       $form['#action'] = url("welcome", array('query' => array('destination' => 'dashboard')));
       break;
   }
+
+  if ($form['#id'] == "node-form") {
+    // Remove group public checkbox. 
+    if (isset($form['og_nodeapi'])) {
+      _eduglu_core_make_hidden($form['og_nodeapi']);
+    }
+    // Even if you have the perms, we don't want you messing with this stuff
+    $disable = array('menu', 'comment_settings');
+    foreach ($disable as $key) {
+      if (!empty($form[$key])) {
+        $form[$key]['#access'] = FALSE;
+      }
+    }
+  }
+}
+
+/**
+ * Set all elements in a given form to 'value'. Using value preserves the tree and prevents
+ * The element from being rendered.
+ */
+function _eduglu_core_make_hidden(&$form) {
+  if (isset($form['#type'])) {
+    $form['#type'] = 'value';
+    $form['#required'] = FALSE;
+  }
+  if (is_array($form)) {
+    foreach ($form as $key => $value) {
+      if (is_array($value) && strpos($key, '#') !== 0) {
+        _eduglu_core_make_hidden($form[$key]);
+      }
+    }
+  }
 }
 

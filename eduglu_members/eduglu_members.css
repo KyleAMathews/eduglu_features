@@ -1,8 +1,4 @@
 /* Block user-profile bumping against search box now that it's got no margins */
-.block-eduglu_members {
-  margin-top: 60px;
-}
-
 table#stats {
 	width: 55%;
 	margin-top: 10px;
@@ -19,12 +15,6 @@ table#stats td {
 	float: left;
 	margin-right: 10px;
 	margin-bottom: 10px;
-}
-
-ul.links {
-	margin-top: 19px;
-	float: left;
-	font-size: 1.2em;
 }
 .block-eduglu_members tbody {
   border: none;
