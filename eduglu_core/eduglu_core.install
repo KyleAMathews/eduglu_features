@@ -1,6 +1,14 @@
 <?php
 
 /**
+ * Implementation of hook_install().
+ */
+function eduglu_core_install() {
+  // See update_6002.
+  db_query("UPDATE {system} SET weight = 10 WHERE name = 'eduglu_core'");
+}
+
+/**
  * Update the "my feed" global link to dashboard.
  */
 function eduglu_core_update_6000() {
@@ -15,4 +23,11 @@ function eduglu_core_update_6000() {
  */
 function eduglu_core_update_6001() {
   drupal_install_modules(array('eduglu_welcome'));
+}
+
+/**
+ * Bump up weight of eduglu_core module so it can form_alter organic group forms.
+ */
+function eduglu_core_update_6002() {
+  db_query("UPDATE {system} SET weight = 10 WHERE name = 'eduglu_core'");
 }
