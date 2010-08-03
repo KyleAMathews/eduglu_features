@@ -80,3 +80,13 @@
   padding-left: 10px;
   padding-bottom: 5px;
 }
+.eduglu-about-group-label strong {
+  float: right;
+}
+.eduglu-about-about-group {
+  border: 1px solid lightGrey;
+  background: #F7F7F9;
+  margin-bottom: 5px;
+  padding: 10px 0;
+
+}
