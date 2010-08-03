@@ -4,8 +4,10 @@ function theme_eduglu_about_page($space) {
   $output .= "<p class='grid-15 eduglu-about-group-description'>" . $space->group->og_description . "</p>";
   $output .= _eduglu_about_members_pics($space);
   $output .= _eduglu_about_group_details($space);
-  $output .= theme_eduglu_about_stats_boxes_container($space);
+  // Push down blocks to next level.
+  $output .= "<div class='grid-15'></div>";
   $output .= _eduglu_top_contributors($space);
+  $output .= theme_eduglu_about_stats_boxes_container($space);
   
   return $output;
 }
@@ -45,7 +47,7 @@ function _eduglu_about_group_details($space) {
 }
 function _eduglu_about_access_description($space) {
   $space_preset = $space->controllers->variable->values['space']['spaces_preset_og'];
-  
+
   switch ($space_preset) {
     case "og_private":
       $output .= "<p>Only group members can view group content<br />";
@@ -59,7 +61,7 @@ function _eduglu_about_access_description($space) {
       $output .= "Only group members can post</p>";
       break;
       
-    case "og_public":
+    case "eduglu_public":
       $output .= "<p>Anyone can view group content<br />";
       $output .= "Anyone can join<br />";
       $output .= "Only group members can post</p>";
