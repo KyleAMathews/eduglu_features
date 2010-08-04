@@ -173,7 +173,7 @@ function eduglu_members_block($op = 'list', $delta = 0, $edit = array()) {
         $content .= "<hr />";
 
         if ($user->uid != $uid) {
-          $content .= "<strong>" . t("Connect with @name", array('@name' => $name)) . "</strong>";
+          $content .= "<strong>" . t("Connect with !name", array('!name' => $name)) . "</strong>";
           $contact_methods = array();
           $contact_methods[] = l(t("Send @name an email", array('@name' => $name)), "user/" . $uid . "/contact");
           $content .= theme('item_list', $contact_methods);
