@@ -372,14 +372,14 @@ function eduglu_members_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'user_picture_dimensions';
-  $strongarm->value = '1600x1400';
+  $strongarm->value = '4000x4000';
 
   $export['user_picture_dimensions'] = $strongarm;
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'user_picture_file_size';
-  $strongarm->value = '1500';
+  $strongarm->value = '4500';
 
   $export['user_picture_file_size'] = $strongarm;
   $strongarm = new stdClass;
