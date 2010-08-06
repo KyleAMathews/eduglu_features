@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Helper to implementation of hook_views_default_views().
+ * Implementation of hook_views_default_views().
  */
-function _eduglu_groups_views_default_views() {
+function eduglu_groups_views_default_views() {
   $views = array();
 
   // Exported view: eduglu_group_rss_feed

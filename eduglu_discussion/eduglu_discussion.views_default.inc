@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Helper to implementation of hook_views_default_views().
+ * Implementation of hook_views_default_views().
  */
-function _eduglu_discussion_views_default_views() {
+function eduglu_discussion_views_default_views() {
   $views = array();
 
   // Exported view: og_ghp_ron_spaces

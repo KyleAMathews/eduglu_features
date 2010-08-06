@@ -1,121 +1,9 @@
 <?php
 
 /**
- * Helper to implementation of hook_context_default_contexts().
+ * Implementation of hook_strongarm().
  */
-function _eduglu_discussion_context_default_contexts() {
-  $export = array();
-  $context = new stdClass;
-  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
-  $context->api_version = 3;
-  $context->name = 'spaces-feature-discussion';
-  $context->description = '';
-  $context->tag = 'eduglu';
-  $context->conditions = array(
-    'node' => array(
-      'values' => array(
-        'story' => 'story',
-      ),
-      'options' => array(
-        'node_form' => 1,
-      ),
-    ),
-    'views' => array(
-      'values' => array(
-        'og_ghp_ron_spaces' => 'og_ghp_ron_spaces',
-      ),
-    ),
-  );
-  $context->reactions = array(
-    'menu' => 'discussion',
-  );
-  $context->condition_mode = 0;
-
-  $translatables['spaces-feature-discussion'] = array(
-    t('eduglu'),
-  );
-
-  $export['spaces-feature-discussion'] = $context;
-  return $export;
-}
-
-/**
- * Helper to implementation of hook_ctools_plugin_api().
- */
-function _eduglu_discussion_ctools_plugin_api() {
-  $args = func_get_args();
-  $module = array_shift($args);
-  $api = array_shift($args);
-  if ($module == "context" && $api == "context") {
-    return array("version" => 3);
-  }
-  elseif ($module == "strongarm" && $api == "strongarm") {
-    return array("version" => 1);
-  }
-}
-
-/**
- * Helper to implementation of hook_menu_default_items().
- */
-function _eduglu_discussion_menu_default_items() {
-  $items = array();
-
-  $items[] = array(
-    'title' => 'Discussions',
-    'path' => 'discussion',
-    'weight' => '-48',
-    'description' => 'The discussion lets you monitor recent activity in a group.',
-  );
-  // Translatables
-  array(
-    t('Discussions'),
-    t('The discussion lets you monitor recent activity in a group.'),
-  );
-
-
-  return $items;
-}
-
-/**
- * Helper to implementation of hook_user_default_permissions().
- */
-function _eduglu_discussion_user_default_permissions() {
-  $permissions = array();
-
-  // Exported permission: create story content
-  $permissions[] = array(
-    'name' => 'create story content',
-    'roles' => array(
-      '0' => 'admin',
-      '1' => 'authenticated user',
-    ),
-  );
-
-  // Exported permission: delete own story content
-  $permissions[] = array(
-    'name' => 'delete own story content',
-    'roles' => array(
-      '0' => 'admin',
-      '1' => 'authenticated user',
-    ),
-  );
-
-  // Exported permission: edit own story content
-  $permissions[] = array(
-    'name' => 'edit own story content',
-    'roles' => array(
-      '0' => 'admin',
-      '1' => 'authenticated user',
-    ),
-  );
-
-  return $permissions;
-}
-
-/**
- * Helper to implementation of hook_strongarm().
- */
-function _eduglu_discussion_strongarm() {
+function eduglu_discussion_strongarm() {
   $export = array();
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -127,10 +15,24 @@ function _eduglu_discussion_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'comment_anonymous_wiki';
+  $strongarm->value = '2';
+
+  $export['comment_anonymous_wiki'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'comment_controls_story';
   $strongarm->value = '3';
 
   $export['comment_controls_story'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'comment_controls_wiki';
+  $strongarm->value = '3';
+
+  $export['comment_controls_wiki'] = $strongarm;
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
@@ -141,10 +43,24 @@ function _eduglu_discussion_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'comment_default_mode_wiki';
+  $strongarm->value = '2';
+
+  $export['comment_default_mode_wiki'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'comment_default_order_story';
   $strongarm->value = '2';
 
   $export['comment_default_order_story'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'comment_default_order_wiki';
+  $strongarm->value = '2';
+
+  $export['comment_default_order_wiki'] = $strongarm;
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
@@ -155,6 +71,13 @@ function _eduglu_discussion_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'comment_default_per_page_wiki';
+  $strongarm->value = '50';
+
+  $export['comment_default_per_page_wiki'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'comment_form_location_story';
   $strongarm->value = '1';
 
@@ -162,10 +85,24 @@ function _eduglu_discussion_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'comment_form_location_wiki';
+  $strongarm->value = '1';
+
+  $export['comment_form_location_wiki'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'comment_preview_story';
   $strongarm->value = '0';
 
   $export['comment_preview_story'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'comment_preview_wiki';
+  $strongarm->value = '0';
+
+  $export['comment_preview_wiki'] = $strongarm;
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
@@ -183,10 +120,24 @@ function _eduglu_discussion_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'comment_subject_field_wiki';
+  $strongarm->value = '0';
+
+  $export['comment_subject_field_wiki'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'comment_upload_story';
   $strongarm->value = '1';
 
   $export['comment_upload_story'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'comment_wiki';
+  $strongarm->value = '2';
+
+  $export['comment_wiki'] = $strongarm;
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
@@ -210,10 +161,20 @@ function _eduglu_discussion_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'node_options_story';
   $strongarm->value = array(
-    '0' => 'status',
+    0 => 'status',
   );
 
   $export['node_options_story'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_options_wiki';
+  $strongarm->value = array(
+    0 => 'status',
+    1 => 'revision',
+  );
+
+  $export['node_options_wiki'] = $strongarm;
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
@@ -242,5 +203,12 @@ function _eduglu_discussion_strongarm() {
   $strongarm->value = '1';
 
   $export['upload_story'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'upload_wiki';
+  $strongarm->value = '1';
+
+  $export['upload_wiki'] = $strongarm;
   return $export;
 }

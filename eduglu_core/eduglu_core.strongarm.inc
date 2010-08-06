@@ -1,185 +1,9 @@
 <?php
 
 /**
- * Helper to implementation of hook_ctools_plugin_api().
+ * Implementation of hook_strongarm().
  */
-function _eduglu_core_ctools_plugin_api() {
-  $args = func_get_args();
-  $module = array_shift($args);
-  $api = array_shift($args);
-  if ($module == "strongarm" && $api == "strongarm") {
-    return array("version" => 1);
-  }
-}
-
-/**
- * Helper to implementation of hook_user_default_permissions().
- */
-function _eduglu_core_user_default_permissions() {
-  $permissions = array();
-
-  // Exported permission: access all views
-  $permissions[] = array(
-    'name' => 'access all views',
-    'roles' => array(
-      '0' => 'admin',
-      '1' => 'anonymous user',
-      '2' => 'authenticated user',
-    ),
-  );
-
-  // Exported permission: access comments
-  $permissions[] = array(
-    'name' => 'access comments',
-    'roles' => array(
-      '0' => 'admin',
-      '1' => 'anonymous user',
-      '2' => 'authenticated user',
-    ),
-  );
-
-  // Exported permission: access content
-  $permissions[] = array(
-    'name' => 'access content',
-    'roles' => array(
-      '0' => 'admin',
-      '1' => 'anonymous user',
-      '2' => 'authenticated user',
-    ),
-  );
-
-  // Exported permission: administer comments
-  $permissions[] = array(
-    'name' => 'administer comments',
-    'roles' => array(
-      '0' => 'admin',
-    ),
-  );
-
-  // Exported permission: administer content types
-  $permissions[] = array(
-    'name' => 'administer content types',
-    'roles' => array(
-      '0' => 'admin',
-    ),
-  );
-
-  // Exported permission: administer nodes
-  $permissions[] = array(
-    'name' => 'administer nodes',
-    'roles' => array(
-      '0' => 'admin',
-    ),
-  );
-
-  // Exported permission: post comments
-  $permissions[] = array(
-    'name' => 'post comments',
-    'roles' => array(
-      '0' => 'admin',
-      '1' => 'authenticated user',
-    ),
-  );
-
-  // Exported permission: post comments without approval
-  $permissions[] = array(
-    'name' => 'post comments without approval',
-    'roles' => array(
-      '0' => 'admin',
-      '1' => 'authenticated user',
-    ),
-  );
-
-  // Exported permission: search content
-  $permissions[] = array(
-    'name' => 'search content',
-    'roles' => array(
-      '0' => 'admin',
-      '1' => 'anonymous user',
-      '2' => 'authenticated user',
-    ),
-  );
-
-  // Exported permission: upload files
-  $permissions[] = array(
-    'name' => 'upload files',
-    'roles' => array(
-      '0' => 'admin',
-      '1' => 'authenticated user',
-    ),
-  );
-
-  // Exported permission: upload files to comments
-  $permissions[] = array(
-    'name' => 'upload files to comments',
-    'roles' => array(
-      '0' => 'admin',
-      '1' => 'authenticated user',
-    ),
-  );
-
-  // Exported permission: use advanced search
-  $permissions[] = array(
-    'name' => 'use advanced search',
-    'roles' => array(
-      '0' => 'admin',
-      '1' => 'anonymous user',
-      '2' => 'authenticated user',
-    ),
-  );
-
-  // Exported permission: view files uploaded to comments
-  $permissions[] = array(
-    'name' => 'view files uploaded to comments',
-    'roles' => array(
-      '0' => 'admin',
-      '1' => 'anonymous user',
-      '2' => 'authenticated user',
-    ),
-  );
-
-  // Exported permission: view imagecache 25x25_crop
-  $permissions[] = array(
-    'name' => 'view imagecache 25x25_crop',
-    'roles' => array(),
-  );
-
-  // Exported permission: view imagecache 30x30_crop
-  $permissions[] = array(
-    'name' => 'view imagecache 30x30_crop',
-    'roles' => array(
-      '0' => 'admin',
-      '1' => 'anonymous user',
-      '2' => 'authenticated user',
-    ),
-  );
-
-  // Exported permission: view uploaded files
-  $permissions[] = array(
-    'name' => 'view uploaded files',
-    'roles' => array(
-      '0' => 'admin',
-      '1' => 'anonymous user',
-      '2' => 'authenticated user',
-    ),
-  );
-
-  // Exported permission: view users outside groups
-  $permissions[] = array(
-    'name' => 'view users outside groups',
-    'roles' => array(
-      '0' => 'admin',
-      '1' => 'authenticated user',
-    ),
-  );
-
-  return $permissions;
-}
-
-/**
- * Helper to implementation of hook_strongarm().
- */
-function _eduglu_core_strongarm() {
+function eduglu_core_strongarm() {
   $export = array();
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -281,7 +105,12 @@ function _eduglu_core_strongarm() {
     'toggle_favicon' => 1,
     'toggle_primary_links' => 1,
     'toggle_secondary_links' => 1,
+    'default_logo' => 0,
+    'logo_path' => 'files/island-logo.png',
+    'logo_upload' => '',
     'default_favicon' => 1,
+    'favicon_path' => '',
+    'favicon_upload' => '',
   );
 
   $export['theme_dewey_settings'] = $strongarm;

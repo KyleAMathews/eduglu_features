@@ -1,91 +1,111 @@
 <?php
 
 /**
- * Implementation of hook_content_default_fields().
- */
-function eduglu_members_content_default_fields() {
-  module_load_include('inc', 'eduglu_members', 'eduglu_members.defaults');
-  $args = func_get_args();
-  return call_user_func_array('_eduglu_members_content_default_fields', $args);
-}
-
-/**
- * Implementation of hook_context_default_contexts().
- */
-function eduglu_members_context_default_contexts() {
-  module_load_include('inc', 'eduglu_members', 'eduglu_members.defaults');
-  $args = func_get_args();
-  return call_user_func_array('_eduglu_members_context_default_contexts', $args);
-}
-
-/**
  * Implementation of hook_ctools_plugin_api().
  */
 function eduglu_members_ctools_plugin_api() {
-  module_load_include('inc', 'eduglu_members', 'eduglu_members.defaults');
-  $args = func_get_args();
-  return call_user_func_array('_eduglu_members_ctools_plugin_api', $args);
-}
-
-/**
- * Implementation of hook_fieldgroup_default_groups().
- */
-function eduglu_members_fieldgroup_default_groups() {
-  module_load_include('inc', 'eduglu_members', 'eduglu_members.defaults');
-  $args = func_get_args();
-  return call_user_func_array('_eduglu_members_fieldgroup_default_groups', $args);
+  list($module, $api) = func_get_args();
+  if ($module == "context" && $api == "context") {
+    return array("version" => 3);
+  }
+  elseif ($module == "spaces" && $api == "spaces") {
+    return array("version" => 3);
+  }
+  elseif ($module == "strongarm" && $api == "strongarm") {
+    return array("version" => 1);
+  }
 }
 
 /**
  * Implementation of hook_imagecache_default_presets().
  */
 function eduglu_members_imagecache_default_presets() {
-  module_load_include('inc', 'eduglu_members', 'eduglu_members.defaults');
-  $args = func_get_args();
-  return call_user_func_array('_eduglu_members_imagecache_default_presets', $args);
+  $items = array(
+    '25x25_crop' => array(
+      'presetname' => '25x25_crop',
+      'actions' => array(
+        '0' => array(
+          'weight' => '0',
+          'module' => 'imagecache',
+          'action' => 'imagecache_scale_and_crop',
+          'data' => array(
+            'width' => '25',
+            'height' => '25',
+          ),
+        ),
+      ),
+    ),
+    '30x30_crop' => array(
+      'presetname' => '30x30_crop',
+      'actions' => array(
+        '0' => array(
+          'weight' => '0',
+          'module' => 'imagecache',
+          'action' => 'imagecache_scale_and_crop',
+          'data' => array(
+            'width' => '30',
+            'height' => '30',
+          ),
+        ),
+      ),
+    ),
+    'user_image_default' => array(
+      'presetname' => 'user_image_default',
+      'actions' => array(
+        '0' => array(
+          'weight' => '0',
+          'module' => 'imagecache',
+          'action' => 'imagecache_scale_and_crop',
+          'data' => array(
+            'width' => '100',
+            'height' => '100',
+          ),
+        ),
+      ),
+    ),
+    'user_image_large' => array(
+      'presetname' => 'user_image_large',
+      'actions' => array(
+        '0' => array(
+          'weight' => '0',
+          'module' => 'imagecache',
+          'action' => 'imagecache_scale_and_crop',
+          'data' => array(
+            'width' => '200',
+            'height' => '200',
+          ),
+        ),
+      ),
+    ),
+  );
+  return $items;
 }
 
 /**
  * Implementation of hook_node_info().
  */
 function eduglu_members_node_info() {
-  module_load_include('inc', 'eduglu_members', 'eduglu_members.features.node');
-  $args = func_get_args();
-  return call_user_func_array('_eduglu_members_node_info', $args);
+  $items = array(
+    'uprofile' => array(
+      'name' => t('User Profile'),
+      'module' => 'features',
+      'description' => t('Holds the data for a user\'s profile. Needs to be attached to the user via Bio or Nodeprofile.'),
+      'has_title' => '1',
+      'title_label' => t('Title'),
+      'has_body' => '0',
+      'body_label' => '',
+      'min_word_count' => '0',
+      'help' => '',
+    ),
+  );
+  return $items;
 }
 
 /**
- * Implementation of hook_spaces_presets().
+ * Implementation of hook_views_api().
  */
-function eduglu_members_spaces_presets() {
-  module_load_include('inc', 'eduglu_members', 'eduglu_members.defaults');
-  $args = func_get_args();
-  return call_user_func_array('_eduglu_members_spaces_presets', $args);
-}
-
-/**
- * Implementation of hook_user_default_permissions().
- */
-function eduglu_members_user_default_permissions() {
-  module_load_include('inc', 'eduglu_members', 'eduglu_members.defaults');
-  $args = func_get_args();
-  return call_user_func_array('_eduglu_members_user_default_permissions', $args);
-}
-
-/**
- * Implementation of hook_strongarm().
- */
-function eduglu_members_strongarm() {
-  module_load_include('inc', 'eduglu_members', 'eduglu_members.defaults');
-  $args = func_get_args();
-  return call_user_func_array('_eduglu_members_strongarm', $args);
-}
-
-/**
- * Implementation of hook_views_default_views().
- */
-function eduglu_members_views_default_views() {
-  module_load_include('inc', 'eduglu_members', 'eduglu_members.features.views');
-  $args = func_get_args();
-  return call_user_func_array('_eduglu_members_views_default_views', $args);
+function eduglu_members_views_api() {
+  return array(
+    'api' => '2',
+  );
 }

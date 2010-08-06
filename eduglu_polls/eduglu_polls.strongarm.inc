@@ -1,136 +1,9 @@
 <?php
 
 /**
- * Helper to implementation of hook_context_default_contexts().
+ * Implementation of hook_strongarm().
  */
-function _eduglu_polls_context_default_contexts() {
-  $export = array();
-  $context = new stdClass;
-  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
-  $context->api_version = 3;
-  $context->name = 'spaces-feature-poll';
-  $context->description = 'context for space polls';
-  $context->tag = 'eduglu';
-  $context->conditions = array(
-    'node' => array(
-      'values' => array(
-        'poll' => 'poll',
-      ),
-      'options' => array(
-        'node_form' => 1,
-      ),
-    ),
-    'path' => array(
-      'values' => array(
-        '*/poll/*' => '*/poll/*',
-      ),
-    ),
-    'views' => array(
-      'values' => array(
-        'polls' => 'polls',
-      ),
-    ),
-  );
-  $context->reactions = array(
-    'menu' => 'poll',
-  );
-  $context->condition_mode = 0;
-
-  $translatables['spaces-feature-poll'] = array(
-    t('context for space polls'),
-    t('eduglu'),
-  );
-
-  $export['spaces-feature-poll'] = $context;
-  return $export;
-}
-
-/**
- * Helper to implementation of hook_ctools_plugin_api().
- */
-function _eduglu_polls_ctools_plugin_api() {
-  $args = func_get_args();
-  $module = array_shift($args);
-  $api = array_shift($args);
-  if ($module == "context" && $api == "context") {
-    return array("version" => 3);
-  }
-  elseif ($module == "strongarm" && $api == "strongarm") {
-    return array("version" => 1);
-  }
-}
-
-/**
- * Helper to implementation of hook_menu_default_items().
- */
-function _eduglu_polls_menu_default_items() {
-  $items = array();
-
-  $items[] = array(
-    'title' => 'Polls',
-    'path' => 'poll',
-    'weight' => '-49',
-    'description' => 'Polls let you ask structured questions to other members of your group.',
-  );
-  // Translatables
-  array(
-    t('Polls'),
-    t('Polls let you ask structured questions to other members of your group.'),
-  );
-
-
-  return $items;
-}
-
-/**
- * Helper to implementation of hook_user_default_permissions().
- */
-function _eduglu_polls_user_default_permissions() {
-  $permissions = array();
-
-  // Exported permission: cancel own vote
-  $permissions[] = array(
-    'name' => 'cancel own vote',
-    'roles' => array(
-      '0' => 'admin',
-      '1' => 'authenticated user',
-    ),
-  );
-
-  // Exported permission: create poll content
-  $permissions[] = array(
-    'name' => 'create poll content',
-    'roles' => array(
-      '0' => 'admin',
-      '1' => 'authenticated user',
-    ),
-  );
-
-  // Exported permission: edit own poll content
-  $permissions[] = array(
-    'name' => 'edit own poll content',
-    'roles' => array(
-      '0' => 'admin',
-      '1' => 'authenticated user',
-    ),
-  );
-
-  // Exported permission: vote on polls
-  $permissions[] = array(
-    'name' => 'vote on polls',
-    'roles' => array(
-      '0' => 'admin',
-      '1' => 'authenticated user',
-    ),
-  );
-
-  return $permissions;
-}
-
-/**
- * Helper to implementation of hook_strongarm().
- */
-function _eduglu_polls_strongarm() {
+function eduglu_polls_strongarm() {
   $export = array();
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -214,7 +87,7 @@ function _eduglu_polls_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'node_options_poll';
   $strongarm->value = array(
-    '0' => 'status',
+    0 => 'status',
   );
 
   $export['node_options_poll'] = $strongarm;

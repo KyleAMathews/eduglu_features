@@ -4,34 +4,17 @@
  * Implementation of hook_ctools_plugin_api().
  */
 function eduglu_core_ctools_plugin_api() {
-  module_load_include('inc', 'eduglu_core', 'eduglu_core.defaults');
-  $args = func_get_args();
-  return call_user_func_array('_eduglu_core_ctools_plugin_api', $args);
+  list($module, $api) = func_get_args();
+  if ($module == "strongarm" && $api == "strongarm") {
+    return array("version" => 1);
+  }
 }
 
 /**
- * Implementation of hook_user_default_permissions().
+ * Implementation of hook_views_api().
  */
-function eduglu_core_user_default_permissions() {
-  module_load_include('inc', 'eduglu_core', 'eduglu_core.defaults');
-  $args = func_get_args();
-  return call_user_func_array('_eduglu_core_user_default_permissions', $args);
-}
-
-/**
- * Implementation of hook_strongarm().
- */
-function eduglu_core_strongarm() {
-  module_load_include('inc', 'eduglu_core', 'eduglu_core.defaults');
-  $args = func_get_args();
-  return call_user_func_array('_eduglu_core_strongarm', $args);
-}
-
-/**
- * Implementation of hook_views_default_views().
- */
-function eduglu_core_views_default_views() {
-  module_load_include('inc', 'eduglu_core', 'eduglu_core.features.views');
-  $args = func_get_args();
-  return call_user_func_array('_eduglu_core_views_default_views', $args);
+function eduglu_core_views_api() {
+  return array(
+    'api' => '2',
+  );
 }

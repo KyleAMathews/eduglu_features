@@ -4,52 +4,40 @@
  * Implementation of hook_ctools_plugin_api().
  */
 function eduglu_groups_ctools_plugin_api() {
-  module_load_include('inc', 'eduglu_groups', 'eduglu_groups.defaults');
-  $args = func_get_args();
-  return call_user_func_array('_eduglu_groups_ctools_plugin_api', $args);
+  list($module, $api) = func_get_args();
+  if ($module == "spaces" && $api == "spaces") {
+    return array("version" => 3);
+  }
+  elseif ($module == "strongarm" && $api == "strongarm") {
+    return array("version" => 1);
+  }
 }
 
 /**
  * Implementation of hook_node_info().
  */
 function eduglu_groups_node_info() {
-  module_load_include('inc', 'eduglu_groups', 'eduglu_groups.features.node');
-  $args = func_get_args();
-  return call_user_func_array('_eduglu_groups_node_info', $args);
+  $items = array(
+    'group' => array(
+      'name' => t('group'),
+      'module' => 'features',
+      'description' => t('Create a new group'),
+      'has_title' => '1',
+      'title_label' => t('Title'),
+      'has_body' => '1',
+      'body_label' => t('Group description'),
+      'min_word_count' => '0',
+      'help' => '',
+    ),
+  );
+  return $items;
 }
 
 /**
- * Implementation of hook_spaces_presets().
+ * Implementation of hook_views_api().
  */
-function eduglu_groups_spaces_presets() {
-  module_load_include('inc', 'eduglu_groups', 'eduglu_groups.defaults');
-  $args = func_get_args();
-  return call_user_func_array('_eduglu_groups_spaces_presets', $args);
-}
-
-/**
- * Implementation of hook_user_default_permissions().
- */
-function eduglu_groups_user_default_permissions() {
-  module_load_include('inc', 'eduglu_groups', 'eduglu_groups.defaults');
-  $args = func_get_args();
-  return call_user_func_array('_eduglu_groups_user_default_permissions', $args);
-}
-
-/**
- * Implementation of hook_strongarm().
- */
-function eduglu_groups_strongarm() {
-  module_load_include('inc', 'eduglu_groups', 'eduglu_groups.defaults');
-  $args = func_get_args();
-  return call_user_func_array('_eduglu_groups_strongarm', $args);
-}
-
-/**
- * Implementation of hook_views_default_views().
- */
-function eduglu_groups_views_default_views() {
-  module_load_include('inc', 'eduglu_groups', 'eduglu_groups.features.views');
-  $args = func_get_args();
-  return call_user_func_array('_eduglu_groups_views_default_views', $args);
+function eduglu_groups_views_api() {
+  return array(
+    'api' => '2',
+  );
 }
