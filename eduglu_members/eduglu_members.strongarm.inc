@@ -86,6 +86,8 @@ function eduglu_members_strongarm() {
     'options' => '-1',
     'comment_settings' => '0',
     'menu' => '-4',
+    'book' => '10',
+    'path' => '30',
   );
 
   $export['content_extra_weights_uprofile'] = $strongarm;

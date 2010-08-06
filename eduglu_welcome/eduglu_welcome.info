@@ -1,5 +1,4 @@
 core = "6.x"
-dependencies[] = "boxes"
 dependencies[] = "context"
 dependencies[] = "features"
 dependencies[] = "menu"
