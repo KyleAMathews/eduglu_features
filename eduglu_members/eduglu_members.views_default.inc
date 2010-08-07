@@ -361,6 +361,8 @@ function eduglu_members_views_default_views() {
   ));
   $handler->override_option('title', 'Recent posts');
   $handler->override_option('css_class', 'clear-block');
+  $handler->override_option('empty', '<strong class="blank-slate">This member hasn\'t performed any activity yet.</strong>');
+  $handler->override_option('empty_format', '2');
   $handler->override_option('items_per_page', '25');
   $handler->override_option('use_pager', TRUE);
   $handler->override_option('style_plugin', 'table');

@@ -106,7 +106,7 @@ function eduglu_core_strongarm() {
     'toggle_primary_links' => 1,
     'toggle_secondary_links' => 1,
     'default_logo' => 0,
-    'logo_path' => 'sites/all/themes/dewey/images/eduglu-logo.png',
+    'logo_path' => 'sites/all/themes/dewey/logo.png',
     'logo_upload' => '',
     'default_favicon' => 1,
     'favicon_path' => '',

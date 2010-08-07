@@ -11,8 +11,12 @@ function eduglu_discussion_menu_default_menu_links() {
     'menu_name' => 'features',
     'link_path' => 'discussion',
     'router_path' => 'discussion',
-    'link_title' => 'Dashboard',
-    'options' => array(),
+    'link_title' => 'Discussions',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+    ),
     'module' => 'system',
     'hidden' => '0',
     'external' => '0',
@@ -22,7 +26,7 @@ function eduglu_discussion_menu_default_menu_links() {
   );
   // Translatables
   array(
-    t('Dashboard'),
+    t('Discussions'),
   );
 
 

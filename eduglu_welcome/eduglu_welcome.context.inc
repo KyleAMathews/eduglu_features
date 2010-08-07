@@ -20,20 +20,12 @@ function eduglu_welcome_context_default_contexts() {
   );
   $context->reactions = array(
     'block' => array(
-      'blocks' => array(
-        'boxes-box-e9df3b15' => array(
-          'module' => 'boxes',
-          'delta' => 'box-e9df3b15',
-          'region' => 'right',
-          'weight' => 0,
-        ),
         'user-0' => array(
           'module' => 'user',
           'delta' => 0,
           'region' => 'right',
           'weight' => 1,
         ),
-      ),
     ),
   );
   $context->condition_mode = 0;
