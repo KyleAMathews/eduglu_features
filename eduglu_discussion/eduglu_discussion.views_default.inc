@@ -136,7 +136,7 @@ function eduglu_discussion_views_default_views() {
   $handler->override_option('path', 'discussion');
   $handler->override_option('menu', array(
     'type' => 'normal',
-    'title' => 'Dashboard',
+    'title' => 'Discussions',
     'description' => '',
     'weight' => '0',
     'name' => 'features',
