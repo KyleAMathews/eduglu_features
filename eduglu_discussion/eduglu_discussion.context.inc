@@ -31,6 +31,10 @@ function eduglu_discussion_context_default_contexts() {
   );
   $context->condition_mode = 0;
 
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('eduglu');
+
   $export['spaces-feature-discussion'] = $context;
   return $export;
 }

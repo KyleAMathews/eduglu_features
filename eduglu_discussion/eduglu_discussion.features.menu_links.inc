@@ -12,11 +12,7 @@ function eduglu_discussion_menu_default_menu_links() {
     'link_path' => 'discussion',
     'router_path' => 'discussion',
     'link_title' => 'Discussions',
-    'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-    ),
+    'options' => array(),
     'module' => 'system',
     'hidden' => '0',
     'external' => '0',
@@ -25,9 +21,8 @@ function eduglu_discussion_menu_default_menu_links() {
     'weight' => '0',
   );
   // Translatables
-  array(
-    t('Discussions'),
-  );
+  // Included for use with string extractors like potx.
+  t('Discussions');
 
 
   return $menu_links;
