@@ -6,6 +6,8 @@
 function eduglu_core_install() {
   // See update_6002.
   db_query("UPDATE {system} SET weight = 10 WHERE name = 'eduglu_core'");
+
+  variable_set("site_frontpage", "eduglu_front_page_redirect");
 }
 
 /**
