@@ -24,6 +24,22 @@ function eduglu_quiz_recent() {
   return views_embed_view('eduglu_latest_quizzes', 'page_1');
 }
 
+// Hook into views and restrict access by views to the workflows
+function eduglu_quiz_views_query_alter(&$view, &$query) {
+  if ($view->name == "eduglu_latest_quizzes" && $space = spaces_get_space()) {
+    $where = array(
+      'clauses' => array(
+        'node_revisions_quiz_node_properties__node.nid IN (SELECT nid FROM og_ancestry WHERE group_nid = %d)',
+      ),
+      'args' => array(
+        $space->id,
+      ),
+      'type' => 'AND',
+    );
+    $query->where = array($where);
+  }
+}
+
 
 // alter view to add where clause to eliminate if nid not in group... cludgy, file issue?
 // permissions + add to og + other variables?

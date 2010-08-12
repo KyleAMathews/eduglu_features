@@ -81,6 +81,20 @@ function eduglu_quiz_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'og_content_type_usage_quiz';
+  $strongarm->value = 'group_post_standard';
+
+  $export['og_content_type_usage_quiz'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_max_groups_quiz';
+  $strongarm->value = '';
+
+  $export['og_max_groups_quiz'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'upload_quiz';
   $strongarm->value = '1';
 
