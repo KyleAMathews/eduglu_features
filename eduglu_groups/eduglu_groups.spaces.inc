@@ -35,6 +35,11 @@ function eduglu_groups_spaces_presets() {
     ),
   );
 
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Only members will be able to access this group. Membership is strictly managed by admins.');
+  t('Private Group');
+
   $export['eduglu_private'] = $spaces_presets;
   $spaces_presets = new stdClass;
   $spaces_presets->disabled = FALSE; /* Edit this to true to make a default spaces_presets disabled initially */
@@ -79,6 +84,11 @@ function eduglu_groups_spaces_presets() {
     ),
   );
 
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Only site members can see group posts. Members may join this group at will.');
+  t('Protected Group');
+
   $export['eduglu_protected'] = $spaces_presets;
   $spaces_presets = new stdClass;
   $spaces_presets->disabled = FALSE; /* Edit this to true to make a default spaces_presets disabled initially */
@@ -109,6 +119,11 @@ function eduglu_groups_spaces_presets() {
       'spaces_og_private' => 0,
     ),
   );
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Anyone on the internet can view content from this group. Members may join this group at will.');
+  t('Public Group');
 
   $export['eduglu_public'] = $spaces_presets;
   return $export;
