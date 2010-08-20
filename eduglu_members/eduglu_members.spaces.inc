@@ -14,6 +14,11 @@ function eduglu_members_spaces_presets() {
   $spaces_presets->space_type = 'user';
   $spaces_presets->value = FALSE;
 
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Provides simple user profile for EduGlu');
+  t('Simple Profile');
+
   $export['eduglu_simple_profile'] = $spaces_presets;
   return $export;
 }

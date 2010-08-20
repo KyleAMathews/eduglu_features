@@ -64,13 +64,6 @@ function eduglu_members_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_upload_uprofile';
-  $strongarm->value = '0';
-
-  $export['comment_upload_uprofile'] = $strongarm;
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'comment_uprofile';
   $strongarm->value = '0';
 
@@ -151,13 +144,6 @@ function eduglu_members_strongarm() {
   $strongarm->value = 'eduglu_simple_profile';
 
   $export['spaces_preset_user'] = $strongarm;
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'upload_uprofile';
-  $strongarm->value = '0';
-
-  $export['upload_uprofile'] = $strongarm;
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;

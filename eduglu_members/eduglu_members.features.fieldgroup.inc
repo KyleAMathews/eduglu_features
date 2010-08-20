@@ -8,7 +8,6 @@ function eduglu_members_fieldgroup_default_groups() {
 
   // Exported group: group_about
   $groups['uprofile-group_about'] = array(
-    'group_type' => 'standard',
     'type_name' => 'uprofile',
     'group_name' => 'group_about',
     'label' => 'Basic Info',
@@ -25,6 +24,7 @@ function eduglu_members_fieldgroup_default_groups() {
       ),
     ),
     'weight' => '1',
+    'group_type' => 'standard',
     'fields' => array(
       '0' => 'field_name',
       '1' => 'field_location',
@@ -35,7 +35,6 @@ function eduglu_members_fieldgroup_default_groups() {
 
   // Exported group: group_contact
   $groups['uprofile-group_contact'] = array(
-    'group_type' => 'standard',
     'type_name' => 'uprofile',
     'group_name' => 'group_contact',
     'label' => 'Contact',
@@ -52,12 +51,12 @@ function eduglu_members_fieldgroup_default_groups() {
       ),
     ),
     'weight' => '5',
+    'group_type' => 'standard',
     'fields' => array(),
   );
 
   // Exported group: group_links
   $groups['uprofile-group_links'] = array(
-    'group_type' => 'standard',
     'type_name' => 'uprofile',
     'group_name' => 'group_links',
     'label' => 'Links',
@@ -74,15 +73,15 @@ function eduglu_members_fieldgroup_default_groups() {
       ),
     ),
     'weight' => '7',
+    'group_type' => 'standard',
     'fields' => array(),
   );
 
   // Translatables
-  array(
-    t('Basic Info'),
-    t('Contact'),
-    t('Links'),
-  );
+  // Included for use with string extractors like potx.
+  t('Basic Info');
+  t('Contact');
+  t('Links');
 
   return $groups;
 }

@@ -60,6 +60,15 @@ function eduglu_core_user_default_permissions() {
     ),
   );
 
+  // Exported permission: edit field_attachment
+  $permissions['edit field_attachment'] = array(
+    'name' => 'edit field_attachment',
+    'roles' => array(
+      '0' => 'admin',
+      '1' => 'authenticated user',
+    ),
+  );
+
   // Exported permission: post comments
   $permissions['post comments'] = array(
     'name' => 'post comments',
@@ -88,24 +97,6 @@ function eduglu_core_user_default_permissions() {
     ),
   );
 
-  // Exported permission: upload files
-  $permissions['upload files'] = array(
-    'name' => 'upload files',
-    'roles' => array(
-      '0' => 'admin',
-      '1' => 'authenticated user',
-    ),
-  );
-
-  // Exported permission: upload files to comments
-  $permissions['upload files to comments'] = array(
-    'name' => 'upload files to comments',
-    'roles' => array(
-      '0' => 'admin',
-      '1' => 'authenticated user',
-    ),
-  );
-
   // Exported permission: use advanced search
   $permissions['use advanced search'] = array(
     'name' => 'use advanced search',
@@ -116,13 +107,12 @@ function eduglu_core_user_default_permissions() {
     ),
   );
 
-  // Exported permission: view files uploaded to comments
-  $permissions['view files uploaded to comments'] = array(
-    'name' => 'view files uploaded to comments',
+  // Exported permission: view field_attachment
+  $permissions['view field_attachment'] = array(
+    'name' => 'view field_attachment',
     'roles' => array(
       '0' => 'admin',
-      '1' => 'anonymous user',
-      '2' => 'authenticated user',
+      '1' => 'authenticated user',
     ),
   );
 
@@ -135,16 +125,6 @@ function eduglu_core_user_default_permissions() {
   // Exported permission: view imagecache 30x30_crop
   $permissions['view imagecache 30x30_crop'] = array(
     'name' => 'view imagecache 30x30_crop',
-    'roles' => array(
-      '0' => 'admin',
-      '1' => 'anonymous user',
-      '2' => 'authenticated user',
-    ),
-  );
-
-  // Exported permission: view uploaded files
-  $permissions['view uploaded files'] = array(
-    'name' => 'view uploaded files',
     'roles' => array(
       '0' => 'admin',
       '1' => 'anonymous user',

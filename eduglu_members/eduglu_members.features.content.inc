@@ -34,8 +34,6 @@ function eduglu_members_content_default_fields() {
     'allowed_values' => '',
     'allowed_values_php' => '',
     'widget' => array(
-      'rows' => '10',
-      'size' => 60,
       'default_value' => array(
         '0' => array(
           'value' => '',
@@ -44,6 +42,8 @@ function eduglu_members_content_default_fields() {
         ),
       ),
       'default_value_php' => NULL,
+      'rows' => '10',
+      'size' => 60,
       'label' => 'About Me',
       'weight' => '-6',
       'description' => '',
@@ -131,8 +131,6 @@ function eduglu_members_content_default_fields() {
     'allowed_values' => '',
     'allowed_values_php' => '',
     'widget' => array(
-      'rows' => '1',
-      'size' => '60',
       'default_value' => array(
         '0' => array(
           'value' => '',
@@ -140,6 +138,8 @@ function eduglu_members_content_default_fields() {
         ),
       ),
       'default_value_php' => NULL,
+      'rows' => '1',
+      'size' => '60',
       'label' => 'Location',
       'weight' => '-8',
       'description' => 'City, State or Province, Country',
@@ -176,8 +176,6 @@ function eduglu_members_content_default_fields() {
     'allowed_values' => '',
     'allowed_values_php' => '',
     'widget' => array(
-      'rows' => '1',
-      'size' => '60',
       'default_value' => array(
         '0' => array(
           'value' => '',
@@ -185,6 +183,8 @@ function eduglu_members_content_default_fields() {
         ),
       ),
       'default_value_php' => NULL,
+      'rows' => '1',
+      'size' => '60',
       'label' => 'Name',
       'weight' => '-9',
       'description' => '',
@@ -194,12 +194,11 @@ function eduglu_members_content_default_fields() {
   );
 
   // Translatables
-  array(
-    t('About Me'),
-    t('Location'),
-    t('Name'),
-    t('Website'),
-  );
+  // Included for use with string extractors like potx.
+  t('About Me');
+  t('Location');
+  t('Name');
+  t('Website');
 
   return $fields;
 }

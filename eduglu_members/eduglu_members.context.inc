@@ -38,6 +38,11 @@ function eduglu_members_context_default_contexts() {
   );
   $context->condition_mode = 0;
 
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('User profile page');
+  t('eduglu');
+
   $export['spaces-feature-user'] = $context;
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
@@ -71,6 +76,10 @@ function eduglu_members_context_default_contexts() {
     ),
   );
   $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Dashboard');
 
   $export['spaces_dashboard-custom-1'] = $context;
   return $export;
