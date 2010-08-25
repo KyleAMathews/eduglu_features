@@ -53,7 +53,7 @@ function eduglu_discussion_content_default_fields() {
     'active' => '1',
     'list_field' => '0',
     'list_default' => 1,
-    'description_field' => '0',
+    'description_field' => '1',
     'widget' => array(
       'file_extensions' => 'jpg jpeg gif png txt doc docx xls xlsx pdf ppt pptx pps odt ods odp py rb zip java swf pages key numbers gz tar bz2',
       'file_path' => '[uid]',

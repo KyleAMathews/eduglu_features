@@ -33,3 +33,32 @@ function eduglu_core_update_6001() {
 function eduglu_core_update_6002() {
   db_query("UPDATE {system} SET weight = 10 WHERE name = 'eduglu_core'");
 }
+
+/**
+ * Migrate files from the core upload module to filefield().
+ */
+function eduglu_core_update_6003() {
+    $files = db_query("SELECT * FROM upload WHERE nid > 0 ORDER BY nid ASC, fid ASC");
+
+  $nid = 0;
+
+  while ($file = db_fetch_array($files)) {
+    $attachment = new stdClass();
+
+    // D5 didn't have weights,
+    // so we'll store things in the order they were uploaded
+    if ($nid != $file['nid']) {
+      $delta = 0;
+      $nid = $file['nid'];
+    }
+
+    $attachment->vid = $file['vid'];
+    $attachment->nid = $file['nid'];
+    $attachment->delta = $file['weight'];
+    $attachment->field_attachment_fid = $file['fid'];
+    $attachment->field_attachment_list = $file['list'];
+    // schema will take care of the serialization
+    $attachment->field_attachment_data = array('description' => $file['description']);
+    drupal_write_record('content_field_attachment', $attachment);
+  }
+}

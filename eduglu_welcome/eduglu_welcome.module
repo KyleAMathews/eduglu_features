@@ -19,7 +19,7 @@ function eduglu_welcome_menu() {
     'title' => 'Settings',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('eduglu_welcome_settings'),
-    'access callback' => 'spaces_access_admin',
+    'access callback' => 'spaces_access_admin', // TODO change access to just check if person has role of admin.
     'access arguments' => array(),
     'type' => MENU_CALLBACK,
   );
