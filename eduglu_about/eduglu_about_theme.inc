@@ -93,7 +93,7 @@ function theme_eduglu_stats_box($flotData, $options, $label, $legend) {
 
 function theme_eduglu_members_listing($members, $num_members) {
   $output .= '<div class="grid-6 eduglu-about-members-container">';
-  $output .= "<h3>$num_members Members</h3>";
+  $output .= "<h3>" . l(t('@num_members Members', array('@num_members' => $num_members)), 'about/members') . "</h3>"; 
   $output .= '<div class="eduglu-about-members">';
   // Add pictures
   $output .= _eduglu_about_create_member_pictures($members);

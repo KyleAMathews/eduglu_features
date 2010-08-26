@@ -56,12 +56,12 @@
   padding: 19px;
   overflow: auto;
 }
-.eduglu-about-members a img, .eduglu-about-members a {
+.eduglu-about-members a img, .eduglu-about-members a.eduglu-about-group-member-picture {
   border: none;
   overflow: hidden;
   float: left;
 }
-.eduglu-about-members a:hover {
+.eduglu-about-members a.eduglu-about-group-member-picture:hover {
   border: 2px solid black;
 }
 .eduglu-about-members a:hover img {
@@ -88,4 +88,23 @@
   background: #F7F7F9;
   margin-bottom: 10px;
   padding: 10px 0;
+}
+.view-eduglu-about-members th, .view-eduglu-about-members td, .view-eduglu-about-members caption {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.view-eduglu-about-members tr div{
+  float: left;
+}
+.view-eduglu-about-members .views-field-name {
+  width: 50%;
+}
+.view-eduglu-about-members .views-field-picture {
+  margin-right: 10px;
+}
+.view-eduglu-about-members tr {
+  border-bottom: 1px solid lightgrey;
+}
+.view-eduglu-about-members .striped {
+  background-color: #F2F2F2;
 }

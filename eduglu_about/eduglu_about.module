@@ -1,19 +1,21 @@
 <?php
 // TODO cache everything for 24 hours.
 // Move stuff into theme functions
+include_once('eduglu_about.features.inc');
 
 /*
  * Implementation of hook_init().
  */
 function eduglu_about_init() {
   drupal_add_css(drupal_get_path('module', 'eduglu_about') . "/eduglu_about.css");
+  drupal_add_js(drupal_get_path('module', 'eduglu_about') . "/eduglu_about.js");
 }
 
 /*
  * Implementation of hook_menu().
  */
 function eduglu_about_menu() {
-  $items['about-group'] = array(
+  $items['about'] = array(
     'title' => 'About',
     'description' => t('Shows top contributors and recent activity in a group.'),
     'page callback' => 'eduglu_about_page',
@@ -22,6 +24,11 @@ function eduglu_about_menu() {
     'menu_name' => 'features',
     'file' => 'eduglu_about_page.inc',
     'weight' => -1000,
+    'type' => MENU_CALLBACK,
+  );
+  $items['about/group'] = array(
+    'title' => "About Group",
+    'type' => MENU_DEFAULT_LOCAL_TASK,
   );
 
   return $items;
@@ -57,5 +64,4 @@ function eduglu_about_theme() {
       'file' => 'eduglu_about_theme.inc',
     ),
   );
-
 }

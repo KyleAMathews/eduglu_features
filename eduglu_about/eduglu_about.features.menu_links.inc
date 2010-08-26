@@ -6,11 +6,11 @@
 function eduglu_about_menu_default_menu_links() {
   $menu_links = array();
 
-  // Exported menu link: features:about-group
-  $menu_links['features:about-group'] = array(
+  // Exported menu link: features:about
+  $menu_links['features:about'] = array(
     'menu_name' => 'features',
-    'link_path' => 'about-group',
-    'router_path' => 'about-group',
+    'link_path' => 'about',
+    'router_path' => 'about',
     'link_title' => 'About',
     'options' => array(
       'attributes' => array(
@@ -25,9 +25,8 @@ function eduglu_about_menu_default_menu_links() {
     'weight' => '-1000',
   );
   // Translatables
-  array(
-    t('About'),
-  );
+  // Included for use with string extractors like potx.
+  t('About');
 
 
   return $menu_links;
