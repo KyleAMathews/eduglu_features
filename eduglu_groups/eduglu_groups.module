@@ -18,7 +18,8 @@ function eduglu_groups_enable() {
 function eduglu_groups_init() {
    drupal_add_js(drupal_get_path('module', 'eduglu_groups')
                  .'/eduglu_groups.js', 'module');
-   
+   drupal_add_css(drupal_get_path('module', 'eduglu_groups')
+                 .'/eduglu_groups.css');   
        // Add our space feed link if in a space.
   if ($space = spaces_get_space()) {
     $feed_url = url('rss.xml', array('absolute' => true));
@@ -27,7 +28,104 @@ function eduglu_groups_init() {
   }
 }
 
-/*
+/**
+ * Implementation of hook_block().
+ */
+function eduglu_groups_block($op = 'list', $delta = 0, $edit = array()) {
+  switch ($op) {
+    case 'list':
+      return array('addform' => array('info' => t('User add form')));
+    case 'view':
+      if (eduglu_groups_addform_access()) {
+        module_load_include('inc', 'eduglu_groups', 'eduglu_groups');
+        $space = spaces_get_space();
+        return array('subject' => t('Add existing users to group'), 'content' => drupal_get_form('eduglu_groups_addform', $space->group));
+      }
+      break;
+  }
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function eduglu_groups_theme() {
+  return array(
+    'eduglu_groups_addform' => array(
+      'arguments' => array('form' => array()),
+      'path' => drupal_get_path('module', 'eduglu_groups'),
+      'file' => 'eduglu_groups.inc',
+    ),
+  );
+}
+
+/**
+ * Access callback for using the members addform.
+ */
+function eduglu_groups_addform_access() {
+  global $user;
+  $space = spaces_get_space();
+  $group = node_load($space->id);
+  
+  return og_is_group_admin($group, $user) && $space && $space->type == 'og';
+}
+
+/**
+ * Implmentation of hook_menu().
+ */
+function eduglu_groups_menu() {
+  $items = array();
+  $items['node/%node/manage-members'] = array(
+    'title' => 'Manage Members',
+    'page callback' => 'eduglu_groups_manage_members',
+    'page arguments' => array(1),
+    'access callback' => 'eduglu_groups_manage_members_access',
+    'access arguments' => array(1),
+    'type' => MENU_LOCAL_TASK,
+  );
+  $items['members/add/ajax'] = array(
+      'page callback' => 'eduglu_groups_addform_ajax',
+      'page arguments' => array(),
+      'access callback' => 'eduglu_groups_addform_access',
+      'access arguments' => array(),
+      'type' => MENU_CALLBACK,
+      'file' => 'eduglu_groups.inc',
+  );
+  $items['members/add/autocomplete'] = array(
+      'page callback' => 'eduglu_groups_autocomplete',
+      'access callback' => 'user_access',
+      'access arguments' => array('access user profiles'),
+      'type' => MENU_CALLBACK,
+      'file' => 'eduglu_groups.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * If the node isn't a group and the current user isn't group admin in that 
+ * group, deny access.
+ */
+function eduglu_groups_manage_members_access($node) {
+  global $user;
+  if ($user->uid == 1) {
+    return TRUE;
+  }
+  else if (!og_is_group_type($node->type)) {
+    return FALSE;
+  }
+  else if (!og_is_group_admin($node, $user)) {
+    return FALSE;
+  }
+  else {
+    return TRUE;
+  }
+}
+
+function eduglu_groups_manage_members($group_node) {
+  return views_embed_view('eduglu_group_membership_tools', 'page_1');
+}
+
+/**
  * Implementation of hook_menu_alter().
  */
 function eduglu_groups_menu_alter(&$items) {
@@ -210,4 +308,181 @@ function eduglu_groups_og_access_grants_alter(&$grants, $node) {
       unset($grants[$key]);
     }
   }
+}
+
+/*************************************************************
+ * Extra OG Actions to let group admins control their groups.
+ ************************************************************/
+/**
+* Implementation of hook_action_info().
+*/
+function eduglu_groups_action_info() {
+  return array(
+    'eduglu_groups_move_user_action' => array(
+      'description' => t('Move user to a different group'),
+      'type' => 'user',
+      'configurable' => TRUE,
+      'hooks' => array(),
+    ),
+    'eduglu_groups_remove_user_action' => array(
+      'description' => t('Remove user from the group'),
+      'type' => 'user',
+      'configurable' => FALSE,
+      'hooks' => array(),    
+    ),
+    'eduglu_groups_demote_user_action' => array(
+      'description' => t('Demote user from administrator in the group'),
+      'type' => 'user',
+      'configurable' => FALSE,
+      'hooks' => array(),    
+    ),
+    'eduglu_groups_promote_user_action' => array(
+      'description' => t('Promote user to an administrator in the group'),
+      'type' => 'user',
+      'configurable' => FALSE,
+      'hooks' => array(),    
+    ),
+  );
+}
+
+/**
+ * Provide form for group admins to choose which group to move the user to.
+ */
+function eduglu_groups_move_user_action_form($context) {
+  $form = array();
+
+  if (!isset($context['groups'])) {
+    $context['groups'] = array();
+  }
+
+  $groups = og_all_groups_options();
+  if (count($groups)) {
+    $form['groups'] = array(
+      '#type' => 'select',
+      '#title' => t('Groups'),
+      '#options' => $groups,
+      '#description' => t('Select the groups to which this user should be moved to.'),
+      '#default_value' => $context['groups'],
+      '#required' => TRUE,
+      '#multiple' => TRUE,
+    );
+  }
+  else {
+    drupal_set_message(t('Please <a href="!url">create</a> a group first.', array('!url' => url('admin/content'))));
+  }
+  return $form;
+
+}
+
+/**
+ * Submission handler for eduglu_groups_move_user_action configuration form.
+ */
+function eduglu_groups_move_user_action_submit($form, &$form_state) {
+  return array(
+    'groups' => $form_state['values']['groups'],
+  );
+}
+
+/**
+* Implementation of a Drupal action.
+* Moves the current user to a choosen group.
+*/
+function eduglu_groups_move_user_action(&$user, $context) {
+  $space = spaces_get_space();
+  if ($space->type != "og") {
+    return;
+  }  
+  // get the uid from the object
+  if (isset($user->uid)) {
+    $uid = $user->uid;
+  }
+  elseif (isset($context['uid'])) {
+    $uid = $context['uid'];
+  }
+
+  $group_node = node_load($space->id);
+
+  // First remove the user from the existing group.
+  og_delete_subscription($group_node->nid, $uid);
+
+  // Then add the user to all the selected groups.
+  if (isset($context['groups'])) {
+    foreach ($context['groups'] as $gid) {
+      og_save_subscription($gid, $user->uid, array('is_active' => 1));
+    }
+    watchdog('action', 'Moved user %name to groups %groups.', array('%name' => $user->name, '%groups' => implode(',', $context['groups'])));
+  }
+
+}
+
+/**
+* Implementation of a Drupal action.
+* Removes the current user from the group.
+*/
+function eduglu_groups_remove_user_action(&$user, $context) {
+  $space = spaces_get_space();
+  if ($space->type != "og") {
+    return;
+  }
+  // Get the uid from the object.
+  if (isset($user->uid)) {
+    $uid = $user->uid;
+  }
+  elseif (isset($context['uid'])) {
+    $uid = $context['uid'];
+    $user = user_load($uid);
+  }
+
+  $group_node = node_load($space->id);
+
+  og_delete_subscription($group_node->nid, $uid);
+  watchdog('action', 'Deleted user %name from the group %group.', array('%name' => $user->name, '%group' => $group_node->title));
+}
+
+/**
+* Implementation of a Drupal action.
+* Demote the current user from a group administrator.
+*/
+function eduglu_groups_demote_user_action(&$user, $context) {
+  $space = spaces_get_space();
+  if ($space->type != "og") {
+    return;
+  }
+  // Get the uid from the object.
+  if (isset($user->uid)) {
+    $uid = $user->uid;
+  }
+  elseif (isset($context['uid'])) {
+    $uid = $context['uid'];
+    $user = user_load($uid);
+  }
+
+  $group_node = node_load($space->id);
+
+  og_save_subscription($group_node->nid, $user->uid, array('is_admin' => 0));
+  watchdog('action', 'Demoted user %name from <em>group administrator</em> in %group.', array('%name' => $user->name, '%group' => $group_node->title));
+}
+
+/**
+* Implementation of a Drupal action.
+* Promote the current user to a group administrator.
+*/
+function eduglu_groups_promote_user_action(&$user, $context) {
+  $space = spaces_get_space();
+  if ($space->type != "og") {
+    return;
+  }
+  // Get the uid from the object.
+  if (isset($user->uid)) {
+    $uid = $user->uid;
+  }
+  elseif (isset($context['uid'])) {
+    $uid = $context['uid'];
+    $user = user_load($uid);
+  }
+
+  $group_node = node_load($space->id);
+
+  og_save_subscription($group_node->nid, $user->uid, array('is_admin' => 1));
+  watchdog('action', 'Promoted user %name to <em>group administrator</em> in %group.', array('%name' => $user->name, '%group' => $group_node->title));
 }
