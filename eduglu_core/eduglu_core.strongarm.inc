@@ -43,6 +43,41 @@ function eduglu_core_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'filter_html_1';
+  $strongarm->value = '1';
+
+  $export['filter_html_1'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'filter_html_help_1';
+  $strongarm->value = 1;
+
+  $export['filter_html_help_1'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'filter_html_nofollow_1';
+  $strongarm->value = 0;
+
+  $export['filter_html_nofollow_1'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'filter_url_length_1';
+  $strongarm->value = '100';
+
+  $export['filter_url_length_1'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'filter_url_length_2';
+  $strongarm->value = '100';
+
+  $export['filter_url_length_2'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'imageapi_jpeg_quality';
   $strongarm->value = '85';
 
@@ -90,6 +125,307 @@ function eduglu_core_strongarm() {
   $strongarm->value = 'eduglu_front_page_redirect';
 
   $export['site_frontpage'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_is_amp_on_1';
+  $strongarm->value = 1;
+
+  $export['typogrify_is_amp_on_1'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_is_amp_on_2';
+  $strongarm->value = 1;
+
+  $export['typogrify_is_amp_on_2'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_is_caps_on_1';
+  $strongarm->value = 1;
+
+  $export['typogrify_is_caps_on_1'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_is_caps_on_2';
+  $strongarm->value = 1;
+
+  $export['typogrify_is_caps_on_2'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_is_initial_quotes_on_1';
+  $strongarm->value = 1;
+
+  $export['typogrify_is_initial_quotes_on_1'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_is_initial_quotes_on_2';
+  $strongarm->value = 1;
+
+  $export['typogrify_is_initial_quotes_on_2'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_is_widont_on_1';
+  $strongarm->value = 1;
+
+  $export['typogrify_is_widont_on_1'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_is_widont_on_2';
+  $strongarm->value = 1;
+
+  $export['typogrify_is_widont_on_2'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_ff_ligature_1';
+  $strongarm->value = 0;
+
+  $export['typogrify_use_ff_ligature_1'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_ff_ligature_2';
+  $strongarm->value = 1;
+
+  $export['typogrify_use_ff_ligature_2'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_ffi_ligature_1';
+  $strongarm->value = 0;
+
+  $export['typogrify_use_ffi_ligature_1'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_ffi_ligature_2';
+  $strongarm->value = 1;
+
+  $export['typogrify_use_ffi_ligature_2'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_ffl_ligature_1';
+  $strongarm->value = 0;
+
+  $export['typogrify_use_ffl_ligature_1'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_ffl_ligature_2';
+  $strongarm->value = 1;
+
+  $export['typogrify_use_ffl_ligature_2'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_fi_ligature_1';
+  $strongarm->value = 0;
+
+  $export['typogrify_use_fi_ligature_1'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_fi_ligature_2';
+  $strongarm->value = 1;
+
+  $export['typogrify_use_fi_ligature_2'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_fl_ligature_1';
+  $strongarm->value = 0;
+
+  $export['typogrify_use_fl_ligature_1'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_fl_ligature_2';
+  $strongarm->value = 1;
+
+  $export['typogrify_use_fl_ligature_2'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_ft_ligature_1';
+  $strongarm->value = 0;
+
+  $export['typogrify_use_ft_ligature_1'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_ft_ligature_2';
+  $strongarm->value = 1;
+
+  $export['typogrify_use_ft_ligature_2'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_ss_ligature_1';
+  $strongarm->value = 0;
+
+  $export['typogrify_use_ss_ligature_1'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_ss_ligature_2';
+  $strongarm->value = 1;
+
+  $export['typogrify_use_ss_ligature_2'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_st_ligature_1';
+  $strongarm->value = 0;
+
+  $export['typogrify_use_st_ligature_1'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_st_ligature_2';
+  $strongarm->value = 1;
+
+  $export['typogrify_use_st_ligature_2'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_unicode_for_->>_1';
+  $strongarm->value = 0;
+
+  $export['typogrify_use_unicode_for_->>_1'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_unicode_for_->>_2';
+  $strongarm->value = 1;
+
+  $export['typogrify_use_unicode_for_->>_2'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_unicode_for_->_1';
+  $strongarm->value = 0;
+
+  $export['typogrify_use_unicode_for_->_1'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_unicode_for_->_2';
+  $strongarm->value = 1;
+
+  $export['typogrify_use_unicode_for_->_2'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_unicode_for_->|_1';
+  $strongarm->value = 0;
+
+  $export['typogrify_use_unicode_for_->|_1'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_unicode_for_->|_2';
+  $strongarm->value = 1;
+
+  $export['typogrify_use_unicode_for_->|_2'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_unicode_for_<->_1';
+  $strongarm->value = 0;
+
+  $export['typogrify_use_unicode_for_<->_1'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_unicode_for_<->_2';
+  $strongarm->value = 1;
+
+  $export['typogrify_use_unicode_for_<->_2'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_unicode_for_<-_1';
+  $strongarm->value = 0;
+
+  $export['typogrify_use_unicode_for_<-_1'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_unicode_for_<-_2';
+  $strongarm->value = 1;
+
+  $export['typogrify_use_unicode_for_<-_2'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_unicode_for_<<-_1';
+  $strongarm->value = 0;
+
+  $export['typogrify_use_unicode_for_<<-_1'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_unicode_for_<<-_2';
+  $strongarm->value = 1;
+
+  $export['typogrify_use_unicode_for_<<-_2'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_unicode_for_<=>_1';
+  $strongarm->value = 0;
+
+  $export['typogrify_use_unicode_for_<=>_1'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_unicode_for_<=>_2';
+  $strongarm->value = 1;
+
+  $export['typogrify_use_unicode_for_<=>_2'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_unicode_for_<=_1';
+  $strongarm->value = 0;
+
+  $export['typogrify_use_unicode_for_<=_1'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_unicode_for_<=_2';
+  $strongarm->value = 1;
+
+  $export['typogrify_use_unicode_for_<=_2'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_unicode_for_=>_1';
+  $strongarm->value = 0;
+
+  $export['typogrify_use_unicode_for_=>_1'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_unicode_for_|<-_1';
+  $strongarm->value = 0;
+
+  $export['typogrify_use_unicode_for_|<-_1'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'typogrify_use_unicode_for_|<-_2';
+  $strongarm->value = 1;
+
+  $export['typogrify_use_unicode_for_|<-_2'] = $strongarm;
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;

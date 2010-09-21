@@ -27,6 +27,14 @@ function eduglu_core_install() {
     'favicon_path' => 'sites/all/themes/dewey/favicon.ico',
   );
   variable_set('theme_dewey_settings', $dewey_theme_settings);
+
+  // Adjust settings for the filter
+  variable_set('filter_url_length_1', 100);
+  variable_set('filter_html_1', 1);
+  variable_set('filter_html_help_1', 0);
+
+  // Set allowed HTML tags for Filter HTML format
+  variable_set('allowed_html_1', "<a><em><strong><small><sup><sub><cite><blockquote><code><ul><ol><li><dl><dt><dd><h2><h3><h4><img><br><br/><p><div><span><b><i><font><color><embed><object><python><java><css><php><html> <strike><table><caption><thead><tbody><tr><td><pre><iframe><p><fieldset><legend>");
 }
 
 /**
