@@ -93,30 +93,6 @@ function eduglu_core_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'theme_dewey_settings';
-  $strongarm->value = array(
-    'toggle_logo' => 1,
-    'toggle_name' => 1,
-    'toggle_slogan' => 0,
-    'toggle_mission' => 1,
-    'toggle_node_user_picture' => 1,
-    'toggle_comment_user_picture' => 1,
-    'toggle_search' => 1,
-    'toggle_favicon' => 1,
-    'toggle_primary_links' => 1,
-    'toggle_secondary_links' => 1,
-    'default_logo' => 0,
-    'logo_path' => 'sites/all/themes/dewey/logo.png',
-    'logo_upload' => '',
-    'default_favicon' => 1,
-    'favicon_path' => '',
-    'favicon_upload' => '',
-  );
-
-  $export['theme_dewey_settings'] = $strongarm;
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'upload_extensions_default';
   $strongarm->value = 'jpg jpeg gif png txt doc docx xls xlsx pdf ppt pptx pps odt ods odp py rb zip java swf pages key numbers gz tar bz2';
 

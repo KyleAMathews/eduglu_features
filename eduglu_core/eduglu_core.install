@@ -8,6 +8,25 @@ function eduglu_core_install() {
   db_query("UPDATE {system} SET weight = 10 WHERE name = 'eduglu_core'");
 
   variable_set("site_frontpage", "eduglu_front_page_redirect");
+
+  // Setup default theme variables.
+  $dewey_theme_settings = array(
+    'toggle_logo' => 1,
+    'toggle_name' => 1,
+    'toggle_slogan' => 0,
+    'toggle_mission' => 1,
+    'toggle_node_user_picture' => 1,
+    'toggle_comment_user_picture' => 1,
+    'toggle_search' => 1,
+    'toggle_favicon' => 1,
+    'toggle_primary_links' => 1,
+    'toggle_secondary_links' => 1,
+    'default_logo' => 0,
+    'logo_path' => 'sites/all/themes/dewey/logo.png',
+    'default_favicon' => 0,
+    'favicon_path' => 'sites/all/themes/dewey/favicon.ico',
+  );
+  variable_set('theme_dewey_settings', $dewey_theme_settings);
 }
 
 /**
