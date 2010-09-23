@@ -13,6 +13,7 @@ function eduglu_core_filter_default_formats() {
       '0' => 'admin',
       '1' => 'anonymous user',
       '2' => 'authenticated user',
+      '3' => 'manager',
     ),
     'filters' => array(
       '0' => array(

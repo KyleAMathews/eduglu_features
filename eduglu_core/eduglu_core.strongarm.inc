@@ -185,56 +185,56 @@ function eduglu_core_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'typogrify_use_ff_ligature_3';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
 
   $export['typogrify_use_ff_ligature_3'] = $strongarm;
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'typogrify_use_ff_ligature_4';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
 
   $export['typogrify_use_ff_ligature_4'] = $strongarm;
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'typogrify_use_ffi_ligature_3';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
 
   $export['typogrify_use_ffi_ligature_3'] = $strongarm;
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'typogrify_use_ffi_ligature_4';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
 
   $export['typogrify_use_ffi_ligature_4'] = $strongarm;
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'typogrify_use_ffl_ligature_3';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
 
   $export['typogrify_use_ffl_ligature_3'] = $strongarm;
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'typogrify_use_ffl_ligature_4';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
 
   $export['typogrify_use_ffl_ligature_4'] = $strongarm;
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'typogrify_use_fi_ligature_3';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
 
   $export['typogrify_use_fi_ligature_3'] = $strongarm;
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'typogrify_use_fi_ligature_4';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
 
   $export['typogrify_use_fi_ligature_4'] = $strongarm;
   $strongarm = new stdClass;
@@ -283,14 +283,14 @@ function eduglu_core_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'typogrify_use_st_ligature_3';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
 
   $export['typogrify_use_st_ligature_3'] = $strongarm;
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'typogrify_use_st_ligature_4';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
 
   $export['typogrify_use_st_ligature_4'] = $strongarm;
   $strongarm = new stdClass;
