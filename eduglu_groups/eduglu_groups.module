@@ -24,7 +24,7 @@ function eduglu_groups_init() {
   if ($space = spaces_get_space()) {
     $feed_url = url('rss.xml', array('absolute' => true));
     
-    drupal_add_feed($feed_url, "Latests posts from the " . $space->group->title . " Group.");
+    drupal_add_feed($feed_url, "Latest posts from the " . $space->group->title . " Group.");
   }
 }
 
@@ -214,7 +214,7 @@ function eduglu_groups_form_alter($form, $form_state, $form_id) {
  */
 function eduglu_groups_preprocess_views_view_rss(&$vars) {
    if ($space = spaces_get_space()) {
-      $vars['title'] = "$space->group->title Group";  
+      $vars['title'] = $space->group->title . " Group";  
    }
 }
 
