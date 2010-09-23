@@ -65,12 +65,76 @@ function eduglu_members_user_default_permissions() {
     ),
   );
 
+  // Exported permission: edit field_about_me
+  $permissions['edit field_about_me'] = array(
+    'name' => 'edit field_about_me',
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: edit field_blog
+  $permissions['edit field_blog'] = array(
+    'name' => 'edit field_blog',
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: edit field_location
+  $permissions['edit field_location'] = array(
+    'name' => 'edit field_location',
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: edit field_name
+  $permissions['edit field_name'] = array(
+    'name' => 'edit field_name',
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
+  );
+
   // Exported permission: edit own uprofile content
   $permissions['edit own uprofile content'] = array(
     'name' => 'edit own uprofile content',
     'roles' => array(
       '0' => 'admin',
       '1' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: view field_about_me
+  $permissions['view field_about_me'] = array(
+    'name' => 'view field_about_me',
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: view field_blog
+  $permissions['view field_blog'] = array(
+    'name' => 'view field_blog',
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: view field_location
+  $permissions['view field_location'] = array(
+    'name' => 'view field_location',
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
+  );
+
+  // Exported permission: view field_name
+  $permissions['view field_name'] = array(
+    'name' => 'view field_name',
+    'roles' => array(
+      '0' => 'authenticated user',
     ),
   );
 
