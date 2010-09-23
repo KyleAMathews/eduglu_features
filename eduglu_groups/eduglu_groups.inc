@@ -65,7 +65,6 @@ function eduglu_groups_addform($form_state, $group) {
  * Theme function for eduglu_groups_addform().
  */
 function theme_eduglu_groups_addform($form) {
-  drupal_add_js(drupal_get_path('module', 'eduglu_groups') .'/eduglu_groups.js');
   $output = "<div id='eduglu-groups-addform-messages'>";
   $output .= drupal_render($form['messages']);
   $output .= "</div>";

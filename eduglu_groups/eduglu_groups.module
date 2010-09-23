@@ -16,8 +16,6 @@ function eduglu_groups_enable() {
  * Impmentation of hook_init().
  */
 function eduglu_groups_init() {
-   drupal_add_js(drupal_get_path('module', 'eduglu_groups')
-                 .'/eduglu_groups.js', 'module');
    drupal_add_css(drupal_get_path('module', 'eduglu_groups')
                  .'/eduglu_groups.css');   
        // Add our space feed link if in a space.
