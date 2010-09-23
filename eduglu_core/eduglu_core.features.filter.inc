@@ -13,7 +13,6 @@ function eduglu_core_filter_default_formats() {
       '0' => 'admin',
       '1' => 'anonymous user',
       '2' => 'authenticated user',
-      '3' => 'manager',
     ),
     'filters' => array(
       '0' => array(
@@ -33,28 +32,28 @@ function eduglu_core_filter_default_formats() {
       ),
       '3' => array(
         'module' => 'filter',
-        'delta' => '2',
-        'weight' => '-6',
+        'delta' => '1',
+        'weight' => '-7',
       ),
       '4' => array(
         'module' => 'filter',
         'delta' => '0',
-        'weight' => '-5',
+        'weight' => '-6',
       ),
       '5' => array(
         'module' => 'filter',
-        'delta' => '1',
-        'weight' => '-4',
+        'delta' => '2',
+        'weight' => '-5',
       ),
       '6' => array(
         'module' => 'filter',
         'delta' => '3',
-        'weight' => '-3',
+        'weight' => '-4',
       ),
       '7' => array(
         'module' => 'typogrify',
         'delta' => '0',
-        'weight' => '10',
+        'weight' => '-3',
       ),
     ),
   );
@@ -64,9 +63,6 @@ function eduglu_core_filter_default_formats() {
     'name' => 'Full HTML',
     'roles' => array(
       '0' => 'admin',
-      '1' => 'anonymous user',
-      '2' => 'authenticated user',
-      '3' => 'manager',
     ),
     'filters' => array(
       '0' => array(
