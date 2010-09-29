@@ -28,6 +28,16 @@ function eduglu_assignment_context_default_contexts() {
     ),
   );
   $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'eduglu_assignment-0' => array(
+          'module' => 'eduglu_assignment',
+          'delta' => 0,
+          'region' => 'right',
+          'weight' => 0,
+        ),
+      ),
+    ),
     'menu' => 'assignments',
   );
   $context->condition_mode = 0;

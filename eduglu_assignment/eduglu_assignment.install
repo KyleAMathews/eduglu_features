@@ -1,0 +1,57 @@
+<?php
+// $Id$
+
+/**
+ * Implementation of hook_install().
+ */
+function eduglu_assignment_install() {
+  $success = drupal_install_schema('eduglu_assignment');
+    
+  if ($success) {
+    drupal_set_message(st('Eduglu Assignment module installed tables successfully.'));
+  }
+  else {
+    drupal_set_message(st('The installation of the Eduglu Feature tables failed.'), 'error');
+  }
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function eduglu_assignment_uninstall() {
+  drupal_uninstall_schema('eduglu_assignment');
+
+  drupal_set_message(t('Eduglu Assignment has been uninstalled.'));
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function eduglu_assignment_schema() {
+  $schema = array();
+
+  $schema['eduglu_assignment'] = array(
+    'fields' => array(
+      'nid' => array(
+        'description' => 'The nid for the post.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0),
+      'assignment_nid' => array(
+        'description' => 'The nid for the referenced assignment node.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0),
+      ),
+    'unique keys' => array(
+      'nid_aid'     => array('nid', 'assignment_nid'),
+    ),
+    'indexes' => array(
+      'assignment_nid' => array('assignment_nid'),
+    ),
+  );
+
+  return $schema;
+}
