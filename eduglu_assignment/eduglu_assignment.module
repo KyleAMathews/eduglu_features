@@ -40,8 +40,11 @@ function eduglu_assignment_form_alter(&$form, $form_state, $form_id) {
   }
 }
 
-// add attachment field to blog post, figure why add blog post button ain't appering
-
+/**
+ * Implementation of hook_nodeapi().
+ *
+ * Detect saving of a node that references an assignment and save that reference.
+ */
 function eduglu_assignment_nodeapi(&$node, $op) {
   if (($op == "insert" || $op == "update") && !empty($node->field_assignment)) {
     db_query("DELETE FROM {eduglu_assignment} WHERE nid = %d", $node->nid);
@@ -64,8 +67,12 @@ function eduglu_assignment_block($op = 'list', $delta = 0, $edit = array()) {
       return $blocks;
 
     case 'view':
-      if (is_numeric(arg(1))) {
+      $nid = arg(1);
+      if (!empty($nid) && is_numeric($nid)) {
         $nid = check_plain(arg(1));
+      }
+      else {
+        return;
       }
       $results = db_query("SELECT n.nid, n.type, n.uid, n.title
                            FROM {eduglu_assignment} e
