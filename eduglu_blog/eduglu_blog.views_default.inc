@@ -60,7 +60,8 @@ function eduglu_blog_views_default_views() {
     ),
   ));
   $handler->override_option('access', array(
-    'type' => 'perm',
+    'type' => 'spaces_feature',
+    'spaces_feature' => 'eduglu_blog',
     'perm' => 'access content',
   ));
   $handler->override_option('cache', array(
