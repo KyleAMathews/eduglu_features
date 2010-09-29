@@ -11,7 +11,22 @@ function eduglu_blog_context_default_contexts() {
   $context->name = 'eduglu_blog';
   $context->description = 'Context for blog posts and blog views';
   $context->tag = 'eduglu';
-  $context->conditions = FALSE;
+  $context->conditions = array(
+    'node' => array(
+      'values' => array(
+        'eduglu_blog' => 'eduglu_blog',
+      ),
+      'options' => array(
+        'node_form' => '1',
+      ),
+    ),
+    'views' => array(
+      'values' => array(
+        'eduglu_blogs_site' => 'eduglu_blogs_site',
+        'eduglu_blogs_site:page_1' => 'eduglu_blogs_site:page_1',
+      ),
+    ),
+  );
   $context->reactions = array(
     'menu' => 'blog-posts',
   );
