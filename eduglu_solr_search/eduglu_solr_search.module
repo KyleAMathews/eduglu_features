@@ -1,3 +1,10 @@
 <?php
 
 include_once('eduglu_solr_search.features.inc');
+
+/**
+ * Implmentation of hook_init().
+ */
+function eduglu_solr_search_init() {
+  drupal_add_css(drupal_get_path('module', 'eduglu_solr_search') . "/eduglu_solr_search.css");
+}
