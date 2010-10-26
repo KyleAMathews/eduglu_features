@@ -47,16 +47,15 @@ function eduglu_core_menu_alter(&$items) {
   }
 }
 
-function eduglu_core_form_alter(&$form, &$form_state, $form_id) {
-//dpm($form_id);
+function eduglu_core_form_alter(&$form, $form_state, $form_id) {
+//dd($form_id);
 //dpm($form);
 //dpm($form_state);
+  if ($form_id == 'user_login_block') {
+    $form['#action'] = "";
+    $form['#submit'][] = "eduglu_core_login_redirect";
+  }
   switch ($form_id) {
-    // Redirect people to dashboard after logging in from the front page.
-    case 'user_login_block':
-      $form['#action'] = url("welcome", array('query' => array('destination' => 'dashboard')));
-      break;
-
     // Hide the eduglu_welcome + spaces_dashboard features in groups as they're
     // not useful there.
     case 'spaces_features_form':
@@ -85,6 +84,31 @@ function eduglu_core_form_alter(&$form, &$form_state, $form_id) {
     }
   }
 }
+function eduglu_core_login_redirect($form, &$form_state) {
+  $account = user_load(array('name' => $form_state['values']['name'], 'status' => 1));
+  if (!empty($account)) {
+    // If the user's email address is invalid, redirect to the register form.
+    if (!valid_email_address($account->mail)) {
+      $form_state['redirect'] = "register";
+    }
+    else if ($GLOBALS['_user_' . $account->uid]) {
+      $form_state['redirect'] = "register";
+    }
+    else {
+      $form_state['redirect'] = "dashboard";
+    }
+  }
+  else {
+    $form_state['redirect'] = "dashboard";
+  }
+}
+
+function eduglu_core_user($op, &$edit, &$account, $category) {
+  if ($op == "insert") {
+    $GLOBALS['_user_' . $account->uid] = 1; 
+//    drupal_goto("register");
+  }
+}
 
 /**
  * Set all elements in a given form to 'value'. Using value preserves the tree and prevents
@@ -102,5 +126,67 @@ function _eduglu_core_make_hidden(&$form) {
       }
     }
   }
+}
+/**
+ * Generates an array of admin links for the current space suitable
+ * for use in theme_links().
+ */
+function eduglu_core_admin_links($space = NULL) {
+  $links = array();
+  $space = !isset($space) ? spaces_get_space() : $space;
+
+  // Within a space
+  if ($space) {
+    if ($space->type == 'og' && spaces_access_admin()) {
+      $item = menu_get_item("node/{$space->id}/edit");
+      if ($item && $item['access']) {
+        $links['settings'] = array(
+          'title' => t('@type settings', array('@type' => ucwords(node_get_types('name', $space->group->type)))),
+          'href' => $item['href'],
+        );
+      }
+
+      $item = menu_get_item("node/{$space->id}/features");
+      if ($item && $item['access']) {
+        $links['features'] = array(
+          'title' => t('Customize features'),
+          'href' => $item['href'],
+        );
+      }
+      $item = menu_get_item("node/{$space->id}/manage-members");
+      if ($item && $item['access']) {
+        $links['manage-members'] = array(
+          'title' => t('Manage members'),
+          'href' => $item['href'],
+        );
+      }  // TODO check that the notebook feature is enabled before displaying this. Add dropdown to mixpanel js. Commit stuffa
+         // Check that there's books in this group and that the book feature is enabled.
+         $val = db_result(db_query("SELECT bid
+                                 FROM {book} b
+                                 JOIN {og_ancestry} o
+                                 ON b.bid = o.nid
+                                 WHERE o.group_nid = %d
+                                 LIMIT 1", $space->id));
+      if (!empty($val) && array_key_exists('atrium_book', $space->controllers->variable->values['space']['spaces_features'])) {
+      $item = menu_get_item("node/{$space->id}/outline_designer");
+        if ($item && $item['access']) {
+          $links['outline'] = array(
+            'title' => t('Outline book pages'),
+            'href' => $item['href'],
+          );
+        }
+      }
+    }
+  }
+  // Sitewide
+  else if (user_access('administer site configuration')) {
+    $links['features'] = array(
+      'title' => t('Customize features'),
+      'href' => "features",
+    );
+    $links['reorder'] = $reorder;
+  }
+  drupal_alter('eduglu_admin_links', $links, $space);
+  return $links;
 }
 
