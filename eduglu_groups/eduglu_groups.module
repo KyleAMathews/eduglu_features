@@ -137,63 +137,11 @@ function eduglu_groups_menu_alter(&$items) {
  * Impmentation of hook_preprocess_page().
  */
 function eduglu_groups_preprocess_page(&$vars, $hook) {
-  // Create my groups div.
-  $vars['my_groups'] = eduglu_groups_prepare_my_groups();
-  
     // Add our space feed link if in a space.
   if ($space = spaces_get_space()) {
     $feed_url = url('rss.xml', array('absolute' => true));
     $vars['feed_icons'] = " " . theme('feed_icon', url("rss.xml"), $space->group->title . " Group RSS Feed");
   }
-}
-
-function eduglu_groups_prepare_my_groups() {
-  global $user;
-  
-  $results = db_query("SELECT p.value, n.title
-                      FROM {og_uid} o
-                      JOIN {purl} p
-                      JOIN {node} n
-                      WHERE o.nid = p.id
-                      AND o.nid = n.nid
-                      AND p.provider = 'spaces_og'
-                      AND o.uid = %d
-                      AND o.is_active = 1", $user->uid);
-  
-  $groups = array();
-  while ($data = db_fetch_array($results)) {
-    $groups[$data['value']] = $data['title'];
-  }
-  
-  // Sort the groups.
-  natcasesort($groups);
-  $num_columns = 2;
-  if (count($groups > 45)) {
-    $num_columns = 3;
-  }
-  $length_column = count($groups) / 3 + 1; // Add one so no orphaned column at end.
-  $chunked_groups = array_chunk($groups, $length_column, true);
-  
-  $output .= "<div id='my-groups'>";
-  $output .= "<h2 class='grid-3'>My Groups</h2><p class='grid-5'>"
-  . l("Browse all groups", "og/all", array('attributes' => array('class' => 'grid-2')))
-  . l("Manage my group memberships", "og_mailinglist/subscriptions", array('attributes' => array('class' => 'grid-2')))
-  . "<hr />";
-  $output .= "<div class='clear-block'>";
-  foreach ($chunked_groups as $groups) {
-    $output .= "<div class='grid-4'>";
-    foreach ($groups as $value => $group_title) {
-      $output .= l($group_title, $value, array('purl' => array('disabled' => TRUE)));
-    }
-    $output .= "</div>";
-  }
-  $output .= "</div>";
-  
-  $output .= "<strong>" .
-    l("Create new group", "node/add/group", array('attributes' => array('class' => 'grid-2 create-new-group')))
-    . "</strong>";
-  $output .= "</div>";  
-  return $output;  
 }
 
 function eduglu_groups_theme_registry_alter(&$theme_registry) {
