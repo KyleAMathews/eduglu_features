@@ -6,9 +6,9 @@
 function eduglu_core_filter_default_formats() {
   $formats = array();
 
-  // Exported format: Markdown
-  $formats['Markdown'] = array(
-    'name' => 'Markdown',
+  // Exported format: Partial HTML
+  $formats['Partial HTML'] = array(
+    'name' => 'Partial HTML',
     'roles' => array(
       '0' => 'admin',
       '1' => 'anonymous user',
@@ -27,31 +27,26 @@ function eduglu_core_filter_default_formats() {
         'weight' => '-9',
       ),
       '2' => array(
-        'module' => 'markdown',
-        'delta' => '0',
-        'weight' => '-8',
-      ),
-      '3' => array(
         'module' => 'filter',
         'delta' => '1',
         'weight' => '-7',
       ),
-      '4' => array(
+      '3' => array(
         'module' => 'filter',
         'delta' => '0',
         'weight' => '-6',
       ),
-      '5' => array(
+      '4' => array(
         'module' => 'filter',
         'delta' => '2',
         'weight' => '-5',
       ),
-      '6' => array(
+      '5' => array(
         'module' => 'filter',
         'delta' => '3',
         'weight' => '-4',
       ),
-      '7' => array(
+      '6' => array(
         'module' => 'typogrify',
         'delta' => '0',
         'weight' => '-3',
@@ -77,26 +72,21 @@ function eduglu_core_filter_default_formats() {
         'weight' => '-9',
       ),
       '2' => array(
-        'module' => 'markdown',
-        'delta' => '0',
-        'weight' => '-8',
-      ),
-      '3' => array(
         'module' => 'filter',
         'delta' => '2',
         'weight' => '-7',
       ),
-      '4' => array(
+      '3' => array(
         'module' => 'filter',
         'delta' => '1',
         'weight' => '-6',
       ),
-      '5' => array(
+      '4' => array(
         'module' => 'filter',
         'delta' => '3',
         'weight' => '-5',
       ),
-      '6' => array(
+      '5' => array(
         'module' => 'typogrify',
         'delta' => '0',
         'weight' => '-4',

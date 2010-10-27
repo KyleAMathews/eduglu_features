@@ -159,8 +159,7 @@ function eduglu_core_admin_links($space = NULL) {
           'title' => t('Manage members'),
           'href' => $item['href'],
         );
-      }  // TODO check that the notebook feature is enabled before displaying this. Add dropdown to mixpanel js. Commit stuffa
-         // Check that there's books in this group and that the book feature is enabled.
+      }
          $val = db_result(db_query("SELECT bid
                                  FROM {book} b
                                  JOIN {og_ancestry} o

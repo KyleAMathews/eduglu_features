@@ -9,7 +9,7 @@ function eduglu_core_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'allowed_html_3';
-  $strongarm->value = '<a> <em> <strong> <small> <sup> <sub> <cite> <blockquote> <code> <ul> <ol> <li> <dl> <dt> <dd> <h1> <h2> <h3> <h4> <img> <br> <br/> <p> <div> <span> <b> <i> <font> <color><embed><object><python><java><css><php><html> <strike><table><caption><thead><tbody><tr><td><pre><iframe><p><fieldset><legend>';
+  $strongarm->value = '<a><em><strong><small><sup><sub><cite><blockquote><code><ul><ol><li><dl><dt><dd><h1><h2><h3><h4><img><br><br /><p><div><span><b><i><font><color><embed><object><python><java><css><php><html> <strike><table><caption><thead><tbody><tr><td><pre><iframe><p><fieldset><legend>';
 
   $export['allowed_html_3'] = $strongarm;
   $strongarm = new stdClass;
