@@ -24,7 +24,7 @@ function eduglu_about_menu() {
     'menu_name' => 'features',
     'file' => 'eduglu_about_page.inc',
     'weight' => -1000,
-    'type' => MENU_CALLBACK,
+    'type' => MENU_NORMAL_ITEM,
   );
   $items['about/group'] = array(
     'title' => "About Group",
