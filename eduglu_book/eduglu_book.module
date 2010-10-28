@@ -1,0 +1,292 @@
+<?php
+
+include_once('eduglu_book.features.inc');
+
+/**
+ * Implementation of hook_help().
+ 
+function eduglu_book_help($path, $arg) {
+  if (($path == 'help#eduglu_book') || context_isset('context', 'spaces-feature-book')) {
+    switch ($path) {
+      case 'node/add/book':
+      case 'node/%/edit':
+        $help = '';
+        $help .= '<h3>'. t('Materials') .'</h3>';
+        $help .= '<p>'. t('Tips for adding & editing book pages:') .'</p>';
+        $help .= '<ul>';
+        $help .= '<li>'. t('Create a new book or choose an existing one for your page.') .'</li>';
+        $help .= '<li>'. t('Select a position for your page in the book\'s hierarchy and <strong>weight</strong> your page higher or lower if you would like to move it before or after other pages around it.') .'</li>';
+        $help .= '<li>'. t('Consider adding a <strong>log message</strong> when editing existing pages so others can get a quick summary of changes you have made.') .'</li>';
+        $help .= '</ul>';
+        return $help;
+
+      case 'help#eduglu_book':
+      default:
+        $help = '';
+        $help .= '<h3>'. t('Materials') .'</h3>';
+        $help .= '<p>'. t('The materials section provides a way for you to store and share information with your group members. With the book feature you can:') .'</p>';
+        $help .= '<ul>';
+        $help .= '<li>'. t('!add_book_pages and organize them hierarchically into different books.', array('!add_book_pages' => l(t('Add book pages'), 'node/add/book'))) .'</li>';
+        $help .= '<li>'. t('Attach files to pages to share them with others.') .'</li>';
+        $help .= '<li>'. t('Track changes that others have made and revert changes as necessary.') .'</li>';
+        $help .= '<li>'. t('!archive books that are no longer of interest to the group. Archived books can be reactivated later if needed.', array('!archive' => l(t('Archive'), 'materials/archived'))) .'</li>';
+        $help .= '</ul>';
+        return $help;
+    }
+  }
+} 
+*/
+/**
+ * Implementation of hook_menu().
+ */
+function eduglu_book_menu() {
+  $items = array();
+  $items['materials'] = array(
+    'title' => 'Materials',
+    'page callback' => 'eduglu_book_overview',
+    'page arguments' => array(),
+    'access callback' => 'spaces_access_feature',
+    'access arguments' => array('view', 'eduglu_book'),
+    'type' => MENU_NORMAL_ITEM,
+    'menu_name' => 'features',
+    'file' => 'eduglu_book.pages.inc',
+  );
+  $items['materials/overview'] = array(
+    'title' => 'Overview',
+    'page callback' => 'eduglu_book_overview',
+    'page arguments' => array(),
+    'access callback' => 'spaces_access_feature',
+    'access arguments' => array('view', 'eduglu_book'),
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => -10,
+    'file' => 'eduglu_book.pages.inc',
+  );
+  $items['features/eduglu_book'] = array(
+    'title' => 'Settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('eduglu_book_settings'),
+    'access callback' => 'spaces_access_admin',
+    'access arguments' => array(),
+    'type' => MENU_CALLBACK,
+    'file' => 'eduglu_book.pages.inc',
+  );
+  return $items;
+}
+
+/**
+ * Implementation of hook_block().
+ */
+function eduglu_book_block($op = 'list', $delta = 0) {
+  switch ($op) {
+    case 'list':
+      if (module_exists('admin')) {
+        $info =array(
+          'book' => array('info' => t('Atrium: Book')),
+          'book_all' => array('info' => t('Atrium: Book (all)')),
+        );
+      }
+      return $info;
+    case 'view':
+      $function = "_atrium_block_{$delta}";
+      if (function_exists($function)) {
+        return call_user_func($function);
+      }
+      break;
+  }
+}
+/**
+ * Feature-aware book block. Show only the current book.
+ */
+function _atrium_block_book() {
+  $node = menu_get_object();
+  if (!empty($node->book['bid'])) {
+    // Only show the block if the user has view access for the top-level node.
+    $title = db_result(db_query(db_rewrite_sql('SELECT n.title FROM {node} n WHERE n.nid = %d'), $node->book['bid']));
+    if ($title) {
+      // Dynamic block
+      if (module_exists('admin')) {
+        $data = array_shift(menu_tree_all_data($node->book['menu_name']));
+        if ($data['below']) {
+          drupal_add_css(drupal_get_path('module', 'admin') .'/includes/admin.menu.css');
+          drupal_add_css(drupal_get_path('module', 'eduglu_book') .'/eduglu_book.css');
+          drupal_add_js(drupal_get_path('module', 'admin') .'/includes/jquery.drilldown.js');
+          drupal_add_js(drupal_get_path('module', 'atrium') .'/atrium.js');
+          drupal_add_js(array('atriumBookPath' => url($_GET['q'])), 'setting');
+          $title = l($data['link']['title'], "node/{$node->book['bid']}", array('attributes' => array('class' => 'depth-0')));
+          return array(
+            'subject' => "<span class='trail'>{$title}</span>",
+            'content' => menu_tree_output(array($data)),
+          );
+        }
+      }
+      // Boring old block
+      else {
+        $data = array_shift(menu_tree_page_data($node->book['menu_name']));
+        if ($data['below']) {
+          $title = l($data['link']['title'], "node/{$node->book['bid']}", array('attributes' => array('class' => 'depth-0')));
+          return array(
+            'subject' => "<span class='trail'>{$title}</span>",
+            'content' => menu_tree_output($data['below']),
+          );
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implementation of hook_nodeapi().
+ */
+function eduglu_book_nodeapi($node, $op) {
+  if ($op == "view") {
+    unset ($node->content['book_navigation']);
+  }
+}
+
+/**
+ * Feature-aware book block. Show all books that belong to the current feature.
+ */
+function _atrium_block_book_all() {
+  if ($space = spaces_get_space()) {
+    // Retrieve node type arguments from active context if necessary.
+    $type = NULL;
+    foreach (context_get('context') as $context) {
+      if (!empty($context->conditions['bookroot']['values'])) {
+        $type = current($context->conditions['bookroot']['values']);
+        break;
+      }
+    }
+
+    // Dynamic block.
+    if (module_exists('admin')) {
+      drupal_add_css(drupal_get_path('module', 'admin') .'/includes/admin.menu.css');
+      drupal_add_css(drupal_get_path('module', 'eduglu_book') .'/eduglu_book.css');
+      drupal_add_js(drupal_get_path('module', 'admin') .'/includes/jquery.drilldown.js');
+      drupal_add_js(drupal_get_path('module', 'eduglu_book') .'/eduglu_book.js');
+      drupal_add_js(array('atriumBookPath' => url($_GET['q'])), 'setting');
+
+      // Build a distinct cache ID per space & node type.
+      $cid = $type ? "eduglu_book:{$space->type}:{$space->id}:$type" : "eduglu_book:{$space->type}:{$space->id}";
+      /*
+      if ($cache = cache_get($cid)) {
+        $block = array(
+          'subject' => "<span class='trail'>". t('Materials') ."</span>",
+          'content' => $cache->data,
+        );
+      }*/
+      /*else */if ($view = views_get_view('eduglu_book_current')) {
+        // Since the tree is *complete* and will be cached, we clear out
+        // $_GET['q'] for the duration of the build to prevent stray active
+        // classes from being added to links in the tree.
+        $q = $_GET['q'];
+        $_GET['q'] = '';
+
+        // Generate book tree per book node in current space.
+        $data = array();
+        $view->execute_display('default', array($type));
+        if (is_array($view->result) && count($view->result)) {
+          foreach($view->result as $row) {
+            $data = array_merge($data, menu_tree_all_data(book_menu_name($row->nid)));
+          }
+          $data = array(array('link' => array('title' => 'Materials', 'href' => 'materials'), 'below' => $data));
+          if ($output = menu_tree_output($data)) {
+            cache_set($cid, $output);
+            $block = array(
+              'subject' => "<span class='trail'>". t('Materials') ."</span>",
+              'content' => $output,
+            );
+          }
+        }
+
+        // Put path back.
+        $_GET['q'] = $q;
+      }
+    }
+    // Boring old block.
+    else if ($view = views_get_view('eduglu_book_current')) {
+      $data = array();
+      $view->execute_display('default', array($type));
+      if (is_array($view->result) && count($view->result)) {
+        foreach($view->result as $row) {
+          $data = array_merge($data, menu_tree_page_data(book_menu_name($row->nid)));
+        }
+      }
+      if ($output = menu_tree_output($data)) {
+        $title = l(t('Materials'), 'materials', array('attributes' => array('class' => 'depth-0')));
+        $block = array(
+          'subject' => "<span class='trail'>{$title}</span>",
+          'content' => $output,
+        );
+      }
+    }
+  }
+  return isset($block) ? $block : NULL;
+}
+
+/**
+ * Implmentation of hook_form_alter().
+ */
+function eduglu_book_form_alter(&$form, $form_state) {
+    // Book mods
+  if ($form['#id'] == 'node-form' && book_type_is_allowed($form['#node']->type)) {
+    $node = $form['#node'];
+
+    if (!empty($form['book'])) {
+      // Fieldset mods
+      $form['book']['#weight'] = !empty($form['body_field']['#weight']) ? $form['body_field']['#weight'] : 0;
+      $form['book']['#collapsible'] =
+      $form['book']['#collapsed'] = FALSE;
+
+      if (!empty($form['book']['bid']['#options'])) {
+        // Remove "none" option -- do not allow book pages to be orphaned
+        unset($form['book']['bid']['#options'][0]);
+        // Filter book options by current space
+        if ($view = views_get_view('eduglu_book_current')) {
+          $view->set_display();
+          $view->set_items_per_page(0);
+          $view->execute();
+
+          // Collect books in this space into an array
+          $books = array();
+          $books[$node->nid] = 1;
+          if (is_array($view->result) && count($view->result)) {
+            foreach($view->result as $row) {
+              $books[$row->nid] = 1;
+            }
+          }
+
+          // Use collected array to filter options
+          foreach ($form['book']['bid']['#options'] as $k => $v) {
+            if (is_numeric($k) && !isset($books[$k])) {
+              unset($form['book']['bid']['#options'][$k]);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Remove the book form from other nodes, even if the user has admin permissions.
+  else if ($form['#id'] == 'node-form' && !book_type_is_allowed($form['#node']->type)) {
+    _eduglu_book_make_hidden($form['book']);
+  }
+}
+
+/**
+ * Set all elements in a given form to 'value'. Using value preserves the tree and prevents
+ * The element from being rendered.
+ */
+function _eduglu_book_make_hidden(&$form) {
+  if (isset($form['#type'])) {
+    $form['#type'] = 'value';
+    $form['#required'] = FALSE;
+  }
+  if (is_array($form)) {
+    foreach ($form as $key => $value) {
+      if (is_array($value) && strpos($key, '#') !== 0) {
+        _eduglu_core_make_hidden($form[$key]);
+      }
+    }
+  }
+}
+
