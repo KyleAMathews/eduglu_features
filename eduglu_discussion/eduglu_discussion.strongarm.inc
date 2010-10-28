@@ -118,5 +118,12 @@ function eduglu_discussion_strongarm() {
   $strongarm->value = 1;
 
   $export['show_preview_changes_story'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'upload_story';
+  $strongarm->value = '1';
+
+  $export['upload_story'] = $strongarm;
   return $export;
 }

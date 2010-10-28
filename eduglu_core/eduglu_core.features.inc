@@ -30,6 +30,51 @@ function eduglu_core_imagecache_default_presets() {
         ),
       ),
     ),
+    'Large' => array(
+      'presetname' => 'Large',
+      'actions' => array(
+        '0' => array(
+          'weight' => '0',
+          'module' => 'imagecache',
+          'action' => 'imagecache_scale',
+          'data' => array(
+            'width' => '700',
+            'height' => '',
+            'upscale' => 1,
+          ),
+        ),
+      ),
+    ),
+    'Medium' => array(
+      'presetname' => 'Medium',
+      'actions' => array(
+        '0' => array(
+          'weight' => '0',
+          'module' => 'imagecache',
+          'action' => 'imagecache_scale',
+          'data' => array(
+            'width' => '350',
+            'height' => '',
+            'upscale' => 1,
+          ),
+        ),
+      ),
+    ),
+    'Small' => array(
+      'presetname' => 'Small',
+      'actions' => array(
+        '0' => array(
+          'weight' => '0',
+          'module' => 'imagecache',
+          'action' => 'imagecache_scale',
+          'data' => array(
+            'width' => '175',
+            'height' => '',
+            'upscale' => 1,
+          ),
+        ),
+      ),
+    ),
   );
   return $items;
 }
