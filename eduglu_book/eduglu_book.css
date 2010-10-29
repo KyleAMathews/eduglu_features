@@ -1,4 +1,7 @@
-
+.block-eduglu_book h2 {
+  font-size: 1em;
+  margin: 0;
+}
 #block-eduglu-book div.block-content,
 #block-eduglu-book_all div.block-content,
 div.page-region div.drilldown div.block-content {
