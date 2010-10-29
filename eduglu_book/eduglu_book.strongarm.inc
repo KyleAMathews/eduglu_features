@@ -8,6 +8,13 @@ function eduglu_book_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'comment_anonymous_book';
+  $strongarm->value = 0;
+
+  $export['comment_anonymous_book'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'comment_book';
   $strongarm->value = '2';
 
@@ -75,6 +82,25 @@ function eduglu_book_strongarm() {
   $strongarm->value = '4';
 
   $export['comment_upload_images_book'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'content_extra_weights_book';
+  $strongarm->value = array(
+    'title' => '-5',
+    'body_field' => '-2',
+    'revision_information' => '2',
+    'author' => '3',
+    'options' => '4',
+    'comment_settings' => '6',
+    'menu' => '-4',
+    'book' => '-1',
+    'path' => '5',
+    'attachments' => '1',
+    'og_nodeapi' => '-3',
+  );
+
+  $export['content_extra_weights_book'] = $strongarm;
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
