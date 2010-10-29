@@ -1,12 +1,12 @@
-Drupal.behaviors.atrium = function(context) {
-  // Add drill-down functionality to atrium menu blocks.
+Drupal.behaviors.eduglu = function(context) {
+  // Add drill-down functionality to eduglu menu blocks.
   if (jQuery().drilldown) {
-    $('div.region div.block-eduglu_book:has(ul.menu):not(.atrium-processed)')
-      .addClass('atrium-processed')
+    $('div.region div.block-eduglu_book:has(ul.menu):not(.eduglu-processed)')
+      .addClass('eduglu-processed')
       .each(function() {
         var menu = $(this);
         var trail = '#' + $(this).attr('id') + ' span.trail';
-        $(this).drilldown('init', {'activePath': Drupal.settings.atriumBookPath, 'trail': trail});
+        $(this).drilldown('init', {'activePath': Drupal.settings.edugluBookPath, 'trail': trail});
     });
   }
 }

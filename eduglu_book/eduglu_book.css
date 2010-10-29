@@ -1,6 +1,6 @@
 
-#block-atrium-book div.block-content,
-#block-atrium-book_all div.block-content,
+#block-eduglu-book div.block-content,
+#block-eduglu-book_all div.block-content,
 div.page-region div.drilldown div.block-content {
   -moz-border-radius:0px;
   -webkit-border-radius:0px;
@@ -139,7 +139,7 @@ div.block div.views-exposed-form select { width:90%; }
 .block-eduglu_book ul {
   padding: 0;
 }
-#sidebar-right .atrium-processed {
+#sidebar-right .eduglu-processed {
   display: block;
 }
 .block-eduglu_book {

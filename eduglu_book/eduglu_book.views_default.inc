@@ -9,8 +9,8 @@ function eduglu_book_views_default_views() {
   // Exported view: eduglu_book
   $view = new view;
   $view->name = 'eduglu_book';
-  $view->description = 'Atrium > Book';
-  $view->tag = 'atrium';
+  $view->description = 'Eduglu > Book';
+  $view->tag = 'eduglu';
   $view->view_php = '';
   $view->base_table = 'node';
   $view->is_cacheable = FALSE;
@@ -187,18 +187,18 @@ function eduglu_book_views_default_views() {
     'order' => 'asc',
     'columns' => array(
       'feature' => 'feature',
-      'atrium_activity_timestamp' => 'atrium_activity_timestamp',
-      'atrium_activity' => 'atrium_activity',
-      'log' => 'atrium_activity',
+      'eduglu_activity_timestamp' => 'eduglu_activity_timestamp',
+      'eduglu_activity' => 'eduglu_activity',
+      'log' => 'eduglu_activity',
     ),
     'info' => array(
       'feature' => array(
         'separator' => '',
       ),
-      'atrium_activity_timestamp' => array(
+      'eduglu_activity_timestamp' => array(
         'separator' => '',
       ),
-      'atrium_activity' => array(
+      'eduglu_activity' => array(
         'separator' => '',
       ),
       'log' => array(
@@ -229,8 +229,8 @@ function eduglu_book_views_default_views() {
   // Exported view: eduglu_book_current
   $view = new view;
   $view->name = 'eduglu_book_current';
-  $view->description = 'Atrium: book: helper view to look up root book pages';
-  $view->tag = 'atrium';
+  $view->description = 'Eduglu: book: helper view to look up root book pages';
+  $view->tag = 'eduglu';
   $view->view_php = '';
   $view->base_table = 'node';
   $view->is_cacheable = FALSE;
