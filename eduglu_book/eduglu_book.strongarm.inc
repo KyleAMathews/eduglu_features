@@ -8,20 +8,6 @@ function eduglu_book_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'eduglu_archivable_book';
-  $strongarm->value = TRUE;
-
-  $export['eduglu_archivable_book'] = $strongarm;
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'eduglu_update_type_book';
-  $strongarm->value = 1;
-
-  $export['eduglu_update_type_book'] = $strongarm;
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'comment_book';
   $strongarm->value = '2';
 
@@ -89,6 +75,20 @@ function eduglu_book_strongarm() {
   $strongarm->value = '4';
 
   $export['comment_upload_images_book'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'eduglu_archivable_book';
+  $strongarm->value = TRUE;
+
+  $export['eduglu_archivable_book'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'eduglu_update_type_book';
+  $strongarm->value = 1;
+
+  $export['eduglu_update_type_book'] = $strongarm;
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;

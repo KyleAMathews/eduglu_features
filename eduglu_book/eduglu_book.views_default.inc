@@ -60,7 +60,7 @@ function eduglu_book_views_default_views() {
       'relationship' => 'none',
     ),
     'log' => array(
-      'label' => '',
+      'label' => 'Edit log',
       'alter' => array(
         'alter_text' => 1,
         'text' => '<div class=\'description\'>[log]</div>',
@@ -70,14 +70,18 @@ function eduglu_book_views_default_views() {
         'alt' => '',
         'prefix' => '',
         'suffix' => '',
+        'target' => '',
         'help' => '',
         'trim' => 0,
         'max_length' => '',
         'word_boundary' => 1,
         'ellipsis' => 1,
-        'strip_tags' => 0,
         'html' => 0,
+        'strip_tags' => 0,
       ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
       'exclude' => 0,
       'id' => 'log',
       'table' => 'node_revisions',
@@ -116,6 +120,19 @@ function eduglu_book_views_default_views() {
       'id' => 'timestamp',
       'table' => 'node_revisions',
       'field' => 'timestamp',
+      'relationship' => 'none',
+    ),
+  ));
+  $handler->override_option('sorts', array(
+    'last_updated' => array(
+      'order' => 'DESC',
+      'granularity' => 'second',
+      'id' => 'last_updated',
+      'table' => 'node_comment_statistics',
+      'field' => 'last_updated',
+      'override' => array(
+        'button' => 'Override',
+      ),
       'relationship' => 'none',
     ),
   ));
