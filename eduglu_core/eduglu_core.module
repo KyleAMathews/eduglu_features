@@ -166,7 +166,7 @@ function eduglu_core_admin_links($space = NULL) {
                                  ON b.bid = o.nid
                                  WHERE o.group_nid = %d
                                  LIMIT 1", $space->id));
-      if (!empty($val) && array_key_exists('atrium_book', $space->controllers->variable->values['space']['spaces_features'])) {
+      if (!empty($val) && !empty($space) && array_key_exists('atrium_book', $space->controllers->variable->values['space']['spaces_features'])) {
       $item = menu_get_item("node/{$space->id}/outline_designer");
         if ($item && $item['access']) {
           $links['outline'] = array(
