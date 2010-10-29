@@ -191,7 +191,7 @@ function eduglu_book_views_default_views() {
   ));
   $handler->override_option('title', 'Latest changes');
   $handler->override_option('header', '<h3>Latest changes</h3>');
-  $handler->override_option('header_format', '1');
+  $handler->override_option('header_format', '3');
   $handler->override_option('header_empty', 1);
   $handler->override_option('empty', 'No recent updates found.');
   $handler->override_option('items_per_page', 25);
