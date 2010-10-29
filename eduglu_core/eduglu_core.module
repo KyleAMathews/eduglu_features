@@ -136,7 +136,7 @@ function eduglu_core_admin_links($space = NULL) {
   $space = !isset($space) ? spaces_get_space() : $space;
 
   // Within a space
-  if ($space) {
+  if (!empty($space)) {
     if ($space->type == 'og' && spaces_access_admin()) {
       $item = menu_get_item("node/{$space->id}/edit");
       if ($item && $item['access']) {
@@ -166,7 +166,7 @@ function eduglu_core_admin_links($space = NULL) {
                                  ON b.bid = o.nid
                                  WHERE o.group_nid = %d
                                  LIMIT 1", $space->id));
-      if (!empty($val) && !empty($space) && array_key_exists('atrium_book', $space->controllers->variable->values['space']['spaces_features'])) {
+      if (!empty($val) && array_key_exists('atrium_book', $space->controllers->variable->values['space']['spaces_features'])) {
       $item = menu_get_item("node/{$space->id}/outline_designer");
         if ($item && $item['access']) {
           $links['outline'] = array(
