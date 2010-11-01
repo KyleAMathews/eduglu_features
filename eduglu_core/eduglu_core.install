@@ -127,3 +127,10 @@ function eduglu_core_update_6004() {
     db_query("INSERT INTO {wysiwyg} (format, editor, settings) VALUES (%d, '%s', '%s')", $editor['format'], $editor['editor'], $editor['settings']);
   }
 }
+
+/**
+ * Enable the top_bar and some other modules.
+ */
+function eduglu_core_update_6005() {
+  drupal_install_modules(array('top_bar', 'transliteration', 'eduglu_book', 'insert', 'outline_designer_og'));
+}
