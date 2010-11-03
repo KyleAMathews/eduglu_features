@@ -134,3 +134,30 @@ function eduglu_core_update_6004() {
 function eduglu_core_update_6005() {
   drupal_install_modules(array('top_bar', 'transliteration', 'eduglu_book', 'insert', 'outline_designer_og'));
 }
+
+/**
+ * Delete the "my groups" link and change "dashboard" to "home".
+ */
+function eduglu_core_update_6006() {
+  // Delete the "my groups" link as it's now replaced by new dropdown.
+  $my_groups_mlid = db_result(db_query('SELECT mlid
+                                         FROM {menu_links}
+                                         WHERE module = "eduglu_core"
+                                         AND router_path = "og/my"'));
+  if (!empty($my_groups_mlid)) {
+    menu_link_delete($my_groups_mlid);
+  }
+
+
+  // Modify the "dashboard" link to read "home"
+  $dashboard_mlid = db_result(db_query('SELECT mlid
+                                         FROM {menu_links}
+                                         WHERE module = "eduglu_core"
+                                         AND router_path = "dashboard"'));
+
+  if (!empty($dashboard_mlid)) {
+    $item = menu_link_load($dashboard_mlid);
+    $item['link_title'] = t("home");
+    menu_link_save($item);
+  }
+}
