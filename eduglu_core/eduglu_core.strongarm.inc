@@ -128,6 +128,18 @@ function eduglu_core_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'spaces_features';
+  $strongarm->value = array(
+    'eduglu_blog' => '0',
+    'eduglu_groups' => '1',
+    'eduglu_welcome' => '1',
+    'spaces_dashboard' => '1',
+  );
+
+  $export['spaces_features'] = $strongarm;
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'typogrify_is_amp_on_3';
   $strongarm->value = 1;
 
