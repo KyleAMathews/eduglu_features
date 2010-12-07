@@ -6,10 +6,10 @@
 function eduglu_discussion_views_default_views() {
   $views = array();
 
-  // Exported view: og_ghp_ron_spaces
+  // Exported view: discussions
   $view = new view;
-  $view->name = 'og_ghp_ron_spaces';
-  $view->description = 'Spaces OG: Group home page - River of news. Default';
+  $view->name = 'discussions';
+  $view->description = 'Displays a list of recent discussions';
   $view->tag = 'og';
   $view->view_php = '';
   $view->base_table = 'node';

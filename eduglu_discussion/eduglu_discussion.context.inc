@@ -17,12 +17,12 @@ function eduglu_discussion_context_default_contexts() {
         'story' => 'story',
       ),
       'options' => array(
-        'node_form' => 1,
+        'node_form' => '1',
       ),
     ),
     'views' => array(
       'values' => array(
-        'og_ghp_ron_spaces' => 'og_ghp_ron_spaces',
+        'discussions' => 'discussions',
       ),
     ),
   );

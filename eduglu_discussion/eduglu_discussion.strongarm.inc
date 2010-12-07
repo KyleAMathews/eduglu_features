@@ -75,15 +75,14 @@ function eduglu_discussion_strongarm() {
   $strongarm->value = array(
     'title' => '-5',
     'body_field' => '-1',
-    'revision_information' => '3',
-    'author' => '6',
-    'options' => '7',
-    'comment_settings' => '4',
+    'revision_information' => '4',
+    'author' => '7',
+    'options' => '8',
+    'comment_settings' => '5',
     'menu' => '-3',
     'taxonomy' => '-4',
-    'book' => '2',
-    'path' => '5',
-    'attachments' => '1',
+    'book' => '3',
+    'path' => '6',
     'og_nodeapi' => '-2',
   );
 
