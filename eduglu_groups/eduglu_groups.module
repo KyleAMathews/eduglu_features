@@ -127,9 +127,42 @@ function eduglu_groups_manage_members($group_node) {
  * Implementation of hook_menu_alter().
  */
 function eduglu_groups_menu_alter(&$items) {
+  // Views: disable views that we are 'overriding'
+  $views_defaults = variable_get('views_defaults', array());
+  $disabled = array(
+    'og',
+    'og_my',
+    'og_files',
+    //'og_ghp_ron',
+    'og_mytracker',
+    'og_search',
+    'og_tracker',
+    'og_recent_type_term',
+    'og_unread',
+  );
+  $set = FALSE;
+  foreach ($disabled as $view_name) {
+    if (empty($views_defaults[$view_name])) {
+      $set = TRUE;
+      $views_defaults[$view_name] = TRUE;
+    }
+  }
+  if ($set) {
+    variable_set('views_defaults', $views_defaults);
+  }
   if (isset($items['user/%user_category/edit/groups'])) {
     unset($items['user/%user_category/edit/groups']);
     unset($items['user/%user/edit/groups']);
+  }
+
+  // Kill undesirable menu items
+  $yank = array(
+    'og/activity',
+  );
+  foreach ($yank as $path) {
+    if (!empty($items[$path])) {
+      unset($items[$path]);
+    }
   }
 }
 
@@ -144,6 +177,9 @@ function eduglu_groups_preprocess_page(&$vars, $hook) {
   }
 }
 
+/**
+ * Implementation of hook_theme_registry_alter().
+ */
 function eduglu_groups_theme_registry_alter(&$theme_registry) {
   $theme_registry['views_view__views_view_rss']['preprocess functions'][] = 'eduglu_groups_preprocess_views_view_rss';
 }
