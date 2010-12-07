@@ -224,7 +224,7 @@ function eduglu_members_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'realname_theme';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
 
   $export['realname_theme'] = $strongarm;
   $strongarm = new stdClass;
@@ -238,7 +238,7 @@ function eduglu_members_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'realname_user_disable';
-  $strongarm->value = 0;
+  $strongarm->value = 1;
 
   $export['realname_user_disable'] = $strongarm;
   $strongarm = new stdClass;
@@ -283,16 +283,6 @@ function eduglu_members_strongarm() {
   $strongarm->value = 0;
 
   $export['show_preview_changes_uprofile'] = $strongarm;
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'spaces_features';
-  $strongarm->value = array(
-    'eduglu_welcome' => '1',
-    'spaces_dashboard' => '1',
-  );
-
-  $export['spaces_features'] = $strongarm;
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
