@@ -133,7 +133,7 @@ function eduglu_groups_menu_alter(&$items) {
     'og',
     'og_my',
     'og_files',
-    //'og_ghp_ron',
+    'og_ghp_ron',
     'og_mytracker',
     'og_search',
     'og_tracker',

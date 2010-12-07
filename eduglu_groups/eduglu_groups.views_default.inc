@@ -434,7 +434,7 @@ function eduglu_groups_views_default_views() {
   $handler->override_option('cache', array(
     'type' => 'none',
   ));
-  $handler->override_option('title', 'My groups');
+  $handler->override_option('title', 'Your groups');
   $handler->override_option('empty', 'No groups found.');
   $handler->override_option('use_ajax', TRUE);
   $handler->override_option('items_per_page', 20);
@@ -459,7 +459,7 @@ function eduglu_groups_views_default_views() {
   $handler->override_option('items_per_page', 15);
   $handler->override_option('block_description', 'My groups');
   $handler->override_option('block_caching', -1);
-  $handler = $view->new_display('page', 'Page: My groups', 'page_1');
+  $handler = $view->new_display('page', 'Page: Your groups', 'page_1');
   $handler->override_option('fields', array(
     'private' => array(
       'label' => '',
@@ -624,7 +624,7 @@ function eduglu_groups_views_default_views() {
     'default' => '-1',
   ));
   $handler->override_option('row_options', array());
-  $handler->override_option('path', 'og/my');
+  $handler->override_option('path', 'og/your');
   $handler->override_option('menu', array(
     'type' => 'tab',
     'title' => 'My groups',
