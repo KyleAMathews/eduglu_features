@@ -124,6 +124,29 @@ function eduglu_groups_manage_members($group_node) {
 }
 
 /**
+ * Implementation of hook_nodeapi().
+ **/
+function eduglu_groups_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
+  // Check if we're looking at a group node (which we don't want to do).
+  // If we are, find the Space frontpage path and redirect there.
+  if (og_is_group_type($node->type) && $op == "load" && arg(0) == 'node' && is_numeric(arg(1))) {
+    if ($page_nid = $node->nid) {
+      // Grab the space homepage.
+      $purl = db_result(db_query("SELECT value
+                                   FROM {purl}
+                                   WHERE provider = 'spaces_og'
+                                   AND id = %d", $node->nid));
+      $path = unserialize(db_result(db_query("SELECT value
+                                               FROM {spaces_overrides}
+                                               WHERE type = 'og'
+                                               AND id = %d
+                                               AND object_id = 'site_frontpage_path'", $node->nid)));
+      drupal_goto($purl . "/" . $path);
+    }
+  }
+}
+
+/**
  * Implementation of hook_menu_alter().
  */
 function eduglu_groups_menu_alter(&$items) {
