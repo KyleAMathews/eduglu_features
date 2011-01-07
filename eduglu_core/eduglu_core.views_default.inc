@@ -312,10 +312,12 @@ function eduglu_core_views_default_views() {
     'grouping' => '',
     'type' => 'ul',
   ));
+  $handler->override_option('row_plugin', 'node');
   $handler->override_option('row_options', array(
-    'inline' => array(),
-    'separator' => '',
-    'hide_empty' => 0,
+    'relationship' => 'none',
+    'build_mode' => 'teaser',
+    'links' => 0,
+    'comments' => 0,
   ));
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->override_option('path', 'group/unread');
