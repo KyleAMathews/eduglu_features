@@ -18,6 +18,27 @@ function eduglu_core_menu() {
 }
 
 /**
+ * Implemenation of hook_nodeapi().
+ **/
+function eduglu_core_nodeapi(&$node, $op) {
+  global $user;
+  switch ($op) {
+    case 'load':
+      if ($user->uid != 0) {
+        // Add variable w/ count of new nodes for user since their last visit.
+        $node->new_comment_count = db_result(db_query("SELECT count(*)
+                                                        FROM {comments} c
+                                                        INNER JOIN
+                                                        {history} h
+                                                        ON c.nid = h.nid
+                                                        WHERE h.uid = %d
+                                                        AND c.nid = %d
+                                                        AND c.timestamp > h.timestamp;", $user->uid, $node->nid));
+      }
+      break;
+  }
+}
+/**
  * Redirect authenticated users to their dashboard away from the welcome page.
  */
 function eduglu_core_redirect() {
