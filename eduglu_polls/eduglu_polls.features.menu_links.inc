@@ -21,9 +21,8 @@ function eduglu_polls_menu_default_menu_links() {
     'weight' => '0',
   );
   // Translatables
-  array(
-    t('Polls'),
-  );
+  // Included for use with string extractors like potx.
+  t('Polls');
 
 
   return $menu_links;

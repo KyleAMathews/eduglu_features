@@ -100,8 +100,10 @@ function eduglu_polls_views_default_views() {
   $handler->override_option('distinct', 0);
   $handler->override_option('row_plugin', 'node');
   $handler->override_option('row_options', array(
-    'teaser' => 1,
-    'links' => 1,
+    'relationship' => 'none',
+    'build_mode' => 'full',
+    'links' => 0,
+    'comments' => 0,
   ));
   $handler = $view->new_display('feed', 'Feed', 'feed');
   $handler->override_option('style_plugin', 'rss');

@@ -36,6 +36,11 @@ function eduglu_polls_context_default_contexts() {
   );
   $context->condition_mode = 0;
 
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('context for space polls');
+  t('eduglu');
+
   $export['spaces-feature-poll'] = $context;
   return $export;
 }
