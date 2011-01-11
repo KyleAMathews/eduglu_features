@@ -69,7 +69,7 @@ function eduglu_core_menu_alter(&$items) {
 }
 
 function eduglu_core_form_alter(&$form, $form_state, $form_id) {
-//dd($form_id);
+//dpm($form_id);
 //dpm($form);
 //dpm($form_state);
   if ($form_id == 'user_login_block') {
@@ -103,6 +103,11 @@ function eduglu_core_form_alter(&$form, $form_state, $form_id) {
         $form[$key]['#access'] = FALSE;
       }
     }
+  }
+  if ($form_id == "comment_form") {
+    unset($form['author']);
+    unset($form['_author']);
+    $form['comment_filter']['comment']['#title'] = "";
   }
 }
 function eduglu_core_login_redirect($form, &$form_state) {
