@@ -17,7 +17,7 @@ function eduglu_polls_context_default_contexts() {
         'poll' => 'poll',
       ),
       'options' => array(
-        'node_form' => 1,
+        'node_form' => '1',
       ),
     ),
     'path' => array(
@@ -32,6 +32,16 @@ function eduglu_polls_context_default_contexts() {
     ),
   );
   $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views-recent_poll_comments-block' => array(
+          'module' => 'views',
+          'delta' => 'recent_poll_comments-block',
+          'region' => 'right',
+          'weight' => 0,
+        ),
+      ),
+    ),
     'menu' => 'poll',
   );
   $context->condition_mode = 0;
