@@ -217,3 +217,12 @@ function eduglu_core_admin_links($space = NULL) {
   return $links;
 }
 
+/**
+ * Implementation of hook_wysiwyg_editor_settings_alter().
+ */
+function eduglu_core_wysiwyg_editor_settings_alter(&$settings, $context) {
+  // Restrict height of text area to 160 on comment textareas but not on node textareas.
+  if ($context['profile']->editor == 'ckeditor' && arg(1) != "add") {
+    $settings['height'] = 160;
+  }
+}
