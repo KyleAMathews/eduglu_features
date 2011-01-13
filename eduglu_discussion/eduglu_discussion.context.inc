@@ -17,7 +17,7 @@ function eduglu_discussion_context_default_contexts() {
         'story' => 'story',
       ),
       'options' => array(
-        'node_form' => '1',
+        'node_form' => '0',
       ),
     ),
   );
