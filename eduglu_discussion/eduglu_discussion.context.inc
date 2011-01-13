@@ -12,14 +12,6 @@ function eduglu_discussion_context_default_contexts() {
   $context->description = '';
   $context->tag = 'eduglu';
   $context->conditions = array(
-    'node' => array(
-      'values' => array(
-        'story' => 'story',
-      ),
-      'options' => array(
-        'node_form' => '1',
-      ),
-    ),
     'views' => array(
       'values' => array(
         'discussions' => 'discussions',
@@ -27,6 +19,16 @@ function eduglu_discussion_context_default_contexts() {
     ),
   );
   $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views-26367b846de6af2abd97cbb2d76f4362' => array(
+          'module' => 'views',
+          'delta' => '26367b846de6af2abd97cbb2d76f4362',
+          'region' => 'right',
+          'weight' => 0,
+        ),
+      ),
+    ),
     'menu' => 'discussion',
   );
   $context->condition_mode = 0;

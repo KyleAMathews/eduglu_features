@@ -77,8 +77,8 @@ function eduglu_members_imagecache_default_presets() {
           'module' => 'smartcrop',
           'action' => 'smartcrop_scale_and_crop',
           'data' => array(
-            'width' => '100',
-            'height' => '100',
+            'width' => '50',
+            'height' => '50',
             'upscale' => 0,
           ),
         ),
