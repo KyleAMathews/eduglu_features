@@ -38,6 +38,7 @@ function eduglu_core_nodeapi(&$node, $op) {
       break;
   }
 }
+
 /**
  * Redirect authenticated users to their dashboard away from the welcome page.
  */
@@ -107,7 +108,6 @@ function eduglu_core_form_alter(&$form, $form_state, $form_id) {
   
   // We add back (in nicer looking form) the same info in the box.tpl.php file.
   if ($form_id == "comment_form") {
-    unset($form['author']);
     unset($form['_author']);
     $form['comment_filter']['comment']['#title'] = "";
   }
