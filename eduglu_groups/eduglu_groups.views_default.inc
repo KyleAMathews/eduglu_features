@@ -451,13 +451,13 @@ function eduglu_groups_views_default_views() {
     'inline' => array(),
     'separator' => '',
   ));
-  $handler = $view->new_display('block', 'Block: My groups (sidebar)', 'block_2');
+  $handler = $view->new_display('block', 'Block: Your groups (sidebar)', 'block_2');
   $handler->override_option('access', array(
     'type' => 'perm',
     'perm' => 'access content',
   ));
   $handler->override_option('items_per_page', 15);
-  $handler->override_option('block_description', 'My groups');
+  $handler->override_option('block_description', 'Your groups');
   $handler->override_option('block_caching', -1);
   $handler = $view->new_display('page', 'Page: Your groups', 'page_1');
   $handler->override_option('fields', array(
@@ -513,8 +513,8 @@ function eduglu_groups_views_default_views() {
       'table' => 'og',
       'field' => 'description',
     ),
-    'created' => array(
-      'label' => 'Created',
+    'created_1' => array(
+      'label' => 'Member since',
       'alter' => array(
         'alter_text' => 0,
         'text' => '',
@@ -524,19 +524,23 @@ function eduglu_groups_views_default_views() {
         'alt' => '',
         'prefix' => '',
         'suffix' => '',
+        'target' => '',
         'help' => '',
         'trim' => 0,
         'max_length' => '',
         'word_boundary' => 1,
         'ellipsis' => 1,
-        'strip_tags' => 0,
         'html' => 0,
+        'strip_tags' => 0,
       ),
-      'date_format' => 'small',
-      'custom_date_format' => '',
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'date_format' => 'custom',
+      'custom_date_format' => 'j M Y',
       'exclude' => 0,
-      'id' => 'created',
-      'table' => 'node',
+      'id' => 'created_1',
+      'table' => 'og_uid',
       'field' => 'created',
       'override' => array(
         'button' => 'Use default',
@@ -627,7 +631,7 @@ function eduglu_groups_views_default_views() {
   $handler->override_option('path', 'og/your');
   $handler->override_option('menu', array(
     'type' => 'tab',
-    'title' => 'My groups',
+    'title' => 'Your groups',
     'description' => '',
     'weight' => '1',
     'name' => 'navigation',
