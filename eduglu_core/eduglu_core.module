@@ -69,10 +69,12 @@ function eduglu_core_menu_alter(&$items) {
   }
 
   // Delete the default flag.
-  $flag = flag_get_flag('bookmarks');
-  if(is_object($flag)) {
-    $flag->delete();
-    $flag->disable();
+  if (module_exists('flag')) {
+    $flag = flag_get_flag('bookmarks');
+    if(is_object($flag)) {
+      $flag->delete();
+      $flag->disable();
+    }
   }
 }
 
