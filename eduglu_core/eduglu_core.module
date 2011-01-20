@@ -67,6 +67,13 @@ function eduglu_core_menu_alter(&$items) {
       unset($items[$path]);
     }
   }
+
+  // Delete the default flag.
+  $flag = flag_get_flag('bookmarks');
+  if(is_object($flag)) {
+    $flag->delete();
+    $flag->disable();
+  }
 }
 
 function eduglu_core_form_alter(&$form, $form_state, $form_id) {
