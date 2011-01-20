@@ -293,9 +293,17 @@ function _eduglu_block_thread_stats() {
                                                    LIMIT 1", $node->nid)));
   $content .= "<strong>" . t("Thread stats") . "</strong>";
   $content .= "<div class='block-content'>";
-  $content .= t("Lastest activty @date",
+
+  // If less than two days ago, show interval.
+  if ((time() - $node->last_comment_timestamp) < 172800) {
+    $date = format_interval(time() - $node->last_comment_timestamp) . " ago";
+  }
+  else {
+    $date = format_date($node->last_comment_timestamp, 'custom', 'j M Y');
+  }
+  $content .= t("Lastest activity @date",
     array(
-      '@date' => format_date($node->last_comment_timestamp, 'custom', 'j M Y')));
+      '@date' => $date));
   $content .= "<br />";
   $content .= t('Thread started @date by !author.', 
     array(
