@@ -38,7 +38,7 @@ function eduglu_core_imagecache_default_presets() {
           'module' => 'imagecache',
           'action' => 'imagecache_scale',
           'data' => array(
-            'width' => '700',
+            'width' => '580',
             'height' => '',
             'upscale' => 1,
           ),
@@ -53,7 +53,7 @@ function eduglu_core_imagecache_default_presets() {
           'module' => 'imagecache',
           'action' => 'imagecache_scale',
           'data' => array(
-            'width' => '350',
+            'width' => '290',
             'height' => '',
             'upscale' => 1,
           ),
@@ -68,7 +68,7 @@ function eduglu_core_imagecache_default_presets() {
           'module' => 'imagecache',
           'action' => 'imagecache_scale',
           'data' => array(
-            'width' => '175',
+            'width' => '145',
             'height' => '',
             'upscale' => 1,
           ),
