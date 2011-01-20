@@ -50,7 +50,7 @@ function eduglu_members_fieldgroup_default_groups() {
         'label' => NULL,
       ),
     ),
-    'weight' => '5',
+    'weight' => '8',
     'group_type' => 'standard',
     'fields' => array(),
   );
@@ -72,7 +72,7 @@ function eduglu_members_fieldgroup_default_groups() {
         'label' => NULL,
       ),
     ),
-    'weight' => '7',
+    'weight' => '9',
     'group_type' => 'standard',
     'fields' => array(),
   );

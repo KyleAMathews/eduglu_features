@@ -73,14 +73,14 @@ function eduglu_members_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'content_extra_weights_uprofile';
   $strongarm->value = array(
-    'title' => '-5',
-    'revision_information' => '-3',
-    'author' => '-2',
-    'options' => '-1',
-    'comment_settings' => '0',
-    'menu' => '-4',
+    'title' => '2',
+    'revision_information' => '4',
+    'author' => '5',
+    'options' => '6',
+    'comment_settings' => '7',
+    'menu' => '3',
     'book' => '10',
-    'path' => '30',
+    'path' => '11',
   );
 
   $export['content_extra_weights_uprofile'] = $strongarm;
