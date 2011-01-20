@@ -161,3 +161,10 @@ function eduglu_core_update_6006() {
     menu_link_save($item);
   }
 }
+
+/**
+ * Change the admin theme to Seven.
+ **/
+function eduglu_core_update_6007() {
+  variable_set('admin_theme', 'seven');
+}
