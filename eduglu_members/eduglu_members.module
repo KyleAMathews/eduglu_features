@@ -9,6 +9,14 @@ include_once('eduglu_members.features.inc');
 function eduglu_members_init() {
   drupal_add_css(drupal_get_path('module', 'eduglu_members') .
                  "/eduglu_members.css");
+
+  // Disable vertical tabs on the content profile "basic info" group.
+  $vtabs = variable_get('vertical_tabs_forms', array());
+
+  // Enable vertical tabs but be selective of which fieldsets are included.
+  $vtabs['uprofile_node_form'] = array('group_about' => FALSE);
+
+  variable_set('vertical_tabs_forms', $vtabs);
 }
 
 /**
