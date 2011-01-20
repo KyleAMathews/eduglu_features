@@ -174,5 +174,5 @@ function eduglu_core_update_6007() {
  **/
 function eduglu_core_update_6008() {
   $modules = array('flag', 'og_mailinglist_flag', 'tipsy', 'seven');
-  module_enable($modules);
+  drupal_install_modules($modules);
 }
