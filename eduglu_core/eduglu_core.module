@@ -309,34 +309,36 @@ function _eduglu_block_thread_stats() {
  * We only display a percentage of people w/o pictures.
  */
 function _eduglu_core_create_member_picture_grid($members) {
-  foreach ($members as $uid => $picture) {
-    $continue = false;
-    if (isset($picture) && module_exists('imagecache')) {
-      $attr = array('class' => 'eduglu-about-group-member-picture');
-      $preset = '25x25_crop';
+  if (!empty($members)) {
+    foreach ($members as $uid => $picture) {
+      $continue = false;
+      if (isset($picture) && module_exists('imagecache')) {
+        $attr = array('class' => 'eduglu-about-group-member-picture');
+        $preset = '25x25_crop';
 
-      $attr['class'] .= ' picture-'. $preset;
-      if (file_exists($picture)) {
-        $image = theme('imagecache', $preset, $picture);
+        $attr['class'] .= ' picture-'. $preset;
+        if (file_exists($picture)) {
+          $image = theme('imagecache', $preset, $picture);
+        }
+      else {
+        // Only use ~20% of people w/o pictures. Too many default pictures
+        // looks tacky + we want to reinforce it's cool to have a picture.
+        $rand_num = rand(0,1000);
+        if ($rand_num > 200) {
+          $continue = TRUE;
+        }
+
+        $default_image = variable_get('user_picture_default', '');
+        $image = theme("imagecache", $preset, $default_image);
       }
-    else {
-      // Only use ~20% of people w/o pictures. Too many default pictures
-      // looks tacky + we want to reinforce it's cool to have a picture.
-      $rand_num = rand(0,1000);
-      if ($rand_num > 200) {
-        $continue = TRUE;
+      if ($continue) {
+        continue;
       }
 
-      $default_image = variable_get('user_picture_default', '');
-      $image = theme("imagecache", $preset, $default_image);
-    }
-    if ($continue) {
-      continue;
-    }
-
-    $path = 'user/'. $uid;
-    $output .= l($image, $path, array('attributes' => $attr,
+      $path = 'user/'. $uid;
+      $output .= l($image, $path, array('attributes' => $attr,
                                       'html' => true));
+      }
     }
   }
   return $output;
