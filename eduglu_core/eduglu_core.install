@@ -168,3 +168,11 @@ function eduglu_core_update_6006() {
 function eduglu_core_update_6007() {
   variable_set('admin_theme', 'seven');
 }
+
+/**
+ * Enable some new modules. 
+ **/
+function eduglu_core_update_6008() {
+  $modules = array('flag', 'og_mailinglist_flag', 'tipsy', 'seven');
+  module_enable($modules);
+}
