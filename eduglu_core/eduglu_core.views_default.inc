@@ -302,7 +302,7 @@ function eduglu_core_views_default_views() {
   $handler->override_option('cache', array(
     'type' => 'none',
   ));
-  $handler->override_option('title', 'Recent Activity in My Groups');
+  $handler->override_option('title', 'Recent activity in your groups');
   $handler->override_option('empty', 'There are no new posts in your groups.');
   $handler->override_option('empty_format', '3');
   $handler->override_option('use_pager', '1');
