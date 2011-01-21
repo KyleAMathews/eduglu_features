@@ -41,11 +41,6 @@ function eduglu_core_filter_default_formats() {
         'weight' => '-5',
       ),
       '5' => array(
-        'module' => 'filter',
-        'delta' => '3',
-        'weight' => '-4',
-      ),
-      '6' => array(
         'module' => 'typogrify',
         'delta' => '0',
         'weight' => '-3',
