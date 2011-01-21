@@ -30,11 +30,17 @@ function eduglu_discussion_context_default_contexts() {
           'region' => 'right',
           'weight' => 0,
         ),
+        'apachesolr-mlt-001' => array(
+          'module' => 'apachesolr',
+          'delta' => 'mlt-001',
+          'region' => 'right',
+          'weight' => 1,
+        ),
         'eduglu_core-thread_stats' => array(
           'module' => 'eduglu_core',
           'delta' => 'thread_stats',
           'region' => 'right',
-          'weight' => 1,
+          'weight' => 2,
         ),
       ),
     ),
