@@ -304,7 +304,7 @@ function eduglu_core_views_default_views() {
   ));
   $handler->override_option('title', 'Recent Activity in My Groups');
   $handler->override_option('empty', 'There are no new posts in your groups.');
-  $handler->override_option('empty_format', '1');
+  $handler->override_option('empty_format', '3');
   $handler->override_option('use_pager', '1');
   $handler->override_option('distinct', 0);
   $handler->override_option('style_plugin', 'list');
@@ -315,7 +315,7 @@ function eduglu_core_views_default_views() {
   $handler->override_option('row_plugin', 'node');
   $handler->override_option('row_options', array(
     'relationship' => 'none',
-    'build_mode' => 'teaser',
+    'build_mode' => 'full',
     'links' => 0,
     'comments' => 0,
   ));
