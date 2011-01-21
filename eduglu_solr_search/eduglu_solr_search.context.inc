@@ -16,7 +16,6 @@ function eduglu_solr_search_context_default_contexts() {
       'values' => array(
         '*/apachesolr_search/*' => '*/apachesolr_search/*',
       ),
-      'options' => array(),
     ),
   );
   $context->reactions = array(
@@ -25,67 +24,53 @@ function eduglu_solr_search_context_default_contexts() {
         'apachesolr_search-currentsearch' => array(
           'module' => 'apachesolr_search',
           'delta' => 'currentsearch',
-          'weight' => -33,
           'region' => 'right',
-          'status' => '0',
-          'label' => 'Apache Solr Search: Current search',
-          'type' => 'context_ui',
-          'bid' => 'apachesolr_search_currentsearch',
+          'weight' => 0,
         ),
         'apachesolr-sort' => array(
           'module' => 'apachesolr',
           'delta' => 'sort',
-          'weight' => 33,
           'region' => 'right',
-          'status' => '0',
-          'label' => 'Apache Solr Core: Sorting',
-          'type' => 'context_ui',
-          'bid' => 'apachesolr_sort',
+          'weight' => 1,
+        ),
+        'apachesolr_search-created' => array(
+          'module' => 'apachesolr_search',
+          'delta' => 'created',
+          'region' => 'right',
+          'weight' => 2,
         ),
         'apachesolr_og-im_og_gid' => array(
           'module' => 'apachesolr_og',
           'delta' => 'im_og_gid',
-          'weight' => 34,
           'region' => 'right',
-          'status' => '0',
-          'label' => 'Apache Solr OG: Filter by Organic Group',
-          'type' => 'context_ui',
-          'bid' => 'apachesolr_og_im_og_gid',
+          'weight' => 3,
         ),
         'apachesolr_search-uid' => array(
           'module' => 'apachesolr_search',
           'delta' => 'uid',
-          'weight' => 35,
           'region' => 'right',
-          'status' => '0',
-          'label' => 'Apache Solr Search: Filter by author',
-          'type' => 'context_ui',
-          'bid' => 'apachesolr_search_uid',
+          'weight' => 4,
         ),
         'apachesolr_search-im_vid_2' => array(
           'module' => 'apachesolr_search',
           'delta' => 'im_vid_2',
-          'weight' => 36,
           'region' => 'right',
-          'status' => '0',
-          'label' => 'Apache Solr Search: Filter by taxonomy Tags',
-          'type' => 'context_ui',
-          'bid' => 'apachesolr_search_im_vid_2',
+          'weight' => 5,
         ),
         'apachesolr_search-type' => array(
           'module' => 'apachesolr_search',
           'delta' => 'type',
-          'weight' => 37,
           'region' => 'right',
-          'status' => '0',
-          'label' => 'Apache Solr Search: Filter by content type',
-          'type' => 'context_ui',
-          'bid' => 'apachesolr_search_type',
+          'weight' => 6,
         ),
       ),
     ),
   );
   $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Sets block visibility for solr search');
 
   $export['context_ui-section-eduglu_solr_search'] = $context;
   return $export;

@@ -13,6 +13,7 @@ function eduglu_solr_search_strongarm() {
     'apachesolr_search' => array(
       'uid' => 'uid',
       'type' => 'type',
+      'created' => 'created',
       'im_vid_2' => 'im_vid_2',
     ),
     'apachesolr_og' => array(
@@ -60,7 +61,7 @@ function eduglu_solr_search_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'apachesolr_path';
-  $strongarm->value = '/solr';
+  $strongarm->value = '/default';
 
   $export['apachesolr_path'] = $strongarm;
   $strongarm = new stdClass;
