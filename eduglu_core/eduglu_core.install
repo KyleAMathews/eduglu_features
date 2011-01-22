@@ -173,6 +173,6 @@ function eduglu_core_update_6007() {
  * Enable some new modules. 
  **/
 function eduglu_core_update_6008() {
-  $modules = array('flag', 'og_mailinglist_flag', 'tipsy', 'seven');
+  $modules = array('flag', 'og_mailinglist_flag', 'tipsy', 'seven', 'admin_menu');
   drupal_install_modules($modules);
 }
