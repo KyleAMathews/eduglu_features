@@ -1,5 +1,4 @@
 core = "6.x"
-dependencies[] = "apachesolr"
 dependencies[] = "comment"
 dependencies[] = "content"
 dependencies[] = "context"
