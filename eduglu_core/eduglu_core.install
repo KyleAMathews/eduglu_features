@@ -184,3 +184,12 @@ function eduglu_core_update_6009() {
   $modules = array('avatarcrop', 'unique_avatar');
   drupal_install_modules($modules);
 }
+
+/**
+ * Enable some new modules. 
+ **/
+function eduglu_core_update_6010() {
+  // Enabling the same modules again as I hadn't included these in the make file before updating the sites.
+  $modules = array('avatarcrop', 'unique_avatar');
+  drupal_install_modules($modules);
+}
