@@ -275,15 +275,16 @@ function _eduglu_block_thread_stats() {
   $num_followers = db_result(db_query("SELECT count(*)
                                          FROM {og_mailinglist_thread}
                                          WHERE nid = %d", $node->nid));
+
+  $pictures = array();
   if ($num_followers > 0) {
     $results = db_query("SELECT u.uid, u.picture
                          FROM {og_mailinglist_thread} t
                          INNER JOIN {users} u
                          ON t.uid = u.uid
-                         WHERE u.picture <> ''
-                         AND t.nid = %d
-                         LIMIT 50", $node->nid);
-    $pictures = array();
+                         WHERE t.nid = %d
+                         LIMIT 150", $node->nid);
+
     while ($info = db_fetch_array($results)) {
       $pictures[$info['uid']] = $info['picture'];
     }
@@ -326,6 +327,17 @@ function _eduglu_block_thread_stats() {
  * We only display a percentage of people w/o pictures.
  */
 function _eduglu_core_create_member_picture_grid($members) {
+  // Remove all the default pictures we can.
+  foreach ($members as $uid => $picture) {
+    if (empty($picture) && count($members) > 49) {
+      unset($members[$uid]);
+    }
+  }
+  // Limit # of pictures to 49.
+  $members = array_slice($members, 0, 49);
+
+  // Randomize order of member pics so all the default pics don't get left at end.
+  shuffle($members);
   if (!empty($members)) {
     foreach ($members as $uid => $picture) {
       $continue = false;
@@ -338,13 +350,6 @@ function _eduglu_core_create_member_picture_grid($members) {
           $image = theme('imagecache', $preset, $picture);
         }
       else {
-        // Only use ~20% of people w/o pictures. Too many default pictures
-        // looks tacky + we want to reinforce it's cool to have a picture.
-        $rand_num = rand(0,1000);
-        if ($rand_num > 200) {
-          $continue = TRUE;
-        }
-
         $default_image = variable_get('user_picture_default', '');
         $image = theme("imagecache", $preset, $default_image);
       }
