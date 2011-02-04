@@ -20,12 +20,11 @@ function eduglu_core_imagecache_default_presets() {
       'actions' => array(
         '0' => array(
           'weight' => '0',
-          'module' => 'smartcrop',
-          'action' => 'smartcrop_scale_and_crop',
+          'module' => 'imagecache',
+          'action' => 'imagecache_scale_and_crop',
           'data' => array(
-            'width' => '20px',
-            'height' => '20px',
-            'upscale' => 0,
+            'width' => '20',
+            'height' => '20',
           ),
         ),
       ),

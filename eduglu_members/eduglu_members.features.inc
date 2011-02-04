@@ -33,25 +33,6 @@ function eduglu_members_imagecache_default_presets() {
             'height' => '25',
           ),
         ),
-        '1' => array(
-          'weight' => '0',
-          'module' => 'imagecache',
-          'action' => 'imagecache_scale_and_crop',
-          'data' => array(
-            'width' => '25',
-            'height' => '25',
-          ),
-        ),
-        '2' => array(
-          'weight' => '0',
-          'module' => 'smartcrop',
-          'action' => 'smartcrop_scale_and_crop',
-          'data' => array(
-            'width' => '25',
-            'height' => '25',
-            'upscale' => 0,
-          ),
-        ),
       ),
     ),
     '30x30_crop' => array(
@@ -59,12 +40,11 @@ function eduglu_members_imagecache_default_presets() {
       'actions' => array(
         '0' => array(
           'weight' => '0',
-          'module' => 'smartcrop',
-          'action' => 'smartcrop_scale_and_crop',
+          'module' => 'imagecache',
+          'action' => 'imagecache_scale_and_crop',
           'data' => array(
             'width' => '30',
             'height' => '30',
-            'upscale' => 0,
           ),
         ),
       ),
@@ -74,12 +54,11 @@ function eduglu_members_imagecache_default_presets() {
       'actions' => array(
         '0' => array(
           'weight' => '0',
-          'module' => 'smartcrop',
-          'action' => 'smartcrop_scale_and_crop',
+          'module' => 'imagecache',
+          'action' => 'imagecache_scale_and_crop',
           'data' => array(
             'width' => '50',
             'height' => '50',
-            'upscale' => 0,
           ),
         ),
       ),
@@ -89,12 +68,11 @@ function eduglu_members_imagecache_default_presets() {
       'actions' => array(
         '0' => array(
           'weight' => '0',
-          'module' => 'smartcrop',
-          'action' => 'smartcrop_scale_and_crop',
+          'module' => 'imagecache',
+          'action' => 'imagecache_scale_and_crop',
           'data' => array(
             'width' => '200',
             'height' => '200',
-            'upscale' => 0,
           ),
         ),
       ),
