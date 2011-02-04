@@ -240,6 +240,32 @@ function eduglu_core_wysiwyg_editor_settings_alter(&$settings, $context) {
 }
 
 /**
+ * Implementation of hook_link().
+ * Adds print stack handling. Must be supported by the theme layer --
+ * e.g. use the Tao base theme for full print support.
+ */
+function eduglu_core_link($type, $object, $teaser = FALSE) {
+  $links = array();
+  if ($type == 'node' && menu_get_object() === $object) {
+    // Set the canonical URL so search engines don't index the print friendlies.
+    drupal_add_link(array('rel' => 'canonical', 'href' => url($_GET['q'], array('absolute' => TRUE))));
+    $links['print'] = array(
+      'title' => t('Print'),
+      'href' => $_GET['q'],
+      'query' => 'print',
+    );
+    if (module_exists('book') && book_type_is_allowed($object->type)) {
+      $links['print_recurse'] = array(
+        'title' => t('Print entire section'),
+        'href' => $_GET['q'],
+        'query' => 'print&book_recurse'
+      );
+    }
+  }
+  return $links;
+}
+
+/**
  * Implementation of hook_block().
  */
 function eduglu_core_block($op = 'list', $delta = 0) {
