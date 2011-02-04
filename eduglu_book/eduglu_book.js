@@ -1,7 +1,7 @@
 Drupal.behaviors.eduglu = function(context) {
   // Add drill-down functionality to eduglu menu blocks.
   if (jQuery().drilldown) {
-    $('div.region div.block-eduglu_book:has(ul.menu):not(.eduglu-processed)')
+    $('div.block-eduglu_book:has(ul.menu):not(.eduglu-processed)')
       .addClass('eduglu-processed')
       .each(function() {
         var menu = $(this);
