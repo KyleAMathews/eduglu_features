@@ -242,7 +242,7 @@ function eduglu_core_wysiwyg_editor_settings_alter(&$settings, $context) {
 /**
  * Implementation of hook_link().
  * Adds print stack handling. Must be supported by the theme layer --
- * e.g. use the Tao base theme for full print support.
+ * e.g. use the Dewey base theme for full print support.
  */
 function eduglu_core_link($type, $object, $teaser = FALSE) {
   $links = array();
@@ -263,6 +263,16 @@ function eduglu_core_link($type, $object, $teaser = FALSE) {
     }
   }
   return $links;
+}
+
+/**
+ * Implementation of hook_link_alter().
+ */
+function eduglu_core_link_alter(&$links, $node) {
+  // Remove book print link.
+  if (!empty($links['book_printer'])) {
+    unset($links['book_printer']);
+  }
 }
 
 /**
