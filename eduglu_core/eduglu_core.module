@@ -334,10 +334,10 @@ function _eduglu_core_create_member_picture_grid($members) {
     }
   }
   // Limit # of pictures to 49.
-  $members = array_slice($members, 0, 49);
+  $members = array_slice($members, 0, 49, TRUE);
 
   // Randomize order of member pics so all the default pics don't get left at end.
-  shuffle($members);
+  $members = shuffle_assoc($members);
   if (!empty($members)) {
     foreach ($members as $uid => $picture) {
       $continue = false;
@@ -366,3 +366,18 @@ function _eduglu_core_create_member_picture_grid($members) {
   return $output;
 }
 
+/**
+ * Shuffle associative arrays while preserving key, value pairs.
+ * PHP function shuffle doesn't do this.
+ */
+function shuffle_assoc($list) {
+  if (!is_array($list)) return $list;
+
+  $keys = array_keys($list);
+  shuffle($keys);
+  $random = array();
+  foreach ($keys as $key)
+    $random[$key] = $list[$key];
+
+  return $random;
+}
