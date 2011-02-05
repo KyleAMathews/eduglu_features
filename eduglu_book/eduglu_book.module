@@ -79,12 +79,11 @@ function eduglu_book_menu() {
 function eduglu_book_block($op = 'list', $delta = 0) {
   switch ($op) {
     case 'list':
-      if (module_exists('admin')) {
-        $info =array(
-          'book' => array('info' => t('Eduglu: Book')),
-          'book_all' => array('info' => t('Eduglu: Book (all)')),
-        );
-      }
+      $info =array(
+        'book' => array('info' => t('Eduglu: Book')),
+        'book_all' => array('info' => t('Eduglu: Book (all)')),
+      );
+
       return $info;
     case 'view':
       $function = "_eduglu_block_{$delta}";
