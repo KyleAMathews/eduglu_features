@@ -349,6 +349,11 @@ function _eduglu_block_thread_stats() {
       '@date' => format_date($node->created, 'custom', 'j M Y'),
       '!author' => theme('username', user_load($node->uid))));
   $content .= "<br />";
+  if (module_exists('taxonomy') && !empty($node->taxonomy)) {
+    $terms = taxonomy_link('taxonomy terms', $node);
+    $content .= "Tags " . theme('links', $terms, array('class' => 'node-terms'));
+    $content .= "<br />";
+  }
   $content .= t("@count_people following this thread.", array('@count_people' => format_plural($num_followers, '1 person is', '@count people are')));
   $content .= "<br />";
   $content .= _eduglu_core_create_member_picture_grid($pictures);
