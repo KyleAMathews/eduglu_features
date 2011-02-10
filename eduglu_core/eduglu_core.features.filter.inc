@@ -10,9 +10,9 @@ function eduglu_core_filter_default_formats() {
   $formats['Partial HTML'] = array(
     'name' => 'Partial HTML',
     'roles' => array(
-      '0' => 'admin',
-      '1' => 'anonymous user',
-      '2' => 'authenticated user',
+      '0' => 'anonymous user',
+      '1' => 'authenticated user',
+      '2' => 'admin',
     ),
     'filters' => array(
       '0' => array(
